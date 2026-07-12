@@ -28,6 +28,30 @@ const routes: RouteRecordRaw[] = [
     name: 'inventory-product-edit',
     component: () => import('@/pages/inventory/products/ProductEdit.vue'),
   },
+  // Stock
+  {
+    path: '/inventory/stock',
+    name: 'inventory-stock',
+    component: () => import('@/pages/inventory/StockList.vue'),
+  },
+  // Stock Movement
+  {
+    path: '/inventory/movement',
+    name: 'inventory-movement',
+    component: () => import('@/pages/inventory/MovementList.vue'),
+  },
+  // Categories
+  {
+    path: '/inventory/categories',
+    name: 'inventory-categories',
+    component: () => import('@/pages/inventory/CategoryList.vue'),
+  },
+  // Brands
+  {
+    path: '/inventory/brands',
+    name: 'inventory-brands',
+    component: () => import('@/pages/inventory/BrandList.vue'),
+  },
   // Warehouses
   {
     path: '/inventory/warehouses',
@@ -44,7 +68,7 @@ const routes: RouteRecordRaw[] = [
     name: 'inventory-warehouse-edit',
     component: () => import('@/pages/inventory/warehouses/WarehouseEdit.vue'),
   },
-  // Stock Movements
+  // Stock Movements (legacy)
   {
     path: '/inventory/movements',
     name: 'inventory-movements',

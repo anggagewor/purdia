@@ -7,6 +7,18 @@ const routes: RouteRecordRaw[] = [
     name: 'crm-dashboard',
     component: () => import('@/pages/crm/CrmDashboard.vue'),
   },
+  // Customers
+  {
+    path: '/crm/customers',
+    name: 'crm-customers',
+    component: () => import('@/pages/crm/CustomerList.vue'),
+  },
+  // Pipeline
+  {
+    path: '/crm/pipeline',
+    name: 'crm-pipeline',
+    component: () => import('@/pages/crm/CrmPipeline.vue'),
+  },
   // Leads
   {
     path: '/crm/leads',

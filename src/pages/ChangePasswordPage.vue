@@ -2,6 +2,11 @@
 import { ref, computed } from 'vue'
 import { BaseCard, BaseInput, BaseButton, BaseAlert, BaseProgress } from '@/components/ui'
 import { Lock, Eye, EyeOff, CheckCircle, ShieldCheck } from '@lucide/vue'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/composables'
+
+const auth = useAuthStore()
+const toast = useToast()
 
 const currentPassword = ref('')
 const newPassword = ref('')
@@ -10,6 +15,8 @@ const showCurrent = ref(false)
 const showNew = ref(false)
 const showConfirm = ref(false)
 const saved = ref(false)
+const loading = ref(false)
+const apiError = ref('')
 
 const passwordStrength = computed(() => {
   const p = newPassword.value
@@ -55,11 +62,30 @@ const canSubmit = computed(() => {
 
 function handleSubmit() {
   if (!canSubmit.value) return
-  saved.value = true
-  currentPassword.value = ''
-  newPassword.value = ''
-  confirmPassword.value = ''
-  setTimeout(() => (saved.value = false), 3000)
+  apiError.value = ''
+  loading.value = true
+
+  auth
+    .changePassword(currentPassword.value, newPassword.value, confirmPassword.value)
+    .then(() => {
+      saved.value = true
+      currentPassword.value = ''
+      newPassword.value = ''
+      confirmPassword.value = ''
+      toast.success('Password berhasil diubah.')
+      setTimeout(() => (saved.value = false), 3000)
+    })
+    .catch((err: any) => {
+      if (err.errors) {
+        const firstField = Object.keys(err.errors)[0]
+        apiError.value = firstField ? err.errors[firstField][0] : err.message
+      } else {
+        apiError.value = err.message || 'Gagal mengubah password.'
+      }
+    })
+    .finally(() => {
+      loading.value = false
+    })
 }
 </script>
 
@@ -72,6 +98,10 @@ function handleSubmit() {
 
     <BaseAlert v-if="saved" variant="success" title="Password Updated" :icon="CheckCircle">
       Your password has been changed successfully.
+    </BaseAlert>
+
+    <BaseAlert v-if="apiError" variant="danger" title="Error">
+      {{ apiError }}
     </BaseAlert>
 
     <BaseCard>
@@ -208,7 +238,9 @@ function handleSubmit() {
       <template #footer>
         <div class="flex justify-end gap-2 w-full">
           <BaseButton variant="ghost">Cancel</BaseButton>
-          <BaseButton :disabled="!canSubmit" @click="handleSubmit">Update Password</BaseButton>
+          <BaseButton :disabled="!canSubmit || loading" :loading="loading" @click="handleSubmit"
+            >Update Password</BaseButton
+          >
         </div>
       </template>
     </BaseCard>

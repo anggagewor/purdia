@@ -40,9 +40,9 @@ function navigate(path: string) {
   router.push(path)
 }
 
-function logout() {
+async function logout() {
   showUserMenu.value = false
-  auth.logout()
+  await auth.logout()
   router.push({ name: 'login' })
 }
 
@@ -121,7 +121,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                 :style="{ backgroundColor: color.swatch }"
                 :title="color.label"
                 :aria-label="`Set primary color to ${color.label}`"
-                @click="() => { themeStore.setColor(color.name); showColorPicker = false }"
+                @click="
+                  () => {
+                    themeStore.setColor(color.name)
+                    showColorPicker = false
+                  }
+                "
               />
             </div>
           </div>

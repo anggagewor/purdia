@@ -1,0 +1,2007 @@
+openapi: 3.0.3
+info:
+  title: Purdia API
+  description: Composable Business Platform API
+  version: 1.0.0
+  license:
+    name: MIT
+
+servers:
+  - url: http://localhost:8000/api
+    description: Local development
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Sanctum
+
+  parameters:
+    TenantHeader:
+      name: X-Tenant-Id
+      in: header
+      required: true
+      schema:
+        type: integer
+      description: Tenant ID for multi-tenant context
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: MODULE.ERROR_NAME
+            message:
+              type: string
+            context:
+              type: object
+
+    SuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          type: object
+
+    AuthToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+          enum: [active, inactive, suspended]
+        email_verified_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+
+    Menu:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        path:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+        permission:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+        is_visible:
+          type: boolean
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Menu'
+
+tags:
+  - name: Auth
+    description: Authentication (Identity module)
+  - name: Roles
+    description: Role management (Authorization module)
+  - name: Permissions
+    description: Permission management (Authorization module)
+  - name: Tenants
+    description: Tenant/Company management
+  - name: Branches
+    description: Branch management (requires tenant context)
+  - name: Config
+    description: System configuration
+  - name: Files
+    description: File storage management
+  - name: Lookups
+    description: Unified reference data lookups
+  - name: References
+    description: Detailed reference data (countries, currencies, units)
+  - name: Documents
+    description: Document Engine (numbering, sequences)
+  - name: Parties
+    description: Party management (persons, organizations)
+  - name: Catalog
+    description: Product catalog (products, categories, brands)
+  - name: Pricing
+    description: Pricing Engine (price lists, discounts, promotions)
+  - name: Menus
+    description: Navigation menu management (permission-filtered)
+
+paths:
+  # ============================================================
+  # AUTH
+  # ============================================================
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, password_confirmation]
+              properties:
+                name:
+                  type: string
+                  example: John Doe
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+                password_confirmation:
+                  type: string
+      responses:
+        '201':
+          description: Registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/AuthToken'
+        '422':
+          description: Validation error
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login and get token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/AuthToken'
+        '401':
+          description: Invalid credentials
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Logout (revoke current token)
+      responses:
+        '200':
+          description: Logged out
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh token (rotate)
+      responses:
+        '200':
+          description: New token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/AuthToken'
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Get authenticated user profile
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+
+  /auth/change-password:
+    put:
+      tags: [Auth]
+      summary: Change password (authenticated)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [current_password, new_password, new_password_confirmation]
+              properties:
+                current_password:
+                  type: string
+                new_password:
+                  type: string
+                  minLength: 8
+                new_password_confirmation:
+                  type: string
+      responses:
+        '200':
+          description: Password changed
+        '422':
+          description: Current password mismatch or validation error
+
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: Request password reset link
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Reset link sent (always returns success to prevent email enumeration)
+
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      summary: Reset password with token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, token, password, password_confirmation]
+              properties:
+                email:
+                  type: string
+                  format: email
+                token:
+                  type: string
+                password:
+                  type: string
+                  minLength: 8
+                password_confirmation:
+                  type: string
+      responses:
+        '200':
+          description: Password reset successful
+        '422':
+          description: Invalid or expired token
+
+  # ============================================================
+  # ROLES & PERMISSIONS
+  # ============================================================
+  /roles:
+    get:
+      tags: [Roles]
+      summary: List all roles with permissions
+      responses:
+        '200':
+          description: List of roles
+    post:
+      tags: [Roles]
+      summary: Create a new role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Role created
+        '409':
+          description: Slug already exists
+
+  /roles/{role}:
+    get:
+      tags: [Roles]
+      summary: Get role detail
+      parameters:
+        - name: role
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Role detail
+    put:
+      tags: [Roles]
+      summary: Update role
+      parameters:
+        - name: role
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Role updated
+    delete:
+      tags: [Roles]
+      summary: Delete role
+      parameters:
+        - name: role
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Role deleted
+
+  /roles/{role}/permissions:
+    put:
+      tags: [Roles]
+      summary: Sync permissions to role
+      parameters:
+        - name: role
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [permission_ids]
+              properties:
+                permission_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Permissions synced
+
+  /permissions:
+    get:
+      tags: [Permissions]
+      summary: List all permissions
+      responses:
+        '200':
+          description: List of permissions
+    post:
+      tags: [Permissions]
+      summary: Create a permission
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, scope]
+              properties:
+                name:
+                  type: string
+                  example: orders.action.create
+                scope:
+                  type: string
+                  enum: [page, component, action, api]
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Permission created
+
+  /permissions/{permission}:
+    get:
+      tags: [Permissions]
+      summary: Get permission detail
+      parameters:
+        - name: permission
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Permission detail
+    put:
+      tags: [Permissions]
+      summary: Update permission
+      parameters:
+        - name: permission
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, scope]
+              properties:
+                name:
+                  type: string
+                scope:
+                  type: string
+                  enum: [page, component, action, api]
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Permission updated
+    delete:
+      tags: [Permissions]
+      summary: Delete permission
+      parameters:
+        - name: permission
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Permission deleted
+
+  # ============================================================
+  # TENANTS & BRANCHES
+  # ============================================================
+  /tenants:
+    get:
+      tags: [Tenants]
+      summary: List tenants the user belongs to
+      responses:
+        '200':
+          description: List of tenants
+    post:
+      tags: [Tenants]
+      summary: Create a new tenant (company)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                  example: PT Maju Jaya
+                slug:
+                  type: string
+                  example: maju-jaya
+                currency:
+                  type: string
+                  example: IDR
+                locale:
+                  type: string
+                  example: id
+                timezone:
+                  type: string
+                  example: Asia/Jakarta
+                settings:
+                  type: object
+      responses:
+        '201':
+          description: Tenant created
+
+  /tenants/{tenant}:
+    get:
+      tags: [Tenants]
+      summary: Get tenant detail
+      parameters:
+        - name: tenant
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tenant detail with branches
+
+  /branches:
+    get:
+      tags: [Branches]
+      summary: List branches for current tenant
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: List of branches (tree structure)
+    post:
+      tags: [Branches]
+      summary: Create a new branch
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, code]
+              properties:
+                name:
+                  type: string
+                  example: Toko Bandung
+                code:
+                  type: string
+                  example: BDG
+                type:
+                  type: string
+                  enum: [store, warehouse, office, factory, virtual]
+                parent_branch_id:
+                  type: integer
+                address:
+                  type: string
+                phone:
+                  type: string
+                timezone:
+                  type: string
+                settings:
+                  type: object
+      responses:
+        '201':
+          description: Branch created
+
+  /branches/{branch}:
+    get:
+      tags: [Branches]
+      summary: Get branch detail
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: branch
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Branch detail with children
+
+  # ============================================================
+  # CONFIG
+  # ============================================================
+  /configs:
+    get:
+      tags: [Config]
+      summary: List all config groups
+      responses:
+        '200':
+          description: Array of group names
+
+  /configs/{group}:
+    get:
+      tags: [Config]
+      summary: Get all configs in a group
+      parameters:
+        - name: group
+          in: path
+          required: true
+          schema:
+            type: string
+          example: general
+      responses:
+        '200':
+          description: Config items in group
+    put:
+      tags: [Config]
+      summary: Set a single config value
+      parameters:
+        - name: group
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [key, value]
+              properties:
+                key:
+                  type: string
+                  example: app.timezone
+                value:
+                  example: Asia/Jakarta
+                type:
+                  type: string
+                  enum: [string, boolean, integer, float, json, array]
+      responses:
+        '200':
+          description: Config saved
+
+  /configs/{group}/bulk:
+    put:
+      tags: [Config]
+      summary: Bulk set configs for a group
+      parameters:
+        - name: group
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [configs]
+              properties:
+                configs:
+                  type: array
+                  items:
+                    type: object
+                    required: [key, value]
+                    properties:
+                      key:
+                        type: string
+                      value: {}
+                      type:
+                        type: string
+      responses:
+        '200':
+          description: Configs saved
+
+  /configs/{group}/{key}:
+    delete:
+      tags: [Config]
+      summary: Delete a config entry
+      parameters:
+        - name: group
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Config deleted
+
+  # ============================================================
+  # FILES (STORAGE)
+  # ============================================================
+  /files:
+    post:
+      tags: [Files]
+      summary: Upload a file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, module]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                module:
+                  type: string
+                  example: catalog
+                entity_type:
+                  type: string
+                  example: product
+                entity_id:
+                  type: string
+                visibility:
+                  type: string
+                  enum: [public, private, restricted]
+                disk:
+                  type: string
+                path_prefix:
+                  type: string
+                metadata:
+                  type: object
+      responses:
+        '201':
+          description: File uploaded
+
+  /files/{file}:
+    get:
+      tags: [Files]
+      summary: Get file metadata
+      parameters:
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: File metadata
+    delete:
+      tags: [Files]
+      summary: Delete a file
+      parameters:
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: File deleted
+
+  /files/{file}/download:
+    get:
+      tags: [Files]
+      summary: Download file (access-checked)
+      parameters:
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: File stream
+        '403':
+          description: Access denied
+
+  /files/{file}/access:
+    post:
+      tags: [Files]
+      summary: Grant file access to user/role
+      parameters:
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [accessor_type, accessor_id]
+              properties:
+                accessor_type:
+                  type: string
+                  enum: [user, role]
+                accessor_id:
+                  type: string
+                access_level:
+                  type: string
+                  enum: [read_only, read_write, full_control]
+      responses:
+        '200':
+          description: Access granted
+    delete:
+      tags: [Files]
+      summary: Revoke file access
+      parameters:
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [accessor_type, accessor_id]
+              properties:
+                accessor_type:
+                  type: string
+                  enum: [user, role]
+                accessor_id:
+                  type: string
+      responses:
+        '200':
+          description: Access revoked
+
+  /files/entity/{entityType}/{entityId}:
+    get:
+      tags: [Files]
+      summary: Get files attached to an entity
+      parameters:
+        - name: entityType
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+        - name: entityId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of files
+
+  # ============================================================
+  # LOOKUPS & REFERENCES
+  # ============================================================
+  /lookups:
+    get:
+      tags: [Lookups]
+      summary: Get multiple lookup types in one request
+      parameters:
+        - name: types
+          in: query
+          required: true
+          schema:
+            type: string
+          example: country,currency,gender,timezone
+          description: Comma-separated list of lookup types
+      responses:
+        '200':
+          description: Lookup data grouped by type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties:
+                      type: array
+
+  /lookups/{type}:
+    get:
+      tags: [Lookups]
+      summary: Get single lookup type
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+          example: gender
+      responses:
+        '200':
+          description: Lookup items
+
+  /references/countries:
+    get:
+      tags: [References]
+      summary: List countries
+      parameters:
+        - name: region
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: active_only
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: List of countries with currencies
+
+  /references/countries/{country}:
+    get:
+      tags: [References]
+      summary: Get country detail
+      parameters:
+        - name: country
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Country with currency
+
+  /references/currencies:
+    get:
+      tags: [References]
+      summary: List currencies
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: active_only
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: List of currencies
+
+  /references/currencies/{currency}:
+    get:
+      tags: [References]
+      summary: Get currency detail
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Currency detail
+
+  /references/units:
+    get:
+      tags: [References]
+      summary: List unit categories with units
+      responses:
+        '200':
+          description: Unit categories
+
+  /references/units/convert:
+    get:
+      tags: [References]
+      summary: Convert between units
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema:
+            type: string
+          example: kg
+        - name: to
+          in: query
+          required: true
+          schema:
+            type: string
+          example: g
+        - name: value
+          in: query
+          required: true
+          schema:
+            type: number
+          example: 5
+      responses:
+        '200':
+          description: Conversion result
+
+  /references/units/{category}:
+    get:
+      tags: [References]
+      summary: Get units for a category
+      parameters:
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+          example: weight
+      responses:
+        '200':
+          description: Category with units
+
+  # ============================================================
+  # DOCUMENTS (ENGINE)
+  # ============================================================
+  /documents/sequences:
+    get:
+      tags: [Documents]
+      summary: List sequences for current tenant
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: List of sequences
+    post:
+      tags: [Documents]
+      summary: Create a new sequence
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type, prefix]
+              properties:
+                type:
+                  type: string
+                  example: INV
+                prefix:
+                  type: string
+                  example: INV
+                format:
+                  type: string
+                  example: "{PREFIX}-{BRANCH}-{YYYY}{MM}-{####}"
+                reset_frequency:
+                  type: string
+                  enum: [never, daily, monthly, yearly]
+                branch_id:
+                  type: integer
+      responses:
+        '201':
+          description: Sequence created
+
+  /documents/sequences/{sequence}:
+    get:
+      tags: [Documents]
+      summary: Get sequence detail
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: sequence
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sequence detail
+
+  /documents/generate:
+    post:
+      tags: [Documents]
+      summary: Generate next document number
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type]
+              properties:
+                type:
+                  type: string
+                  example: INV
+                branch_id:
+                  type: integer
+      responses:
+        '200':
+          description: Generated number
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      number:
+                        type: string
+                        example: INV-BDG-202607-0001
+                      type:
+                        type: string
+
+  /documents/preview:
+    get:
+      tags: [Documents]
+      summary: Preview next number without consuming
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: branch_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Preview info
+
+  # ============================================================
+  # PARTIES
+  # ============================================================
+  /parties:
+    get:
+      tags: [Parties]
+      summary: List/search parties
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [person, organization]
+        - name: role
+          in: query
+          schema:
+            type: string
+          example: customer
+      responses:
+        '200':
+          description: List of parties
+
+  /parties/{party}:
+    get:
+      tags: [Parties]
+      summary: Get party detail
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: party
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Party with person/organization, contacts, addresses, roles
+    delete:
+      tags: [Parties]
+      summary: Soft delete party
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: party
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Party deleted
+
+  /parties/persons:
+    post:
+      tags: [Parties]
+      summary: Create a person party
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [first_name]
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                code:
+                  type: string
+                birth_date:
+                  type: string
+                  format: date
+                gender:
+                  type: string
+                religion:
+                  type: string
+                blood_type:
+                  type: string
+                marital_status:
+                  type: string
+                national_id:
+                  type: string
+                contacts:
+                  type: array
+                  items:
+                    type: object
+                    required: [type, value]
+                    properties:
+                      type:
+                        type: string
+                        enum: [email, phone, mobile, fax, website, whatsapp, other]
+                      value:
+                        type: string
+                      label:
+                        type: string
+                      is_primary:
+                        type: boolean
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required: [type, line_1]
+                    properties:
+                      type:
+                        type: string
+                        enum: [billing, shipping, office, warehouse, home, other]
+                      line_1:
+                        type: string
+                      line_2:
+                        type: string
+                      city:
+                        type: string
+                      state:
+                        type: string
+                      postal_code:
+                        type: string
+                      country_code:
+                        type: string
+                roles:
+                  type: array
+                  items:
+                    type: string
+                  example: [customer, employee]
+      responses:
+        '201':
+          description: Person created
+
+  /parties/organizations:
+    post:
+      tags: [Parties]
+      summary: Create an organization party
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [legal_name]
+              properties:
+                legal_name:
+                  type: string
+                display_name:
+                  type: string
+                code:
+                  type: string
+                tax_number:
+                  type: string
+                npwp:
+                  type: string
+                nib:
+                  type: string
+                industry:
+                  type: string
+                website:
+                  type: string
+                contacts:
+                  type: array
+                  items:
+                    type: object
+                    required: [type, value]
+                    properties:
+                      type:
+                        type: string
+                      value:
+                        type: string
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required: [type, line_1]
+                    properties:
+                      type:
+                        type: string
+                      line_1:
+                        type: string
+                roles:
+                  type: array
+                  items:
+                    type: string
+                  example: [supplier, vendor]
+      responses:
+        '201':
+          description: Organization created
+
+  # ============================================================
+  # CATALOG
+  # ============================================================
+  /catalog/products:
+    get:
+      tags: [Catalog]
+      summary: List products
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: category_id
+          in: query
+          schema:
+            type: integer
+        - name: brand_id
+          in: query
+          schema:
+            type: integer
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [goods, service, digital, bundle]
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Paginated products
+    post:
+      tags: [Catalog]
+      summary: Create a product
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                sku:
+                  type: string
+                barcode:
+                  type: string
+                type:
+                  type: string
+                  enum: [goods, service, digital, bundle]
+                category_id:
+                  type: integer
+                brand_id:
+                  type: integer
+                description:
+                  type: string
+                unit:
+                  type: string
+                  example: pcs
+      responses:
+        '201':
+          description: Product created
+
+  /catalog/products/{product}:
+    get:
+      tags: [Catalog]
+      summary: Get product detail
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: product
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Product with category, brand, variants
+    delete:
+      tags: [Catalog]
+      summary: Delete product
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: product
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Product deleted
+
+  /catalog/categories:
+    get:
+      tags: [Catalog]
+      summary: List categories (tree)
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: Category tree
+    post:
+      tags: [Catalog]
+      summary: Create category
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                parent_id:
+                  type: integer
+                description:
+                  type: string
+                sort_order:
+                  type: integer
+      responses:
+        '201':
+          description: Category created
+
+  /catalog/categories/{category}:
+    get:
+      tags: [Catalog]
+      summary: Get category detail
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Category with children
+    delete:
+      tags: [Catalog]
+      summary: Delete category
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Category deleted
+
+  /catalog/brands:
+    get:
+      tags: [Catalog]
+      summary: List brands
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: List of brands
+    post:
+      tags: [Catalog]
+      summary: Create brand
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Brand created
+
+  /catalog/brands/{brand}:
+    get:
+      tags: [Catalog]
+      summary: Get brand detail
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: brand
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Brand detail
+    delete:
+      tags: [Catalog]
+      summary: Delete brand
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: brand
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Brand deleted
+
+  # ============================================================
+  # PRICING (ENGINE)
+  # ============================================================
+  /pricing/resolve:
+    post:
+      tags: [Pricing]
+      summary: Resolve price for a product
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [product_id]
+              properties:
+                product_id:
+                  type: integer
+                variant_id:
+                  type: integer
+                branch_id:
+                  type: integer
+                qty:
+                  type: integer
+                  default: 1
+                price_list_id:
+                  type: integer
+      responses:
+        '200':
+          description: Resolved price
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      base_price:
+                        type: number
+                      final_price:
+                        type: number
+                      price_list_id:
+                        type: string
+                      price_list_name:
+                        type: string
+                      currency:
+                        type: string
+                      applied_promotions:
+                        type: array
+
+  /pricing/discount:
+    post:
+      tags: [Pricing]
+      summary: Apply a discount code
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code, amount]
+              properties:
+                code:
+                  type: string
+                  example: WELCOME10
+                amount:
+                  type: number
+                  example: 500000
+      responses:
+        '200':
+          description: Discount result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      applied:
+                        type: boolean
+                      original_amount:
+                        type: number
+                      discount_amount:
+                        type: number
+                      final_amount:
+                        type: number
+                      error:
+                        type: string
+
+  /pricing/price-lists:
+    get:
+      tags: [Pricing]
+      summary: List price lists
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: List of price lists
+    post:
+      tags: [Pricing]
+      summary: Create price list
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                type:
+                  type: string
+                  enum: [selling, buying]
+                currency:
+                  type: string
+                  example: IDR
+                is_default:
+                  type: boolean
+      responses:
+        '201':
+          description: Price list created
+
+  /pricing/discounts:
+    get:
+      tags: [Pricing]
+      summary: List discounts
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: List of discounts
+    post:
+      tags: [Pricing]
+      summary: Create discount
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, type, value]
+              properties:
+                name:
+                  type: string
+                code:
+                  type: string
+                  example: WELCOME10
+                type:
+                  type: string
+                  enum: [percentage, fixed]
+                value:
+                  type: number
+                min_order_amount:
+                  type: number
+                max_discount_amount:
+                  type: number
+                usage_limit:
+                  type: integer
+                starts_at:
+                  type: string
+                  format: date-time
+                ends_at:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Discount created
+
+  /pricing/promotions:
+    get:
+      tags: [Pricing]
+      summary: List promotions
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: List of promotions with rules
+    post:
+      tags: [Pricing]
+      summary: Create promotion
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, discount_type, discount_value]
+              properties:
+                name:
+                  type: string
+                scope:
+                  type: string
+                  enum: [product, category, brand, cart, global]
+                discount_type:
+                  type: string
+                  enum: [percentage, fixed]
+                discount_value:
+                  type: number
+                min_qty:
+                  type: integer
+                min_order_amount:
+                  type: number
+                max_discount_amount:
+                  type: number
+                priority:
+                  type: integer
+                is_combinable:
+                  type: boolean
+                starts_at:
+                  type: string
+                  format: date-time
+                ends_at:
+                  type: string
+                  format: date-time
+                rules:
+                  type: array
+                  items:
+                    type: object
+                    required: [entity_type, entity_id]
+                    properties:
+                      entity_type:
+                        type: string
+                        enum: [product, category, brand]
+                      entity_id:
+                        type: string
+      responses:
+        '201':
+          description: Promotion created
+
+
+  # ============================================================
+  # MENUS (NAVIGATION)
+  # ============================================================
+  /menus:
+    get:
+      tags: [Menus]
+      summary: List all menus (admin, full tree)
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: Full menu tree (unfiltered)
+    post:
+      tags: [Menus]
+      summary: Create a menu item
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name:
+                  type: string
+                  example: Sales
+                slug:
+                  type: string
+                  example: sales
+                path:
+                  type: string
+                  example: /sales
+                  nullable: true
+                icon:
+                  type: string
+                  example: shopping-cart
+                  nullable: true
+                permission:
+                  type: string
+                  example: sales.page.index.view
+                  nullable: true
+                parent_id:
+                  type: integer
+                  nullable: true
+                sort_order:
+                  type: integer
+                  default: 0
+                is_visible:
+                  type: boolean
+                  default: true
+      responses:
+        '201':
+          description: Menu created
+
+  /menus/tree:
+    get:
+      tags: [Menus]
+      summary: Get menu tree filtered by user permissions (for frontend sidebar)
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      responses:
+        '200':
+          description: Permission-filtered menu tree
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Menu'
+
+  /menus/reorder:
+    put:
+      tags: [Menus]
+      summary: Bulk reorder menus (sort + reparent)
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required: [id, sort_order]
+                    properties:
+                      id:
+                        type: integer
+                      sort_order:
+                        type: integer
+                      parent_id:
+                        type: integer
+                        nullable: true
+      responses:
+        '200':
+          description: Menus reordered
+
+  /menus/{menu}:
+    get:
+      tags: [Menus]
+      summary: Get menu detail with children
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: menu
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Menu with children
+    put:
+      tags: [Menus]
+      summary: Update a menu item
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: menu
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                path:
+                  type: string
+                icon:
+                  type: string
+                permission:
+                  type: string
+                parent_id:
+                  type: integer
+                sort_order:
+                  type: integer
+                is_visible:
+                  type: boolean
+                is_active:
+                  type: boolean
+      responses:
+        '200':
+          description: Menu updated
+    delete:
+      tags: [Menus]
+      summary: Delete a menu item
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: menu
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Menu deleted

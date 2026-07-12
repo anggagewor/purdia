@@ -3,10 +3,12 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore } from '@/stores/theme'
+import { useMenuStore } from '@/stores/menu'
 
 const router = useRouter()
 const auth = useAuthStore()
 const themeStore = useThemeStore()
+const menuStore = useMenuStore()
 
 const email = ref('')
 const password = ref('')
@@ -23,6 +25,7 @@ async function handleLogin() {
   try {
     await auth.login(email.value, password.value)
     themeStore.loadForUser()
+    menuStore.refresh()
     router.push({ name: 'dashboard' })
   } catch (e: any) {
     if (e.errors) {

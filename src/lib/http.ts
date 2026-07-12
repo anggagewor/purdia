@@ -48,33 +48,31 @@ function onRefreshFailed() {
 }
 
 /**
- * Attempt silent refresh using stored refresh_token.
+ * Attempt silent refresh by calling POST /auth/refresh with current Bearer token.
  * Returns new access token on success, null on failure.
  */
 async function attemptSilentRefresh(): Promise<string | null> {
-  const refreshToken = await secureGet('refresh_token')
-  if (!refreshToken) return null
+  const currentToken = await secureGet('auth_token')
+  if (!currentToken) return null
 
   try {
     const config = getServiceConfig('auth')
-    const response = await axios.post<{ data: { token: string; refresh_token?: string } }>(
-      `${config.baseURL}/refresh`,
-      { refresh_token: refreshToken },
-      {
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        timeout: config.timeout ?? 15_000,
+    const response = await axios.post<{
+      data: { access_token: string; token_type: string; expires_at: string | null }
+    }>(`${config.baseURL}/refresh`, null, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${currentToken}`,
       },
-    )
+      timeout: config.timeout ?? 15_000,
+    })
 
-    const { token, refresh_token: newRefreshToken } = response.data.data
+    const { access_token } = response.data.data
 
-    // Persist new tokens
-    await secureSet('auth_token', token)
-    if (newRefreshToken) {
-      await secureSet('refresh_token', newRefreshToken)
-    }
+    // Persist new token
+    await secureSet('auth_token', access_token)
 
-    return token
+    return access_token
   } catch {
     return null
   }
