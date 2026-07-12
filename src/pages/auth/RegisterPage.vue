@@ -14,9 +14,11 @@ const password = ref('')
 const passwordConfirmation = ref('')
 const loading = ref(false)
 const error = ref('')
+const fieldErrors = ref<Record<string, string[]>>({})
 
 async function handleRegister() {
   error.value = ''
+  fieldErrors.value = {}
   if (!name.value || !email.value || !password.value || !passwordConfirmation.value) {
     error.value = 'Semua field wajib diisi.'
     return
@@ -31,11 +33,17 @@ async function handleRegister() {
   }
   loading.value = true
   try {
-    await auth.register(name.value, email.value, password.value)
+    await auth.register(name.value, email.value, password.value, passwordConfirmation.value)
     themeStore.loadForUser()
     router.push({ name: 'dashboard' })
   } catch (e: any) {
-    error.value = e.message || 'Registrasi gagal.'
+    if (e.errors) {
+      fieldErrors.value = e.errors
+      const firstField = Object.keys(e.errors)[0]
+      error.value = firstField ? e.errors[firstField][0] : e.message
+    } else {
+      error.value = e.message || 'Registrasi gagal.'
+    }
   } finally {
     loading.value = false
   }

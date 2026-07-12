@@ -11,20 +11,22 @@ export interface ServiceConfig {
   headers?: Record<string, string>
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://api.purdia.test'
+
 const configs = {
   /**
    * Main backend API (default)
    */
   main: {
-    baseURL: '/api',
+    baseURL: `${API_BASE}/api`,
     timeout: 30_000,
   },
 
   /**
-   * Auth service (kalo terpisah dari main API)
+   * Auth service
    */
   auth: {
-    baseURL: '/api/auth',
+    baseURL: `${API_BASE}/api/auth`,
     timeout: 15_000,
   },
 

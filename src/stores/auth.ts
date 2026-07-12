@@ -1,12 +1,26 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { secureGet, secureSet, secureRemove } from '@/lib/crypto'
+import { post } from '@/lib/http'
 
 export interface User {
   id: number
   name: string
   email: string
   avatar?: string
+}
+
+interface AuthTokenResponse {
+  access_token: string
+  token_type: string
+  expires_at: string | null
+}
+
+interface RegisterPayload {
+  name: string
+  email: string
+  password: string
+  password_confirmation: string
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -32,40 +46,44 @@ export const useAuthStore = defineStore('auth', () => {
     ready.value = true
   }
 
-  async function login(email: string, _password: string) {
-    // Mock login — accept any email/password
-    const mockUser: User = {
-      id: 1,
-      name: 'Admin User',
-      email,
-      avatar: undefined,
-    }
-    const mockToken = 'mock-jwt-token-' + Date.now()
-    const mockRefreshToken = 'mock-refresh-token-' + Date.now()
+  async function login(email: string, password: string) {
+    const response = await post<AuthTokenResponse>('/auth/login', { email, password })
+    const { access_token } = response.data
 
-    user.value = mockUser
-    token.value = mockToken
-    await secureSet('auth_token', mockToken)
-    await secureSet('refresh_token', mockRefreshToken)
-    await secureSet('auth_user', JSON.stringify(mockUser))
+    // Persist token
+    token.value = access_token
+    await secureSet('auth_token', access_token)
+
+    // Set basic user info (backend login belum return user object)
+    const loggedInUser: User = { id: 0, name: email.split('@')[0] ?? '', email, avatar: undefined }
+    user.value = loggedInUser
+    await secureSet('auth_user', JSON.stringify(loggedInUser))
   }
 
-  async function register(name: string, email: string, _password: string) {
-    // Mock register
-    const mockUser: User = {
-      id: 1,
+  async function register(
+    name: string,
+    email: string,
+    password: string,
+    passwordConfirmation: string,
+  ) {
+    const payload: RegisterPayload = {
       name,
       email,
-      avatar: undefined,
+      password,
+      password_confirmation: passwordConfirmation,
     }
-    const mockToken = 'mock-jwt-token-' + Date.now()
-    const mockRefreshToken = 'mock-refresh-token-' + Date.now()
 
-    user.value = mockUser
-    token.value = mockToken
-    await secureSet('auth_token', mockToken)
-    await secureSet('refresh_token', mockRefreshToken)
-    await secureSet('auth_user', JSON.stringify(mockUser))
+    const response = await post<AuthTokenResponse>('/auth/register', payload)
+    const { access_token } = response.data
+
+    // Persist token
+    token.value = access_token
+    await secureSet('auth_token', access_token)
+
+    // Set basic user info from register input (backend belum return user object)
+    const newUser: User = { id: 0, name, email, avatar: undefined }
+    user.value = newUser
+    await secureSet('auth_user', JSON.stringify(newUser))
   }
 
   async function forgotPassword(_email: string) {

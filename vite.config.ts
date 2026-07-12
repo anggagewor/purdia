@@ -14,6 +14,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api.purdia.test',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
   build: {
     minify: 'terser',
     terserOptions: {

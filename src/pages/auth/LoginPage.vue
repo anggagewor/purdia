@@ -25,7 +25,12 @@ async function handleLogin() {
     themeStore.loadForUser()
     router.push({ name: 'dashboard' })
   } catch (e: any) {
-    error.value = e.message || 'Login gagal.'
+    if (e.errors) {
+      const firstField = Object.keys(e.errors)[0]
+      error.value = firstField ? e.errors[firstField][0] : e.message
+    } else {
+      error.value = e.message || 'Login gagal.'
+    }
   } finally {
     loading.value = false
   }
