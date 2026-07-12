@@ -142,6 +142,8 @@ tags:
     description: Pricing Engine (price lists, discounts, promotions)
   - name: Menus
     description: Navigation menu management (permission-filtered)
+  - name: Users
+    description: User management (tenant-scoped)
 
 paths:
   # ============================================================
@@ -2005,3 +2007,153 @@ paths:
       responses:
         '200':
           description: Menu deleted
+
+  # ============================================================
+  # USERS (TENANT-SCOPED)
+  # ============================================================
+  /users:
+    get:
+      tags: [Users]
+      summary: List users in current tenant
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Search by name or email
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Paginated user list with role and branch info
+    post:
+      tags: [Users]
+      summary: Create user and assign to tenant
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                  example: Budi Santoso
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+                role_id:
+                  type: integer
+                  description: Role to assign in this tenant
+                branch_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Branch access (empty = all branches)
+      responses:
+        '201':
+          description: User created and assigned
+        '409':
+          description: Email already exists
+
+  /users/{user}:
+    get:
+      tags: [Users]
+      summary: Get user detail with tenant role and branches
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User detail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    allOf:
+                      - $ref: '#/components/schemas/User'
+                      - type: object
+                        properties:
+                          role:
+                            type: string
+                            example: Manager
+                          role_slug:
+                            type: string
+                            example: manager
+                          branches:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                name:
+                                  type: string
+                                code:
+                                  type: string
+    put:
+      tags: [Users]
+      summary: Update user and tenant assignment
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  nullable: true
+                  description: Leave empty to keep current password
+                role_id:
+                  type: integer
+                branch_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Sync branch access (empty array = all branches)
+      responses:
+        '200':
+          description: User updated
+    delete:
+      tags: [Users]
+      summary: Remove user from tenant (deactivate, not delete)
+      parameters:
+        - $ref: '#/components/parameters/TenantHeader'
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User removed from tenant
