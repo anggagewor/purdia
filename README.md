@@ -30,6 +30,7 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
 - 🛡️ **Authentication** — Login, Register, Forgot Password with encrypted token storage
 - 📱 **Collapsible Sidebar** — Icon-only mode with flyout popover submenus
 - 📲 **QR Self-Order** — Public mobile menu page, customers scan & order from table
+- 🏗️ **Monorepo Architecture** — 12 internal packages for maximum reusability
 
 ## 🖥️ Demo & Visuals
 
@@ -72,7 +73,7 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
 
 ---
 
-### ⚡ Quick Start
+## ⚡ Quick Start
 
 ```bash
 # Install dependencies
@@ -82,7 +83,90 @@ npm install
 npm run dev
 ```
 
-## 📦 Modules
+---
+
+## 📦 Monorepo Packages
+
+Purdia is organized as an npm workspace monorepo. Shared logic lives in `packages/` and is consumed via `@purdia/*` imports.
+
+| Package                                             | Description                                               | Size   |
+| --------------------------------------------------- | --------------------------------------------------------- | ------ |
+| [`@purdia/ui`](./packages/ui)                       | 22 Vue base components (Button, Card, Table, Modal, etc.) | —      |
+| [`@purdia/charts`](./packages/charts)               | Line, Bar, Doughnut chart wrappers (Chart.js)             | 2.5 kB |
+| [`@purdia/toast`](./packages/toast)                 | Toast notification store + component + composable         | 5.2 kB |
+| [`@purdia/composables`](./packages/composables)     | `useApi` + `usePagination`                                | 2.3 kB |
+| [`@purdia/http`](./packages/http)                   | Axios wrapper with token refresh & multi-service          | 4.8 kB |
+| [`@purdia/crypto`](./packages/crypto)               | AES-GCM encrypted localStorage (Web Crypto API)           | 2.4 kB |
+| [`@purdia/auth`](./packages/auth)                   | Auth store + Vue Router guard                             | 2.8 kB |
+| [`@purdia/theme`](./packages/theme)                 | Dark/light mode + primary color switching                 | 2.6 kB |
+| [`@purdia/utils`](./packages/utils)                 | Formatting, debounce, throttle, uid helpers               | 1.9 kB |
+| [`@purdia/tailwind`](./packages/tailwind)           | Tailwind v4 theme tokens + color presets + dark mode CSS  | —      |
+| [`@purdia/tsconfig`](./packages/tsconfig)           | Shared TypeScript configs (base, lib, vue-lib)            | —      |
+| [`@purdia/eslint-config`](./packages/eslint-config) | Shared ESLint flat config (Vue 3 + TypeScript)            | —      |
+
+### Usage
+
+```ts
+// Components
+import { BaseButton, BaseCard, BaseTable } from '@purdia/ui'
+import { LineChart, BarChart } from '@purdia/charts'
+import { ToastContainer, useToast } from '@purdia/toast'
+
+// Composables
+import { useApi, usePagination } from '@purdia/composables'
+
+// HTTP & Auth
+import { initHttp, get, post } from '@purdia/http'
+import { useAuthStore, createAuthGuard } from '@purdia/auth'
+
+// Utilities
+import { formatCurrency, debounce, uid } from '@purdia/utils'
+import { secureSet, secureGet } from '@purdia/crypto'
+
+// Theme
+import { useThemeStore, colorOptions } from '@purdia/theme'
+```
+
+```css
+/* Tailwind theme */
+@import 'tailwindcss';
+@import '@purdia/tailwind/theme';
+@import '@purdia/tailwind/colors';
+@import '@purdia/tailwind/dark';
+```
+
+```jsonc
+// tsconfig.json in any package
+{ "extends": "@purdia/tsconfig/lib" }       // pure TS
+{ "extends": "@purdia/tsconfig/vue-lib" }   // Vue component lib
+```
+
+```js
+// eslint.config.js
+import purdiaConfig from '@purdia/eslint-config'
+export default [...purdiaConfig]
+```
+
+### Dependency Graph
+
+```
+@purdia/tsconfig          ← no deps
+@purdia/eslint-config     ← no deps
+@purdia/tailwind          ← no deps (pure CSS)
+@purdia/utils             ← no deps
+@purdia/crypto            ← no deps (Web Crypto API)
+@purdia/theme             ← pinia, vue
+@purdia/toast             ← pinia, vue, @lucide/vue
+@purdia/http              ← axios, @purdia/crypto
+@purdia/auth              ← pinia, vue, vue-router, @purdia/crypto
+@purdia/composables       ← vue, @purdia/http
+@purdia/charts            ← vue, chart.js, vue-chartjs
+@purdia/ui                ← vue, vue-router, @lucide/vue, @tiptap/*
+```
+
+---
+
+## 🏢 Modules
 
 ### 📊 CRM — Customer Relationship Management
 
@@ -123,16 +207,16 @@ npm run dev
 
 ### 🏪 Point of Sale
 
-| Sub-module   | Description                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------- |
-| Dashboard    | Sales overview and stats                                                                          |
+| Sub-module   | Description                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------------- |
+| Dashboard    | Sales overview and stats                                                                             |
 | POS Terminal | Product grid, favorites, inline discounts, multi-payment (Cash, Card, E-Wallet), numpad, hold orders |
-| Stock        | Product inventory management                                                                      |
-| Customers    | Customer database                                                                                 |
-| Cash Drawer  | Cash management                                                                                   |
-| Discounts    | Discount & promo management                                                                       |
-| QR Codes     | Generate & print QR codes per table for customer self-order                                       |
-| Reports      | Sales reports and analytics                                                                       |
+| Stock        | Product inventory management                                                                         |
+| Customers    | Customer database                                                                                    |
+| Cash Drawer  | Cash management                                                                                      |
+| Discounts    | Discount & promo management                                                                          |
+| QR Codes     | Generate & print QR codes per table for customer self-order                                          |
+| Reports      | Sales reports and analytics                                                                          |
 
 #### POS Terminal Features
 
@@ -184,9 +268,11 @@ npm run dev
 | Projects        | Kanban board with drag-and-drop, task detail        |
 | User Management | Users, Roles, Permissions with CRUD                 |
 
+---
+
 ## 🧱 Component Library
 
-All components live in `src/components/ui/` with full TypeScript props, variants, and sizes.
+All components are published as `@purdia/ui` with full TypeScript props, variants, and sizes.
 
 | Component   | Variants                                                      |
 | ----------- | ------------------------------------------------------------- |
@@ -206,20 +292,13 @@ All components live in `src/components/ui/` with full TypeScript props, variants
 | Skeleton    | text, circle, rect, button, avatar, badge, input              |
 | Avatar      | xs, sm, md, lg, xl + circle, rounded, square                  |
 | Dropdown    | 7 color variants + teleported positioning                     |
-| Charts      | Line, Bar, Doughnut (Chart.js)                                |
+| Charts      | Line, Bar, Doughnut (Chart.js) — `@purdia/charts`             |
 | Breadcrumb  | chevron, slash, dot separators + sm, md, lg sizes + icons     |
 | File Upload | dropzone, input, compact + progress, cancel, retry, validate  |
 | Editor      | minimal, default, full (Tiptap WYSIWYG) + sm, md, lg sizes    |
-| Toast       | success, error, warning, info + auto-dismiss, progress bar    |
+| Toast       | success, error, warning, info — `@purdia/toast`               |
 
-**Sidebar Categories:**
-
-| Category   | Components                                                               |
-| ---------- | ------------------------------------------------------------------------ |
-| Form       | Input, Select, Toggle, Date Picker, File Upload, Editor                  |
-| Display    | Card, Badge, Avatar, Table, Alert, Progress, Stat Card, Skeleton, Charts |
-| Navigation | Button, Tabs, Pagination, Breadcrumb                                     |
-| Layout     | Modal, Grid                                                              |
+---
 
 ## 🛠 Tech Stack
 
@@ -236,6 +315,8 @@ All components live in `src/components/ui/` with full TypeScript props, variants
 | Lucide       | 1.x     | 1000+ icons                                     |
 | Vite         | 8       | Dev server and build tool                       |
 
+---
+
 ## 🚀 Installation
 
 ```bash
@@ -243,7 +324,7 @@ All components live in `src/components/ui/` with full TypeScript props, variants
 git clone https://github.com/anggagewor/purdia.git
 cd purdia
 
-# Install dependencies
+# Install dependencies (includes all workspace packages)
 npm install
 
 # Start development server
@@ -256,40 +337,51 @@ npm run build
 npm run preview
 ```
 
+---
+
 ## 📁 Project Structure
 
 ```
-src/
-├── assets/              # Global CSS (Tailwind config, dark mode, color themes)
-├── components/
-│   ├── ui/              # 25+ reusable UI components
-│   ├── charts/          # Chart wrappers (Line, Bar, Doughnut)
-│   └── layout/          # DashboardLayout, SidebarNav, TopBar
-├── composables/
-│   ├── useApi.ts        # Generic loading/error/data composable
-│   ├── usePagination.ts # Paginated list with search, sort, filters
-│   └── useToast.ts      # Programmatic toast notifications
-├── lib/
-│   ├── config.ts        # Multi-backend API configuration
-│   ├── crypto.ts        # Secure storage (AES-GCM encrypt/decrypt)
-│   └── http.ts          # Axios instance with interceptors + silent refresh
-├── pages/
-│   ├── auth/            # Login, Register, Forgot Password
-│   ├── accounting/      # Chart of Accounts, Journals, Ledger, Statements, Tax
-│   ├── clients/         # Client CRUD (company & individual)
-│   ├── crm/             # CRM (11 sub-modules, 35 pages)
-│   ├── hrm/             # HRM (16 sub-modules, 47 pages)
-│   ├── inventory/       # Inventory (8 sub-modules, 22 pages)
-│   ├── invoices/        # Invoice CRUD + filtered views
-│   ├── pos/             # POS Terminal, Stock, Customers, QR Codes, Reports
-│   ├── projects/        # Kanban board, Task Detail
-│   ├── public/          # Public pages (QR self-order menu, no auth required)
-│   ├── users/           # Users, Roles, Permissions
-│   └── examples/        # Component showcase pages
-├── router/
-│   └── routes/          # Route modules per feature (incl. public routes)
-└── stores/              # Pinia stores (auth, theme, toast, pos)
+purdia/
+├── packages/                    # Shared internal packages
+│   ├── ui/                      # @purdia/ui — Vue base components
+│   ├── charts/                  # @purdia/charts — Chart.js wrappers
+│   ├── toast/                   # @purdia/toast — Notification system
+│   ├── composables/             # @purdia/composables — useApi, usePagination
+│   ├── http/                    # @purdia/http — Axios wrapper + token refresh
+│   ├── crypto/                  # @purdia/crypto — Encrypted localStorage
+│   ├── auth/                    # @purdia/auth — Auth store + route guard
+│   ├── theme/                   # @purdia/theme — Dark/light + color switching
+│   ├── utils/                   # @purdia/utils — Formatting & helper functions
+│   ├── tailwind/                # @purdia/tailwind — CSS theme tokens
+│   ├── tsconfig/                # @purdia/tsconfig — Shared TS configs
+│   └── eslint-config/           # @purdia/eslint-config — Shared lint rules
+├── src/
+│   ├── assets/                  # Global CSS (imports @purdia/tailwind)
+│   ├── components/
+│   │   └── layout/              # DashboardLayout, SidebarNav, TopBar
+│   ├── lib/
+│   │   └── config.ts            # Multi-backend API service configuration
+│   ├── pages/                   # All page components per module
+│   │   ├── auth/                # Login, Register, Forgot Password
+│   │   ├── accounting/          # Chart of Accounts, Journals, Ledger
+│   │   ├── clients/             # Client CRUD
+│   │   ├── crm/                 # CRM (11 sub-modules, 35 pages)
+│   │   ├── hrm/                 # HRM (16 sub-modules, 47 pages)
+│   │   ├── inventory/           # Inventory (8 sub-modules, 22 pages)
+│   │   ├── invoices/            # Invoice CRUD + filtered views
+│   │   ├── pos/                 # POS Terminal, Stock, QR Codes
+│   │   ├── projects/            # Kanban board, Task Detail
+│   │   ├── public/              # Public QR self-order (no auth)
+│   │   ├── users/               # Users, Roles, Permissions
+│   │   └── examples/            # Component showcase pages
+│   ├── router/                  # Vue Router with route modules
+│   └── stores/                  # App-specific Pinia stores (pos)
+├── package.json                 # Workspace root
+└── tsconfig.json                # Project references
 ```
+
+---
 
 ## 🤝 Contributing
 
