@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseBadge } from '@/components/ui'
+import { BaseCard, BaseInput, BaseButton, BaseBadge } from '@purdia/ui'
 import { ArrowLeft, ScanLine, Search, Package } from '@lucide/vue'
 
 const router = useRouter()

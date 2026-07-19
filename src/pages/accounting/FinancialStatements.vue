@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BaseButton, BaseTabs, TabPanel, BaseSelect } from '@/components/ui'
+import { BaseCard, BaseButton, BaseTabs, TabPanel, BaseSelect } from '@purdia/ui'
 import { Download } from '@lucide/vue'
-import type { TabItem } from '@/components/ui/BaseTabs.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { TabItem } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const activeTab = ref('balance-sheet')
 const period = ref<string | number>('2025-07')

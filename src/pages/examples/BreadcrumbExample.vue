@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { BaseCard } from '@/components/ui'
-import BaseBreadcrumb from '@/components/ui/BaseBreadcrumb.vue'
-import type { BreadcrumbItem } from '@/components/ui/BaseBreadcrumb.vue'
+import { BaseCard } from '@purdia/ui'
+import BaseBreadcrumb from '@purdia/ui'
+import type { BreadcrumbItem } from '@purdia/ui'
 import { Home, Settings, Users, FileText, FolderOpen, ShoppingCart } from '@lucide/vue'
 
 const basicItems: BreadcrumbItem[] = [
@@ -141,8 +141,8 @@ const invoiceItems: BreadcrumbItem[] = [
       <pre
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
-import BaseBreadcrumb from '@/components/ui/BaseBreadcrumb.vue'
-import type { BreadcrumbItem } from '@/components/ui/BaseBreadcrumb.vue'
+import BaseBreadcrumb from '@purdia/ui'
+import type { BreadcrumbItem } from '@purdia/ui'
 import { Home, FileText } from '@lucide/vue'
 
 const items: BreadcrumbItem[] = [

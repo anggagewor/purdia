@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseButton, ButtonGroup, DropdownButton, BaseCard } from '@/components/ui'
+import { BaseButton, ButtonGroup, DropdownButton, BaseCard } from '@purdia/ui'
 import {
   Plus,
   Download,
@@ -19,7 +19,7 @@ import {
   AlignCenter,
   AlignRight,
 } from '@lucide/vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
+import type { DropdownItem } from '@purdia/ui'
 
 const fileActions: DropdownItem[] = [
   { label: 'New File', icon: Plus, value: 'new' },
@@ -282,9 +282,9 @@ function handleSelect(item: DropdownItem) {
       <pre
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
-import { BaseButton, ButtonGroup, DropdownButton } from '@/components/ui'
+import { BaseButton, ButtonGroup, DropdownButton } from '@purdia/ui'
 import { Plus, Trash2, Bold, Italic } from '@lucide/vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
+import type { DropdownItem } from '@purdia/ui'
 
 const actions: DropdownItem[] = [
   { label: 'Edit', icon: Edit, value: 'edit' },

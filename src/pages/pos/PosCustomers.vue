@@ -11,11 +11,11 @@ import {
   BaseSelect,
   BasePagination,
   DropdownButton,
-} from '@/components/ui'
+} from '@purdia/ui'
 import { Plus, MoreHorizontal, Eye, Edit, Trash2 } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { DropdownItem } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const custPage = ref(1)
 const showCreateModal = ref(false)

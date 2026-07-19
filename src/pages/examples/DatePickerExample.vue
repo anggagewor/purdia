@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseDatePicker, BaseCard, BaseSelect } from '@/components/ui'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import { BaseDatePicker, BaseCard, BaseSelect } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 // Date
 const dateValue = ref('')
@@ -332,7 +332,7 @@ const customFormatValue = ref('')
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
 import { ref } from 'vue'
-import { BaseDatePicker } from '@/components/ui'
+import { BaseDatePicker } from '@purdia/ui'
 
 const date = ref('')
 const time = ref('')

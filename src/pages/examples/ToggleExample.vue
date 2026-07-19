@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseToggle, BaseCard } from '@/components/ui'
+import { BaseToggle, BaseCard } from '@purdia/ui'
 
 const enabled = ref(true)
 const disabled = ref(false)

@@ -2,6 +2,9 @@
   "name": "purdia",
   "version": "0.0.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,6 +16,7 @@
   },
   "dependencies": {
     "@lucide/vue": "^1.24.0",
+    "@purdia/ui": "workspace:*",
     "@tiptap/extension-code-block-lowlight": "^3.27.3",
     "@tiptap/extension-color": "^3.27.3",
     "@tiptap/extension-highlight": "^3.27.3",

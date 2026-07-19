@@ -11,11 +11,11 @@ import {
   BaseToggle,
   BasePagination,
   DropdownButton,
-} from '@/components/ui'
+} from '@purdia/ui'
 import { Plus, MoreHorizontal, Edit, Trash2, Percent, Tag } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { DropdownItem } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const discPage = ref(1)
 const showCreateModal = ref(false)

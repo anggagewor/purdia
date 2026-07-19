@@ -9,7 +9,7 @@ import {
   BaseSelect,
   BaseBadge,
   BaseAvatar,
-} from '@/components/ui'
+} from '@purdia/ui'
 import {
   Plus,
   MoreHorizontal,
@@ -20,7 +20,7 @@ import {
   Calendar,
   MessageSquare,
 } from '@lucide/vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { SelectOption } from '@purdia/ui'
 
 interface Task {
   id: number

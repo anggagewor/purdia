@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BaseTable, BaseSelect, BaseBadge } from '@/components/ui'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import { BaseCard, BaseTable, BaseSelect, BaseBadge } from '@purdia/ui'
+import type { TableColumn } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const selectedAccount = ref<string | number>('1-1100')
 

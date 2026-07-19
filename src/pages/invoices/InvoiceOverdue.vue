@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseTable, BaseBadge, BaseButton } from '@/components/ui'
+import { BaseCard, BaseTable, BaseBadge, BaseButton } from '@purdia/ui'
 import { Eye, Send, AlertTriangle } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
+import type { TableColumn } from '@purdia/ui'
 
 const router = useRouter()
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BaseBadge } from '@/components/ui'
-import { StatCard } from '@/components/ui'
+import { BaseCard, BaseBadge } from '@purdia/ui'
+import { StatCard } from '@purdia/ui'
 import {
   TrendingUp,
   TrendingDown,

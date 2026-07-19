@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseInput, BaseCard } from '@/components/ui'
+import { BaseInput, BaseCard } from '@purdia/ui'
 import { Search, Mail, Lock, Eye, User } from '@lucide/vue'
 
 const text = ref('')
@@ -74,7 +74,7 @@ const errorValue = ref('invalid data')
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
 import { ref } from 'vue'
-import { BaseInput } from '@/components/ui'
+import { BaseInput } from '@purdia/ui'
 import { Search, Mail } from '@lucide/vue'
 
 const email = ref('')

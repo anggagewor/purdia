@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseAvatar, BaseCard } from '@/components/ui'
+import { BaseAvatar, BaseCard } from '@purdia/ui'
 </script>
 
 <template>

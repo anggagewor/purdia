@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseButton, BaseBadge } from '@/components/ui'
-import { StatCard } from '@/components/ui'
+import { BaseCard, BaseButton, BaseBadge } from '@purdia/ui'
+import { StatCard } from '@purdia/ui'
 import {
   Package,
   TrendingUp,

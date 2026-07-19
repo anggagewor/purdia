@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { BaseCard, BaseButton } from '@/components/ui'
+import { BaseCard, BaseButton } from '@purdia/ui'
 import { QrCode, Printer, Download, Copy, Check } from '@lucide/vue'
 import { tables } from '@/stores/pos'
 

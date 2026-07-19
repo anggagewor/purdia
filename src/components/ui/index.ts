@@ -1,23 +1,28 @@
-export { default as BaseButton } from './BaseButton.vue'
-export { default as ButtonGroup } from './ButtonGroup.vue'
-export { default as DropdownButton } from './DropdownButton.vue'
-export { default as BaseCard } from './BaseCard.vue'
-export { default as BaseBadge } from './BaseBadge.vue'
-export { default as BaseInput } from './BaseInput.vue'
-export { default as BaseAvatar } from './BaseAvatar.vue'
-export { default as BaseTable } from './BaseTable.vue'
-export { default as BaseModal } from './BaseModal.vue'
-export { default as BaseAlert } from './BaseAlert.vue'
-export { default as BaseSelect } from './BaseSelect.vue'
-export { default as BaseToggle } from './BaseToggle.vue'
-export { default as BaseProgress } from './BaseProgress.vue'
-export { default as BaseSkeleton } from './BaseSkeleton.vue'
-export { default as BaseTabs } from './BaseTabs.vue'
-export { default as TabPanel } from './TabPanel.vue'
-export { default as BaseDatePicker } from './BaseDatePicker.vue'
-export { default as BasePagination } from './BasePagination.vue'
-export { default as StatCard } from './StatCard.vue'
-export { default as BaseBreadcrumb } from './BaseBreadcrumb.vue'
-export { default as BaseFileUpload } from './BaseFileUpload.vue'
-export { default as BaseEditor } from './BaseEditor.vue'
+// Re-export everything from @purdia/ui package
+export {
+  BaseButton,
+  ButtonGroup,
+  DropdownButton,
+  BaseCard,
+  BaseBadge,
+  BaseInput,
+  BaseAvatar,
+  BaseTable,
+  BaseModal,
+  BaseAlert,
+  BaseSelect,
+  BaseToggle,
+  BaseProgress,
+  BaseSkeleton,
+  BaseTabs,
+  TabPanel,
+  BaseDatePicker,
+  BasePagination,
+  StatCard,
+  BaseBreadcrumb,
+  BaseFileUpload,
+  BaseEditor,
+} from '@purdia/ui'
+
+// ToastContainer stays local (depends on app-specific Pinia store)
 export { default as ToastContainer } from './ToastContainer.vue'

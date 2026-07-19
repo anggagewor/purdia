@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseModal, BaseCard, BaseButton, BaseInput, BaseSelect } from '@/components/ui'
+import { BaseModal, BaseCard, BaseButton, BaseInput, BaseSelect } from '@purdia/ui'
 
 const showBasic = ref(false)
 const showSmall = ref(false)

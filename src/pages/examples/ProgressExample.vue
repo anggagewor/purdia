@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { BaseProgress, BaseCard } from '@/components/ui'
+import { BaseProgress, BaseCard } from '@purdia/ui'
 
 const animatedValue = ref(0)
 let interval: ReturnType<typeof setInterval>

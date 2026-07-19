@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseTable, BaseBadge, BaseButton, BasePagination } from '@/components/ui'
-import { DropdownButton } from '@/components/ui'
+import { BaseCard, BaseTable, BaseBadge, BaseButton, BasePagination } from '@purdia/ui'
+import { DropdownButton } from '@purdia/ui'
 import { Plus, Eye, Pencil, Trash2, FileText } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { DropdownItem } from '@purdia/ui'
 
 const router = useRouter()
 

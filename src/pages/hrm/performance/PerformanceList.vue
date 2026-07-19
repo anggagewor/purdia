@@ -11,11 +11,11 @@ import {
   BasePagination,
   BaseProgress,
   DropdownButton,
-} from '@/components/ui'
+} from '@purdia/ui'
 import { Plus, MoreHorizontal, Eye, Edit, Trash2 } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
-import type { BadgeVariant } from '@/components/ui/BaseBadge.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { DropdownItem } from '@purdia/ui'
+import type { BadgeVariant } from '@purdia/ui'
 
 const router = useRouter()
 const showDeleteModal = ref(false)

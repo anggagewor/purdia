@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BaseTable, BaseBadge, BaseButton, BaseSelect, StatCard } from '@/components/ui'
+import { BaseCard, BaseTable, BaseBadge, BaseButton, BaseSelect, StatCard } from '@purdia/ui'
 import { BarChart } from '@/components/charts'
 import { Download, DollarSign, ShoppingBag, TrendingUp, Receipt } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const period = ref<string | number>('today')
 const periodOptions: SelectOption[] = [

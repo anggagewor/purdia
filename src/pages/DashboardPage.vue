@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { DollarSign, Users, ShoppingCart, TrendingUp } from '@lucide/vue'
-import { StatCard, BaseCard, BaseTable, BaseBadge, BaseAvatar, BaseProgress } from '@/components/ui'
+import { StatCard, BaseCard, BaseTable, BaseBadge, BaseAvatar, BaseProgress } from '@purdia/ui'
 import { LineChart, BarChart, DoughnutChart } from '@/components/charts'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
+import type { TableColumn } from '@purdia/ui'
 
 const revenueData = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],

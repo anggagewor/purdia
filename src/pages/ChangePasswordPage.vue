@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { BaseCard, BaseInput, BaseButton, BaseAlert, BaseProgress } from '@/components/ui'
+import { BaseCard, BaseInput, BaseButton, BaseAlert, BaseProgress } from '@purdia/ui'
 import { Lock, Eye, EyeOff, CheckCircle, ShieldCheck } from '@lucide/vue'
 
 const currentPassword = ref('')

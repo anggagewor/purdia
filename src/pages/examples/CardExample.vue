@@ -8,7 +8,7 @@ import {
   DropdownButton,
   BaseTabs,
   TabPanel,
-} from '@/components/ui'
+} from '@purdia/ui'
 import {
   Plus,
   MoreHorizontal,
@@ -25,8 +25,8 @@ import {
   TrendingUp,
   ExternalLink,
 } from '@lucide/vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
-import type { TabItem } from '@/components/ui/BaseTabs.vue'
+import type { DropdownItem } from '@purdia/ui'
+import type { TabItem } from '@purdia/ui'
 
 const cardActions: DropdownItem[] = [
   { label: 'Edit', icon: Edit, value: 'edit' },

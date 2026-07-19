@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { StatCard, BaseCard } from '@/components/ui'
+import { StatCard, BaseCard } from '@purdia/ui'
 import {
   DollarSign,
   Users,

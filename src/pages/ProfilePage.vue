@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BaseInput, BaseButton, BaseAvatar, BaseSelect } from '@/components/ui'
+import { BaseCard, BaseInput, BaseButton, BaseAvatar, BaseSelect } from '@purdia/ui'
 import { Camera, Mail, Phone, MapPin, Briefcase } from '@lucide/vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { SelectOption } from '@purdia/ui'
 
 const name = ref('Angga Dev')
 const email = ref('angga@purdia.com')

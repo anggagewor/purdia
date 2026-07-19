@@ -6,7 +6,7 @@ import {
   BaseAvatar,
   BaseButton,
   DropdownButton,
-} from '@/components/ui'
+} from '@purdia/ui'
 import {
   Plus,
   Download,
@@ -19,8 +19,8 @@ import {
   Phone,
   MapPin,
 } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { DropdownItem } from '@purdia/ui'
 
 // --- Basic table ---
 const basicColumns: TableColumn[] = [

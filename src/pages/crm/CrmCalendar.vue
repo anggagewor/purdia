@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { BaseCard, BaseButton, BaseBadge } from '@/components/ui'
+import { BaseCard, BaseButton, BaseBadge } from '@purdia/ui'
 import { ChevronLeft, ChevronRight, Plus } from '@lucide/vue'
 
 const currentDate = ref(new Date(2026, 6, 12)) // July 2026

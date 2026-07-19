@@ -8,7 +8,7 @@ import {
   BaseSelect,
   BaseAvatar,
   BasePagination,
-} from '@/components/ui'
+} from '@purdia/ui'
 import {
   Search,
   Plus,
@@ -31,7 +31,7 @@ import {
   MapPin,
   Bell,
 } from '@lucide/vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { SelectOption } from '@purdia/ui'
 import { usePosStore, type QrOrder } from '@/stores/pos'
 
 interface VariantOption {

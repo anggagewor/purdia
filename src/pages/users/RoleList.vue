@@ -7,12 +7,12 @@ import {
   BaseModal,
   BasePagination,
   DropdownButton,
-} from '@/components/ui'
+} from '@purdia/ui'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Plus, MoreHorizontal, Eye, Edit, Trash2, Shield } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { DropdownItem } from '@/components/ui/DropdownButton.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { DropdownItem } from '@purdia/ui'
 
 const router = useRouter()
 const rolePage = ref(1)

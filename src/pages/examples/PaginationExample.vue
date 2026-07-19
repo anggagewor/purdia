@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BasePagination } from '@/components/ui'
+import { BaseCard, BasePagination } from '@purdia/ui'
 
 const page1 = ref(1)
 const page2 = ref(3)

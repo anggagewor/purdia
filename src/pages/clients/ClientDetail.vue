@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseButton, BaseBadge, BaseAvatar, BaseTabs, TabPanel } from '@/components/ui'
+import { BaseCard, BaseButton, BaseBadge, BaseAvatar, BaseTabs, TabPanel } from '@purdia/ui'
 import {
   ArrowLeft,
   Edit,
@@ -15,7 +15,7 @@ import {
   Calendar,
   Hash,
 } from '@lucide/vue'
-import type { TabItem } from '@/components/ui/BaseTabs.vue'
+import type { TabItem } from '@purdia/ui'
 
 const router = useRouter()
 const route = useRoute()

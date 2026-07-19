@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard } from '@/components/ui'
-import BaseEditor from '@/components/ui/BaseEditor.vue'
+import { BaseCard } from '@purdia/ui'
+import BaseEditor from '@purdia/ui'
 
 const basicContent = ref('<p>Ini adalah contoh editor sederhana. Coba ketik di sini...</p>')
 
@@ -185,7 +185,7 @@ const outputContent = ref(
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
 import { ref } from 'vue'
-import BaseEditor from '@/components/ui/BaseEditor.vue'
+import BaseEditor from '@purdia/ui'
 
 const content = ref('&lt;p&gt;Hello World&lt;/p&gt;')
 &lt;/script&gt;

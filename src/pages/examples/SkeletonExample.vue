@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseSkeleton, BaseCard } from '@/components/ui'
+import { BaseSkeleton, BaseCard } from '@purdia/ui'
 </script>
 
 <template>
@@ -237,7 +237,7 @@ import { BaseSkeleton, BaseCard } from '@/components/ui'
       <pre
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
-import { BaseSkeleton } from '@/components/ui'
+import { BaseSkeleton } from '@purdia/ui'
 &lt;/script&gt;
 
 &lt;template&gt;

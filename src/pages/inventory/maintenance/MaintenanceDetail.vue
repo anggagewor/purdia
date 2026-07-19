@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseButton, BaseBadge } from '@/components/ui'
-import type { BadgeVariant } from '@/components/ui/BaseBadge.vue'
+import { BaseCard, BaseButton, BaseBadge } from '@purdia/ui'
+import type { BadgeVariant } from '@purdia/ui'
 import {
   ArrowLeft,
   Edit,

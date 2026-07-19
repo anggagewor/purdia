@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseButton, BaseInput, BaseSelect } from '@/components/ui'
+import { BaseCard, BaseButton, BaseInput, BaseSelect } from '@purdia/ui'
 import { Plus, Trash2, Save, ArrowLeft } from '@lucide/vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { SelectOption } from '@purdia/ui'
 
 const router = useRouter()
 const route = useRoute()

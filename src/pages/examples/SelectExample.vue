@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseSelect, BaseCard } from '@/components/ui'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import { BaseSelect, BaseCard } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 // Single select
 const singleValue = ref<string | number>('')
@@ -250,8 +250,8 @@ async function searchCities(query: string): Promise<SelectOption[]> {
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
 import { ref } from 'vue'
-import { BaseSelect } from '@/components/ui'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import { BaseSelect } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const value = ref('')
 const multiValue = ref&lt;(string | number)[]&gt;([])

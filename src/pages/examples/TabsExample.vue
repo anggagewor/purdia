@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseTabs, TabPanel, BaseCard } from '@/components/ui'
+import { BaseTabs, TabPanel, BaseCard } from '@purdia/ui'
 import { Home, User, Settings, Bell, Mail, Shield, CreditCard, FileText } from '@lucide/vue'
-import type { TabItem } from '@/components/ui/BaseTabs.vue'
+import type { TabItem } from '@purdia/ui'
 
 const activeDefault = ref('home')
 const activePills = ref('profile')
@@ -375,8 +375,8 @@ const sizeTabs: TabItem[] = [
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
 import { ref } from 'vue'
-import { BaseTabs, TabPanel } from '@/components/ui'
-import type { TabItem } from '@/components/ui/BaseTabs.vue'
+import { BaseTabs, TabPanel } from '@purdia/ui'
+import type { TabItem } from '@purdia/ui'
 
 const active = ref('home')
 

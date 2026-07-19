@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseButton, BaseBadge } from '@/components/ui'
+import { BaseCard, BaseButton, BaseBadge } from '@purdia/ui'
 import { ArrowLeft, Edit, ShoppingCart, Calendar, MapPin, User, FileText } from '@lucide/vue'
 
-import type { BadgeVariant } from '@/components/ui/BaseBadge.vue'
+import type { BadgeVariant } from '@purdia/ui'
 
 const router = useRouter()
 const route = useRoute()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { BaseCard } from '@/components/ui'
-import BaseFileUpload from '@/components/ui/BaseFileUpload.vue'
+import { BaseCard } from '@purdia/ui'
+import BaseFileUpload from '@purdia/ui'
 </script>
 
 <template>
@@ -162,8 +162,8 @@ import BaseFileUpload from '@/components/ui/BaseFileUpload.vue'
       <pre
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
-import BaseFileUpload from '@/components/ui/BaseFileUpload.vue'
-import type { UploadFile } from '@/components/ui/BaseFileUpload.vue'
+import BaseFileUpload from '@purdia/ui'
+import type { UploadFile } from '@purdia/ui'
 
 function onUpload(files: UploadFile[]) {
   console.log('Files:', files)

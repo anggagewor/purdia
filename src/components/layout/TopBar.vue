@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Menu, Bell, Search, User, KeyRound, LogOut, Sun, Moon, Palette } from '@lucide/vue'
-import BaseAvatar from '@/components/ui/BaseAvatar.vue'
+import BaseAvatar from '@purdia/ui'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore, colorOptions } from '@/stores/theme'
 

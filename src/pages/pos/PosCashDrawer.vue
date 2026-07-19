@@ -8,10 +8,10 @@ import {
   BaseModal,
   BaseInput,
   BaseSelect,
-} from '@/components/ui'
+} from '@purdia/ui'
 import { Plus, Minus, DollarSign, ArrowDownLeft, ArrowUpRight } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
+import type { TableColumn } from '@purdia/ui'
+import type { SelectOption } from '@purdia/ui'
 
 const showAddModal = ref(false)
 const transactionType = ref<string | number>('in')

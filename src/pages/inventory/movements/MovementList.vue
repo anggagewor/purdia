@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseTable, BaseButton, BaseBadge, BasePagination } from '@/components/ui'
+import { BaseCard, BaseTable, BaseButton, BaseBadge, BasePagination } from '@purdia/ui'
 import { Plus, TrendingUp, TrendingDown, ArrowRight } from '@lucide/vue'
-import type { TableColumn } from '@/components/ui/BaseTable.vue'
+import type { TableColumn } from '@purdia/ui'
 
 const router = useRouter()
 const currentPage = ref(1)

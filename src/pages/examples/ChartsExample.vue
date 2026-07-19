@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseCard } from '@/components/ui'
+import { BaseCard } from '@purdia/ui'
 import { LineChart, BarChart, DoughnutChart } from '@/components/charts'
 
 const lineData = {

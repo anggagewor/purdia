@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTabs, TabPanel } from '@/components/ui'
+import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTabs, TabPanel } from '@purdia/ui'
 import { ArrowLeft, Plus, Trash2 } from '@lucide/vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
-import type { TabItem } from '@/components/ui/BaseTabs.vue'
+import type { SelectOption } from '@purdia/ui'
+import type { TabItem } from '@purdia/ui'
 
 const router = useRouter()
 const route = useRoute()

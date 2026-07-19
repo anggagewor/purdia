@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseAlert, BaseCard } from '@/components/ui'
+import { BaseAlert, BaseCard } from '@purdia/ui'
 import { Info, CheckCircle, AlertTriangle, AlertCircle } from '@lucide/vue'
 
 const showDismissible = ref(true)
