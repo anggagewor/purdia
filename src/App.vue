@@ -11,7 +11,7 @@ const isGuestRoute = computed(() => route.meta.guest === true)
 
 <template>
   <DashboardLayout v-if="!isGuestRoute">
-    <RouterView />
+    <RouterView :key="route.fullPath" />
   </DashboardLayout>
   <RouterView v-else />
   <ToastContainer />

@@ -111,6 +111,126 @@ const routes: RouteRecordRaw[] = [
     name: 'example-editor',
     component: () => import('@/pages/examples/EditorExample.vue'),
   },
+  {
+    path: '/examples/textarea',
+    name: 'example-textarea',
+    component: () => import('@/pages/examples/TextareaExample.vue'),
+  },
+  {
+    path: '/examples/tooltip',
+    name: 'example-tooltip',
+    component: () => import('@/pages/examples/TooltipExample.vue'),
+  },
+  {
+    path: '/examples/popover',
+    name: 'example-popover',
+    component: () => import('@/pages/examples/PopoverExample.vue'),
+  },
+  {
+    path: '/examples/drawer',
+    name: 'example-drawer',
+    component: () => import('@/pages/examples/DrawerExample.vue'),
+  },
+  {
+    path: '/examples/accordion',
+    name: 'example-accordion',
+    component: () => import('@/pages/examples/AccordionExample.vue'),
+  },
+  {
+    path: '/examples/checkbox',
+    name: 'example-checkbox',
+    component: () => import('@/pages/examples/CheckboxExample.vue'),
+  },
+  {
+    path: '/examples/radio',
+    name: 'example-radio',
+    component: () => import('@/pages/examples/RadioExample.vue'),
+  },
+  {
+    path: '/examples/tag',
+    name: 'example-tag',
+    component: () => import('@/pages/examples/TagExample.vue'),
+  },
+  {
+    path: '/examples/spinner',
+    name: 'example-spinner',
+    component: () => import('@/pages/examples/SpinnerExample.vue'),
+  },
+  {
+    path: '/examples/timeline',
+    name: 'example-timeline',
+    component: () => import('@/pages/examples/TimelineExample.vue'),
+  },
+  {
+    path: '/examples/steps',
+    name: 'example-steps',
+    component: () => import('@/pages/examples/StepsExample.vue'),
+  },
+  {
+    path: '/examples/empty-state',
+    name: 'example-empty-state',
+    component: () => import('@/pages/examples/EmptyStateExample.vue'),
+  },
+  {
+    path: '/examples/color-picker',
+    name: 'example-color-picker',
+    component: () => import('@/pages/examples/ColorPickerExample.vue'),
+  },
+  {
+    path: '/examples/rating',
+    name: 'example-rating',
+    component: () => import('@/pages/examples/RatingExample.vue'),
+  },
+  {
+    path: '/examples/slider',
+    name: 'example-slider',
+    component: () => import('@/pages/examples/SliderExample.vue'),
+  },
+  {
+    path: '/examples/divider',
+    name: 'example-divider',
+    component: () => import('@/pages/examples/DividerExample.vue'),
+  },
+  {
+    path: '/examples/kbd',
+    name: 'example-kbd',
+    component: () => import('@/pages/examples/KbdExample.vue'),
+  },
+  {
+    path: '/examples/avatar-group',
+    name: 'example-avatar-group',
+    component: () => import('@/pages/examples/AvatarGroupExample.vue'),
+  },
+  {
+    path: '/examples/number-input',
+    name: 'example-number-input',
+    component: () => import('@/pages/examples/NumberInputExample.vue'),
+  },
+  {
+    path: '/examples/tree-view',
+    name: 'example-tree-view',
+    component: () => import('@/pages/examples/TreeViewExample.vue'),
+  },
+  {
+    path: '/examples/calendar',
+    name: 'example-calendar',
+    component: () => import('@/pages/examples/CalendarExample.vue'),
+  },
+  {
+    path: '/examples/command-palette',
+    name: 'example-command-palette',
+    component: () => import('@/pages/examples/CommandPaletteExample.vue'),
+  },
+  {
+    path: '/examples/notification-list',
+    name: 'example-notification-list',
+    component: () => import('@/pages/examples/NotificationListExample.vue'),
+  },
+  {
+    path: '/examples/context-menu',
+    name: 'example-context-menu',
+    component: () => import('@/pages/examples/ContextMenuExample.vue'),
+  },
 ]
 
 export default routes
