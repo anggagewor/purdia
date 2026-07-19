@@ -17,9 +17,38 @@ Full POS system with terminal interface, QR self-ordering, and multi-payment sup
 
 ## Screenshots
 
-<p align="center">
-  <img src="../Pos_dashboard.png" alt="POS Dashboard" width="100%"/>
-</p>
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <b>POS Dashboard</b><br/>
+      <img src="../Pos_dashboard.png" alt="POS Dashboard" width="100%"/>
+    </td>
+    <td width="50%" align="center">
+      <b>Order</b><br/>
+      <img src="../pos/order.png" alt="POS Order" width="100%"/>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <b>Payment</b><br/>
+      <img src="../pos/payment.png" alt="POS Payment" width="100%"/>
+    </td>
+    <td width="50%" align="center">
+      <b>Hold Order</b><br/>
+      <img src="../pos/hold_order.png" alt="Hold Order" width="100%"/>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <b>QR Order (Staff)</b><br/>
+      <img src="../pos/qr_order.png" alt="QR Order" width="100%"/>
+    </td>
+    <td width="50%" align="center">
+      <b>Public Self-Order (Customer)</b><br/>
+      <img src="../pos/public_order.png" alt="Public Order" width="100%"/>
+    </td>
+  </tr>
+</table>
 
 ## POS Terminal Features
 
