@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { BaseCard } from '@purdia/ui'
-import BaseFileUpload from '@purdia/ui'
+import { BaseCard, BaseFileUpload } from '@purdia/ui'
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { BaseCard } from '@purdia/ui'
-import BaseBreadcrumb from '@purdia/ui'
+import { BaseCard, BaseBreadcrumb } from '@purdia/ui'
 import type { BreadcrumbItem } from '@purdia/ui'
 import { Home, Settings, Users, FileText, FolderOpen, ShoppingCart } from '@lucide/vue'
 

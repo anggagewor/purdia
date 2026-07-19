@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { StatCard, BaseCard } from '@purdia/ui'
-import { LineChart, BarChart, DoughnutChart } from '@/components/charts'
+import { LineChart, BarChart, DoughnutChart } from '@purdia/charts'
 import { DollarSign, ShoppingBag, Users, TrendingUp } from '@lucide/vue'
 
 const salesData = {

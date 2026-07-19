@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { BaseCard, BaseTable, BaseBadge, BaseButton, BaseSelect, StatCard } from '@purdia/ui'
-import { BarChart } from '@/components/charts'
+import { BarChart } from '@purdia/charts'
 import { Download, DollarSign, ShoppingBag, TrendingUp, Receipt } from '@lucide/vue'
 import type { TableColumn } from '@purdia/ui'
 import type { SelectOption } from '@purdia/ui'

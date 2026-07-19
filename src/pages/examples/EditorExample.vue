@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard } from '@purdia/ui'
-import BaseEditor from '@purdia/ui'
+import { BaseCard, BaseEditor } from '@purdia/ui'
 
 const basicContent = ref('<p>Ini adalah contoh editor sederhana. Coba ketik di sini...</p>')
 

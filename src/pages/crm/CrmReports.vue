@@ -12,7 +12,7 @@ import {
   BarChart3,
   PieChart,
 } from '@lucide/vue'
-import { BarChart, DoughnutChart, LineChart } from '@/components/charts'
+import { BarChart, DoughnutChart, LineChart } from '@purdia/charts'
 
 // Pipeline by stage
 const pipelineData = ref({

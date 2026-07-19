@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { BaseCard, BaseBadge } from '@purdia/ui'
 import { StatCard } from '@purdia/ui'
 import { Users, CalendarCheck, Palmtree, GraduationCap } from '@lucide/vue'
-import { BarChart, DoughnutChart, LineChart } from '@/components/charts'
+import { BarChart, DoughnutChart, LineChart } from '@purdia/charts'
 
 // Monthly Attendance Rate
 const attendanceData = ref({

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { BaseCard } from '@purdia/ui'
-import { LineChart, BarChart, DoughnutChart } from '@/components/charts'
+import { LineChart, BarChart, DoughnutChart } from '@purdia/charts'
 
 const lineData = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
@@ -142,7 +142,7 @@ const singleLineData = {
       <pre
         class="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs leading-relaxed overflow-x-auto"
       ><code>&lt;script setup lang="ts"&gt;
-import { LineChart } from '@/components/charts'
+import { LineChart } from '@purdia/charts'
 
 const data = {
   labels: ['Jan', 'Feb', 'Mar'],

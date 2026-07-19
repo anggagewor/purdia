@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DollarSign, Users, ShoppingCart, TrendingUp } from '@lucide/vue'
 import { StatCard, BaseCard, BaseTable, BaseBadge, BaseAvatar, BaseProgress } from '@purdia/ui'
-import { LineChart, BarChart, DoughnutChart } from '@/components/charts'
+import { LineChart, BarChart, DoughnutChart } from '@purdia/charts'
 import type { TableColumn } from '@purdia/ui'
 
 const revenueData = {
