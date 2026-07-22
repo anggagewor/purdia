@@ -158,8 +158,8 @@ const unreadCount = () => notifications.value.filter((n) => !n.read).length
       ><code>&lt;div v-for="item in notifications" :class="!item.read ? 'bg-blue-50/50' : ''"&gt;
   &lt;CheckCircle v-if="item.icon === 'success'" class="text-green-500" /&gt;
   &lt;div&gt;
-    &lt;p class="font-medium"&gt;{{ item.title }}&lt;/p&gt;
-    &lt;p class="text-xs text-gray-500"&gt;{{ item.desc }}&lt;/p&gt;
+    &lt;p class="font-medium"&gt;&#123;&#123; item.title &#125;&#125;&lt;/p&gt;
+    &lt;p class="text-xs text-gray-500"&gt;&#123;&#123; item.desc &#125;&#125;&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </BaseCard>

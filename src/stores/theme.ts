@@ -1,8 +1,8 @@
-import { ref, watch } from 'vue'
+import { ref, computed, watch, onScopeDispose } from 'vue'
 import { defineStore } from 'pinia'
 import { useAuthStore } from './auth'
 
-export type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark' | 'system'
 export type PrimaryColor =
   | 'indigo'
   | 'blue'
@@ -31,10 +31,30 @@ export const colorOptions: ColorOption[] = [
 ]
 
 const validColors = colorOptions.map((c) => c.name)
+const validThemes: Theme[] = ['light', 'dark', 'system']
 
 export const useThemeStore = defineStore('theme', () => {
   const theme = ref<Theme>(getInitialTheme())
   const primaryColor = ref<PrimaryColor>(getInitialColor())
+
+  // Reactive system preference tracking
+  const systemPrefersDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+  // Listen to OS theme changes in real-time
+  const mql = window.matchMedia('(prefers-color-scheme: dark)')
+  const handleSystemChange = (e: MediaQueryListEvent) => {
+    systemPrefersDark.value = e.matches
+  }
+  mql.addEventListener('change', handleSystemChange)
+  onScopeDispose(() => mql.removeEventListener('change', handleSystemChange))
+
+  /** The resolved (effective) theme — resolves 'system' to 'light' | 'dark' */
+  const resolvedTheme = computed<'light' | 'dark'>(() => {
+    if (theme.value === 'system') {
+      return systemPrefersDark.value ? 'dark' : 'light'
+    }
+    return theme.value
+  })
 
   function getStorageKey(suffix: string): string {
     const auth = useAuthStore()
@@ -47,14 +67,14 @@ export const useThemeStore = defineStore('theme', () => {
     const email = auth.user?.email
     if (email) {
       const saved = localStorage.getItem(`theme:${email}`) as Theme | null
-      if (saved === 'light' || saved === 'dark') return saved
+      if (saved && validThemes.includes(saved)) return saved
     }
 
     const generic = localStorage.getItem('theme') as Theme | null
-    if (generic === 'light' || generic === 'dark') return generic
+    if (generic && validThemes.includes(generic)) return generic
 
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
-    return 'light'
+    // Default to 'system' — auto-follow OS preference
+    return 'system'
   }
 
   function getInitialColor(): PrimaryColor {
@@ -71,7 +91,7 @@ export const useThemeStore = defineStore('theme', () => {
     return 'indigo'
   }
 
-  function applyTheme(t: Theme) {
+  function applyTheme(t: 'light' | 'dark') {
     if (t === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
@@ -80,19 +100,25 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   function applyColor(color: PrimaryColor) {
-    // Remove all theme-* classes
     const classes = document.documentElement.classList
     classes.forEach((cls) => {
       if (cls.startsWith('theme-')) classes.remove(cls)
     })
-    // indigo is the default (no class needed)
     if (color !== 'indigo') {
       classes.add(`theme-${color}`)
     }
   }
 
+  /** Cycle through light → dark → system */
   function toggle() {
-    theme.value = theme.value === 'light' ? 'dark' : 'light'
+    const order: Theme[] = ['light', 'dark', 'system']
+    const idx = order.indexOf(theme.value)
+    theme.value = order[(idx + 1) % order.length] as Theme
+  }
+
+  /** Explicitly set the theme mode */
+  function setTheme(t: Theme) {
+    theme.value = t
   }
 
   function setColor(color: PrimaryColor) {
@@ -106,7 +132,7 @@ export const useThemeStore = defineStore('theme', () => {
     if (!email) return
 
     const savedTheme = localStorage.getItem(`theme:${email}`) as Theme | null
-    if (savedTheme === 'light' || savedTheme === 'dark') {
+    if (savedTheme && validThemes.includes(savedTheme)) {
       theme.value = savedTheme
     }
 
@@ -116,12 +142,16 @@ export const useThemeStore = defineStore('theme', () => {
     }
   }
 
-  // Watch & apply theme
+  // Persist theme preference
+  watch(theme, (val) => {
+    const key = getStorageKey('theme')
+    localStorage.setItem(key, val)
+  })
+
+  // Apply the resolved theme (reacts to both user toggle and OS change)
   watch(
-    theme,
+    resolvedTheme,
     (val) => {
-      const key = getStorageKey('theme')
-      localStorage.setItem(key, val)
       applyTheme(val)
     },
     { immediate: true },
@@ -138,5 +168,14 @@ export const useThemeStore = defineStore('theme', () => {
     { immediate: true },
   )
 
-  return { theme, primaryColor, colorOptions, toggle, setColor, loadForUser }
+  return {
+    theme,
+    resolvedTheme,
+    primaryColor,
+    colorOptions,
+    toggle,
+    setTheme,
+    setColor,
+    loadForUser,
+  }
 })

@@ -1,5 +1,6 @@
 export {
   useThemeStore,
+  configureTheme,
   colorOptions,
   type Theme,
   type PrimaryColor,

@@ -446,55 +446,63 @@ function isCategoryActive(category: MenuCategory) {
           <!-- Categories expanded (not collapsed) -->
           <div
             v-if="!collapsed"
-            class="overflow-hidden transition-all duration-200"
-            :class="openMenus.has(item.label) ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'"
+            class="grid transition-all duration-200"
+            :class="
+              openMenus.has(item.label)
+                ? 'grid-rows-[1fr] opacity-100'
+                : 'grid-rows-[0fr] opacity-0'
+            "
           >
-            <div class="ml-4 pl-3 border-l border-gray-200 mt-1 space-y-1 dark:border-gray-700">
-              <!-- Category -->
-              <div v-for="category in item.categories" :key="category.label">
-                <button
-                  class="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 whitespace-nowrap cursor-pointer"
-                  :class="
-                    isCategoryActive(category)
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                  "
-                  @click="toggleMenu(`${item.label}:${category.label}`)"
-                >
-                  <component :is="category.icon" class="w-3.5 h-3.5 shrink-0" />
-                  <span class="flex-1 text-left">{{ category.label }}</span>
-                  <ChevronDown
-                    class="w-3 h-3 shrink-0 transition-transform duration-200"
-                    :class="openMenus.has(`${item.label}:${category.label}`) ? 'rotate-180' : ''"
-                  />
-                </button>
-
-                <!-- Category children -->
-                <div
-                  class="overflow-hidden transition-all duration-200"
-                  :class="
-                    openMenus.has(`${item.label}:${category.label}`)
-                      ? 'max-h-[400px] opacity-100'
-                      : 'max-h-0 opacity-0'
-                  "
-                >
-                  <div
-                    class="ml-3 pl-2.5 border-l border-gray-100 mt-0.5 space-y-0.5 dark:border-gray-700"
+            <div class="overflow-hidden">
+              <div class="ml-4 pl-3 border-l border-gray-200 mt-1 space-y-1 dark:border-gray-700">
+                <!-- Category -->
+                <div v-for="category in item.categories" :key="category.label">
+                  <button
+                    class="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 whitespace-nowrap cursor-pointer"
+                    :class="
+                      isCategoryActive(category)
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                    "
+                    @click="toggleMenu(`${item.label}:${category.label}`)"
                   >
-                    <router-link
-                      v-for="child in category.children"
-                      :key="child.to"
-                      :to="child.to"
-                      class="flex items-center gap-2 px-2 py-1 rounded-md text-xs font-medium transition-all duration-150 whitespace-nowrap no-underline hover:no-underline"
-                      :class="
-                        isActive(child.to)
-                          ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400'
-                          : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200'
-                      "
-                    >
-                      <component :is="child.icon" class="w-3 h-3 shrink-0" />
-                      <span>{{ child.label }}</span>
-                    </router-link>
+                    <component :is="category.icon" class="w-3.5 h-3.5 shrink-0" />
+                    <span class="flex-1 text-left">{{ category.label }}</span>
+                    <ChevronDown
+                      class="w-3 h-3 shrink-0 transition-transform duration-200"
+                      :class="openMenus.has(`${item.label}:${category.label}`) ? 'rotate-180' : ''"
+                    />
+                  </button>
+
+                  <!-- Category children -->
+                  <div
+                    class="grid transition-all duration-200"
+                    :class="
+                      openMenus.has(`${item.label}:${category.label}`)
+                        ? 'grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0'
+                    "
+                  >
+                    <div class="overflow-hidden">
+                      <div
+                        class="ml-3 pl-2.5 border-l border-gray-100 mt-0.5 space-y-0.5 dark:border-gray-700"
+                      >
+                        <router-link
+                          v-for="child in category.children"
+                          :key="child.to"
+                          :to="child.to"
+                          class="flex items-center gap-2 px-2 py-1 rounded-md text-xs font-medium transition-all duration-150 whitespace-nowrap no-underline hover:no-underline"
+                          :class="
+                            isActive(child.to)
+                              ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400'
+                              : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200'
+                          "
+                        >
+                          <component :is="child.icon" class="w-3 h-3 shrink-0" />
+                          <span>{{ child.label }}</span>
+                        </router-link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -527,24 +535,30 @@ function isCategoryActive(category: MenuCategory) {
           <!-- Submenu expanded (not collapsed) -->
           <div
             v-if="!collapsed"
-            class="overflow-hidden transition-all duration-200"
-            :class="openMenus.has(item.label) ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'"
+            class="grid transition-all duration-200"
+            :class="
+              openMenus.has(item.label)
+                ? 'grid-rows-[1fr] opacity-100'
+                : 'grid-rows-[0fr] opacity-0'
+            "
           >
-            <div class="ml-4 pl-3 border-l border-gray-200 mt-1 space-y-0.5 dark:border-gray-700">
-              <router-link
-                v-for="child in item.children"
-                :key="child.to"
-                :to="child.to"
-                class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all duration-150 whitespace-nowrap no-underline hover:no-underline"
-                :class="
-                  isActive(child.to)
-                    ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400'
-                    : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200'
-                "
-              >
-                <component :is="child.icon" class="w-3.5 h-3.5 shrink-0" />
-                <span>{{ child.label }}</span>
-              </router-link>
+            <div class="overflow-hidden">
+              <div class="ml-4 pl-3 border-l border-gray-200 mt-1 space-y-0.5 dark:border-gray-700">
+                <router-link
+                  v-for="child in item.children"
+                  :key="child.to"
+                  :to="child.to"
+                  class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all duration-150 whitespace-nowrap no-underline hover:no-underline"
+                  :class="
+                    isActive(child.to)
+                      ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400'
+                      : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200'
+                  "
+                >
+                  <component :is="child.icon" class="w-3.5 h-3.5 shrink-0" />
+                  <span>{{ child.label }}</span>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Menu, Bell, Search, User, KeyRound, LogOut, Sun, Moon, Palette } from '@lucide/vue'
+import {
+  Menu,
+  Bell,
+  Search,
+  User,
+  KeyRound,
+  LogOut,
+  Sun,
+  Moon,
+  Monitor,
+  Palette,
+} from '@lucide/vue'
 import { BaseAvatar } from '@purdia/ui'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore, colorOptions } from '@/stores/theme'
@@ -79,10 +90,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
       <button
         class="p-1 rounded-md text-gray-600 hover:bg-gray-100 cursor-pointer dark:text-gray-300 dark:hover:bg-gray-700"
         aria-label="Toggle theme"
+        :title="`Theme: ${themeStore.theme}`"
         @click="themeStore.toggle()"
       >
-        <Moon v-if="themeStore.theme === 'light'" :size="20" />
-        <Sun v-else :size="20" />
+        <Sun v-if="themeStore.theme === 'light'" :size="20" />
+        <Moon v-else-if="themeStore.theme === 'dark'" :size="20" />
+        <Monitor v-else :size="20" />
       </button>
 
       <!-- Color picker -->
