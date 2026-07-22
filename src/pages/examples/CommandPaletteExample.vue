@@ -39,7 +39,7 @@ function handleSelect(item: CommandItem) {
   <div class="space-y-8">
     <div>
       <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Command Palette</h1>
-      <p class="text-gray-500 mt-1">
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Quick-access command palette with search and keyboard navigation.
       </p>
     </div>

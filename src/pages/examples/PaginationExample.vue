@@ -14,7 +14,7 @@ const page6 = ref(1)
   <div class="space-y-8">
     <div>
       <h1 class="text-2xl font-bold">Pagination</h1>
-      <p class="text-gray-500 mt-1">Navigate between pages of content.</p>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">Navigate between pages of content.</p>
     </div>
 
     <!-- Default Variant -->

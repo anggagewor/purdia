@@ -21,7 +21,6 @@ export {
   StatCard,
   BaseBreadcrumb,
   BaseFileUpload,
-  BaseEditor,
 } from '@purdia/ui'
 
 // ToastContainer stays local (depends on app-specific Pinia store)

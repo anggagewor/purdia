@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   LayoutDashboard,
@@ -309,15 +309,15 @@ const popoverLeft = ref(0)
 let hideTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Auto-open parent menus based on current route
-function getInitialOpenMenus(): Set<string> {
+function getOpenMenusForRoute(path: string): Set<string> {
   const set = new Set<string>()
   for (const item of menuItems) {
-    if (item.children && item.children.some((child) => route.path === child.to)) {
+    if (item.children && item.children.some((child) => path === child.to)) {
       set.add(item.label)
     }
     if (item.categories) {
       for (const cat of item.categories) {
-        if (cat.children.some((child) => route.path === child.to)) {
+        if (cat.children.some((child) => path === child.to)) {
           set.add(item.label)
           set.add(`${item.label}:${cat.label}`)
         }
@@ -326,7 +326,19 @@ function getInitialOpenMenus(): Set<string> {
   }
   return set
 }
-openMenus.value = getInitialOpenMenus()
+
+// Set initial + watch route changes to keep menus open
+openMenus.value = getOpenMenusForRoute(route.path)
+
+watch(
+  () => route.path,
+  (path) => {
+    const needed = getOpenMenusForRoute(path)
+    for (const key of needed) {
+      openMenus.value.add(key)
+    }
+  },
+)
 
 function toggleMenu(label: string) {
   if (openMenus.value.has(label)) {

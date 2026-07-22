@@ -15,8 +15,8 @@ import {
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Stat Card</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Stat Card</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Card untuk menampilkan metric/KPI dengan trend indicator dan icon.
       </p>
     </div>

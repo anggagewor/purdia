@@ -5,8 +5,8 @@ import { BaseAvatar, BaseCard } from '@purdia/ui'
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Avatar</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Avatar</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         User avatar dengan image, auto-generated initials, dan color.
       </p>
     </div>

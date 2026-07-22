@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { BaseCard, BaseEditor } from '@purdia/ui'
+import { ref, defineAsyncComponent } from 'vue'
+import { BaseCard } from '@purdia/ui'
+
+const BaseEditor = defineAsyncComponent(() =>
+  import('@purdia/ui').then((m) => ({ default: m.BaseEditor })),
+)
 
 const basicContent = ref('<p>Ini adalah contoh editor sederhana. Coba ketik di sini...</p>')
 
@@ -38,8 +42,8 @@ const outputContent = ref(
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">WYSIWYG Editor</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">WYSIWYG Editor</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Rich text editor berbasis
         <a href="https://tiptap.dev" target="_blank" class="text-primary-600 underline">Tiptap</a>
         (open source, headless, ProseMirror-based) dengan toolbar dan semua variasi formatting.

@@ -147,8 +147,8 @@ const components = [
 <template>
   <div>
     <div class="mb-8">
-      <h1 class="text-2xl font-bold text-gray-900">Components</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Components</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Semua reusable components yang tersedia. Klik untuk lihat demo dan cara pakenya.
       </p>
     </div>
@@ -158,18 +158,22 @@ const components = [
         v-for="item in components"
         :key="item.to"
         :to="item.to"
-        class="group flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 no-underline"
+        class="group flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 no-underline dark:bg-gray-800 dark:border-gray-700"
       >
         <div
-          class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 flex items-center justify-center shrink-0 group-hover:bg-primary-100 transition-colors"
+          class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 flex items-center justify-center shrink-0 group-hover:bg-primary-100 transition-colors dark:bg-primary-900/30 dark:group-hover:bg-primary-900/50"
         >
           <component :is="item.icon" class="w-5 h-5" />
         </div>
         <div>
-          <h3 class="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+          <h3
+            class="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors dark:text-gray-100"
+          >
             {{ item.label }}
           </h3>
-          <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">{{ item.description }}</p>
+          <p class="text-xs text-gray-500 mt-0.5 leading-relaxed dark:text-gray-400">
+            {{ item.description }}
+          </p>
         </div>
       </router-link>
     </div>

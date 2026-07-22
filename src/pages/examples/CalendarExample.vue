@@ -20,8 +20,8 @@ const events: Record<number, string> = { 5: 'Meeting', 12: 'Deadline', 15: 'Laun
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Calendar</h1>
-      <p class="text-gray-500 mt-1">Date calendar component with event indicators.</p>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Calendar</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">Date calendar component with event indicators.</p>
     </div>
 
     <BaseCard>
@@ -147,7 +147,7 @@ const events: Record<number, string> = { 5: 'Meeting', 12: 'Deadline', 15: 'Laun
   &lt;button v-for="date in dates"
     :class="date === selected ? 'bg-primary-500 text-white' : 'hover:bg-gray-100'"
     @click="selected = date"&gt;
-    {{ date }}
+    &#123;&#123; date &#125;&#125;
   &lt;/button&gt;
 &lt;/div&gt;</code></pre>
     </BaseCard>

@@ -9,8 +9,8 @@ const showDismissible = ref(true)
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Alert</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Alert</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Notification banners untuk info, success, warning, dan error messages.
       </p>
     </div>

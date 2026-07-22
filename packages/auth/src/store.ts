@@ -145,7 +145,7 @@ export const useAuthStore = defineStore('auth', () => {
     return { message: 'Link reset password telah dikirim ke email Anda.' }
   }
 
-  async function clearStorage() {
+  function clearStorage() {
     secureRemove(getKey('token'))
     secureRemove(getKey('refreshToken'))
     secureRemove(getKey('user'))
@@ -155,7 +155,7 @@ export const useAuthStore = defineStore('auth', () => {
     await authConfig.onLogout?.()
     user.value = null
     token.value = null
-    await clearStorage()
+    clearStorage()
   }
 
   return { user, token, isAuthenticated, ready, init, login, register, forgotPassword, logout }

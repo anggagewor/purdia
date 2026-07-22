@@ -241,9 +241,15 @@ function createInstance(serviceName: string): AxiosInstance {
             originalRequest.headers.Authorization = `Bearer ${newToken}`
             resolve(instance(originalRequest))
           })
+          // Timeout after 10s to prevent memory leaks if refresh never resolves
+          const timeout = setTimeout(() => {
+            clearInterval(checkInterval)
+            reject(apiError)
+          }, 10_000)
           const checkInterval = setInterval(() => {
             if (!isRefreshing && refreshSubscribers.length === 0) {
               clearInterval(checkInterval)
+              clearTimeout(timeout)
               reject(apiError)
             }
           }, 50)

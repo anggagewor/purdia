@@ -5,8 +5,8 @@ import { BaseCard } from '@purdia/ui'
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Grid System</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Grid System</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Layout grid menggunakan Tailwind CSS grid utilities. Responsive, flexible, dan composable.
       </p>
     </div>
@@ -361,20 +361,20 @@ import { BaseCard } from '@purdia/ui'
       <div class="space-y-4">
         <!-- Stats row -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div v-for="i in 4" :key="i" class="bg-white border border-gray-200 rounded-lg p-4">
+          <div v-for="i in 4" :key="i" class="bg-white border border-gray-200 rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700">
             <p class="text-xs text-gray-500">Stat {{ i }}</p>
-            <p class="text-lg font-bold text-gray-900">{{ (i * 1234).toLocaleString() }}</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-gray-100">{{ (i * 1234).toLocaleString() }}</p>
           </div>
         </div>
         <!-- Chart + Sidebar -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div
-            class="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-4 h-48 flex items-center justify-center text-sm text-gray-400"
+            class="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-4 h-48 flex items-center justify-center text-sm text-gray-400 dark:text-gray-500"
           >
             Chart Area (2/3)
           </div>
           <div
-            class="bg-white border border-gray-200 rounded-lg p-4 h-48 flex items-center justify-center text-sm text-gray-400"
+            class="bg-white border border-gray-200 rounded-lg p-4 h-48 flex items-center justify-center text-sm text-gray-400 dark:text-gray-500"
           >
             Sidebar (1/3)
           </div>
@@ -384,7 +384,7 @@ import { BaseCard } from '@purdia/ui'
           <div
             v-for="i in 3"
             :key="i"
-            class="bg-white border border-gray-200 rounded-lg p-4 h-32 flex items-center justify-center text-sm text-gray-400"
+            class="bg-white border border-gray-200 rounded-lg p-4 h-32 flex items-center justify-center text-sm text-gray-400 dark:text-gray-500"
           >
             Card {{ i }}
           </div>
@@ -397,26 +397,26 @@ import { BaseCard } from '@purdia/ui'
       <template #header><h4 class="font-semibold">Real Example — Form Layout</h4></template>
       <div class="space-y-3">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             First Name
           </div>
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             Last Name
           </div>
         </div>
         <div class="grid grid-cols-1">
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             Email (full width)
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             City
           </div>
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             State
           </div>
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             Zip
           </div>
         </div>
@@ -426,7 +426,7 @@ import { BaseCard } from '@purdia/ui'
           >
             Address (3/4)
           </div>
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500">
+          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-xs text-gray-500 dark:bg-gray-800/50 dark:border-gray-700 dark:text-gray-400">
             Apt #
           </div>
         </div>

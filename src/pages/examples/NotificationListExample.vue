@@ -60,8 +60,10 @@ const unreadCount = () => notifications.value.filter((n) => !n.read).length
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Notification List</h1>
-      <p class="text-gray-500 mt-1">Notification feed with read/unread states and actions.</p>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Notification List</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
+        Notification feed with read/unread states and actions.
+      </p>
     </div>
 
     <BaseCard>
@@ -95,14 +97,17 @@ const unreadCount = () => notifications.value.filter((n) => !n.read).length
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2">
-              <p class="text-sm font-medium text-gray-900 truncate">{{ item.title }}</p>
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-100">
+                {{ item.title }}
+              </p>
               <div v-if="!item.read" class="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0"></div>
             </div>
             <p class="text-xs text-gray-500 mt-0.5">{{ item.desc }}</p>
             <p class="text-[10px] text-gray-400 mt-1">{{ item.time }}</p>
           </div>
           <button
-            class="shrink-0 p-1 text-gray-300 hover:text-gray-500 rounded"
+            class="shrink-0 p-1 text-gray-300 hover:text-gray-500 rounded dark:text-gray-600 dark:hover:text-gray-400"
+            aria-label="Dismiss notification"
             @click="dismiss(item.id)"
           >
             <X class="w-3.5 h-3.5" />
@@ -119,7 +124,9 @@ const unreadCount = () => notifications.value.filter((n) => !n.read).length
         >
           <div class="flex items-center gap-2">
             <Bell class="w-4 h-4 text-gray-600" />
-            <span class="text-sm font-semibold text-gray-900">Notifications</span>
+            <span class="text-sm font-semibold text-gray-900 dark:text-gray-100"
+              >Notifications</span
+            >
           </div>
           <span class="text-[10px] font-medium text-white bg-red-500 px-1.5 py-0.5 rounded-full"
             >2</span

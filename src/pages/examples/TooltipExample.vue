@@ -6,7 +6,7 @@ import { BaseTooltip, BaseCard, BaseButton } from '@purdia/ui'
   <div class="space-y-8">
     <div>
       <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Tooltip</h1>
-      <p class="text-gray-500 mt-1">
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Informational popup shown on hover with position and variant options.
       </p>
     </div>

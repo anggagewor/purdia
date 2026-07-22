@@ -8,8 +8,8 @@ const currentStep = ref(2)
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Steps</h1>
-      <p class="text-gray-500 mt-1">Step indicator component for multi-step processes.</p>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Steps</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">Step indicator component for multi-step processes.</p>
     </div>
 
     <BaseCard>
@@ -135,7 +135,7 @@ const currentStep = ref(2)
       ><code>&lt;!-- Default steps --&gt;
 &lt;div class="flex items-center gap-2"&gt;
   &lt;div v-for="step in 4" class="flex items-center gap-2"&gt;
-    &lt;div class="w-8 h-8 rounded-full ..."&gt;{{ step }}&lt;/div&gt;
+    &lt;div class="w-8 h-8 rounded-full ..."&gt;&#123;&#123; step &#125;&#125;&lt;/div&gt;
     &lt;div class="w-12 h-0.5"&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;

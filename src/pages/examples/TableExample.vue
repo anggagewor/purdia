@@ -213,8 +213,8 @@ function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Table</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Table</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Data table dengan search, sorting, accordion (expandable rows), toolbar buttons, dan
         dropdown actions.
       </p>

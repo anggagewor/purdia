@@ -6,8 +6,8 @@ import { Inbox, Search, FileX, Plus } from '@lucide/vue'
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Empty State</h1>
-      <p class="text-gray-500 mt-1">Placeholder component for empty data states.</p>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Empty State</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">Placeholder component for empty data states.</p>
     </div>
 
     <BaseCard>

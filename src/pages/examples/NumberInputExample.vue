@@ -12,8 +12,8 @@ const value4 = ref(1)
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Number Input</h1>
-      <p class="text-gray-500 mt-1">Numeric input with increment/decrement controls.</p>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Number Input</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">Numeric input with increment/decrement controls.</p>
     </div>
 
     <BaseCard>

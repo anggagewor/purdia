@@ -40,8 +40,8 @@ const customFormatValue = ref('')
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Date Picker</h1>
-      <p class="text-gray-500 mt-1">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Date Picker</h1>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
         Date, time, datetime, dan range picker dengan custom format output.
       </p>
     </div>
@@ -79,7 +79,7 @@ const customFormatValue = ref('')
           placeholder="Select..."
         />
       </div>
-      <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+      <div class="mt-4 p-3 bg-gray-50 rounded-lg dark:bg-gray-800/50">
         <p class="text-xs text-gray-500">Raw values:</p>
         <code class="text-xs text-gray-700"
           >dateValue: {{ dateValue || '—' }} | dateFormatted: {{ dateFormatted || '—' }}</code
@@ -106,7 +106,7 @@ const customFormatValue = ref('')
           placeholder="Select time..."
         />
       </div>
-      <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+      <div class="mt-4 p-3 bg-gray-50 rounded-lg dark:bg-gray-800/50">
         <p class="text-xs text-gray-500">Raw values:</p>
         <code class="text-xs text-gray-700"
           >time: {{ timeValue || '—' }} | 12h: {{ timeFormatted || '—' }}</code
@@ -133,7 +133,7 @@ const customFormatValue = ref('')
           placeholder="MySQL format..."
         />
       </div>
-      <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+      <div class="mt-4 p-3 bg-gray-50 rounded-lg dark:bg-gray-800/50">
         <p class="text-xs text-gray-500">Raw values:</p>
         <code class="text-xs text-gray-700"
           >datetime: {{ datetimeValue || '—' }} | mysql: {{ datetimeMysql || '—' }}</code
@@ -160,7 +160,7 @@ const customFormatValue = ref('')
           placeholder="Select range..."
         />
       </div>
-      <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+      <div class="mt-4 p-3 bg-gray-50 rounded-lg dark:bg-gray-800/50">
         <p class="text-xs text-gray-500">Raw values:</p>
         <code class="text-xs text-gray-700"
           >range: [{{ rangeValue[0] || '—' }}, {{ rangeValue[1] || '—' }}]</code
@@ -190,7 +190,7 @@ const customFormatValue = ref('')
           placeholder="Try different formats..."
         />
       </div>
-      <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+      <div class="mt-4 p-3 bg-gray-50 rounded-lg dark:bg-gray-800/50">
         <p class="text-xs text-gray-500">
           Raw value: <code class="text-gray-700">{{ customFormatValue || '—' }}</code>
         </p>
