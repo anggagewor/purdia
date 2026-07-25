@@ -15,6 +15,7 @@ Purdia is organized as an npm workspace monorepo. Shared logic lives in `package
 | [`@purdia/auth`](../packages/auth)                   | Auth store + Vue Router guard                              | 2.8 kB |
 | [`@purdia/theme`](../packages/theme)                 | Dark/light mode + primary color switching                  | 2.6 kB |
 | [`@purdia/tailwind`](../packages/tailwind)           | Tailwind v4 theme tokens + color presets + dark mode CSS   | —      |
+| [`@purdia/utils`](../packages/utils)                 | Shared utility functions — formatting, validation, helpers | —      |
 | [`@purdia/tsconfig`](../packages/tsconfig)           | Shared TypeScript configs (base, lib, vue-lib)             | —      |
 | [`@purdia/eslint-config`](../packages/eslint-config) | Shared ESLint flat config (Vue 3 + TypeScript)             | —      |
 
@@ -67,6 +68,7 @@ export default [...purdiaConfig]
 @purdia/eslint-config     ← no deps
 @purdia/tailwind          ← no deps (pure CSS)
 @purdia/crypto            ← no deps (Web Crypto API)
+@purdia/utils             ← no deps
 @purdia/theme             ← pinia, vue
 @purdia/toast             ← pinia, vue, @lucide/vue
 @purdia/http              ← axios, @purdia/crypto

@@ -1,0 +1,67 @@
+{
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "create": "作成",
+    "search": "検索",
+    "loading": "読み込み中...",
+    "noData": "データがありません",
+    "confirm": "確認",
+    "back": "戻る",
+    "next": "次へ",
+    "submit": "送信",
+    "close": "閉じる",
+    "yes": "はい",
+    "no": "いいえ"
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "profile": "プロフィール",
+    "settings": "設定",
+    "logout": "ログアウト",
+    "chat": "チャット",
+    "email": "メール",
+    "calendar": "カレンダー",
+    "timeline": "タイムライン"
+  },
+  "auth": {
+    "login": "ログイン",
+    "register": "アカウント作成",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "rememberMe": "ログイン状態を保持",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "すでにアカウントをお持ちですか？"
+  },
+  "dashboard": {
+    "welcome": "おかえりなさい、{name}",
+    "totalRevenue": "総収益",
+    "totalUsers": "総ユーザー数",
+    "totalOrders": "総注文数",
+    "recentOrders": "最近の注文",
+    "fromLastMonth": "先月比"
+  },
+  "users": {
+    "title": "ユーザー",
+    "addUser": "ユーザー追加",
+    "name": "名前",
+    "email": "メール",
+    "role": "役割",
+    "status": "ステータス",
+    "active": "アクティブ",
+    "inactive": "非アクティブ",
+    "lastLogin": "最終ログイン"
+  },
+  "i18nDemo": {
+    "title": "国際化（i18n）",
+    "description": "JSONロケールファイルとリアクティブな言語切り替えを備えた軽量なComposableベースのi18nシステム。",
+    "currentLocale": "現在の言語",
+    "switchLanguage": "言語切り替え",
+    "interpolation": "文字列補間: {message}",
+    "greeting": "こんにちは、{name}さん！未読メッセージが{count}件あります。"
+  }
+}

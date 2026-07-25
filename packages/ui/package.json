@@ -11,8 +11,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/purdia-ui.js",
-      "require": "./dist/purdia-ui.umd.cjs"
+      "import": "./src/index.ts"
     },
     "./style.css": "./dist/style.css"
   },

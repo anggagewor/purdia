@@ -15,6 +15,10 @@ import crmRoutes from './routes/crm'
 import hrmRoutes from './routes/hrm'
 import inventoryRoutes from './routes/inventory'
 import publicRoutes from './routes/public'
+import chatRoutes from './routes/chat'
+import emailRoutes from './routes/email'
+import pagesRoutes from './routes/pages'
+import errorRoutes from './routes/errors'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +37,10 @@ const router = createRouter({
     ...crmRoutes,
     ...hrmRoutes,
     ...inventoryRoutes,
+    ...chatRoutes,
+    ...emailRoutes,
+    ...pagesRoutes,
+    ...errorRoutes,
   ],
 })
 

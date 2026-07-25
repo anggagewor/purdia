@@ -11,8 +11,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/purdia-charts.js",
-      "require": "./dist/purdia-charts.umd.cjs"
+      "import": "./src/index.ts"
     }
   },
   "scripts": {

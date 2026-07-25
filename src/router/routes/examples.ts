@@ -231,6 +231,46 @@ const routes: RouteRecordRaw[] = [
     name: 'example-context-menu',
     component: () => import('@/pages/examples/ContextMenuExample.vue'),
   },
+  {
+    path: '/examples/wizard-form',
+    name: 'example-wizard-form',
+    component: () => import('@/pages/examples/WizardFormExample.vue'),
+  },
+  {
+    path: '/examples/print-layout',
+    name: 'example-print-layout',
+    component: () => import('@/pages/examples/PrintLayoutExample.vue'),
+  },
+  {
+    path: '/examples/data-table-advanced',
+    name: 'example-data-table-advanced',
+    component: () => import('@/pages/examples/DataTableAdvancedExample.vue'),
+  },
+  {
+    path: '/examples/infinite-scroll',
+    name: 'example-infinite-scroll',
+    component: () => import('@/pages/examples/InfiniteScrollExample.vue'),
+  },
+  {
+    path: '/examples/i18n',
+    name: 'example-i18n',
+    component: () => import('@/pages/examples/I18nExample.vue'),
+  },
+  {
+    path: '/examples/rbac',
+    name: 'example-rbac',
+    component: () => import('@/pages/examples/RbacExample.vue'),
+  },
+  {
+    path: '/examples/code-block',
+    name: 'example-code-block',
+    component: () => import('@/pages/examples/CodeBlockExample.vue'),
+  },
+  {
+    path: '/examples/markdown',
+    name: 'example-markdown',
+    component: () => import('@/pages/examples/MarkdownExample.vue'),
+  },
 ]
 
 export default routes

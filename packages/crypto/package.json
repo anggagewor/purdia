@@ -11,9 +11,8 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/purdia-crypto.js",
-      "require": "./dist/purdia-crypto.umd.cjs"
+      "types": "./src/index.d.ts",
+      "import": "./src/index.ts"
     }
   },
   "scripts": {

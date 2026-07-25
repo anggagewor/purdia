@@ -1,0 +1,67 @@
+{
+  "common": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Ubah",
+    "create": "Buat",
+    "search": "Cari",
+    "loading": "Memuat...",
+    "noData": "Tidak ada data",
+    "confirm": "Konfirmasi",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "submit": "Kirim",
+    "close": "Tutup",
+    "yes": "Ya",
+    "no": "Tidak"
+  },
+  "nav": {
+    "dashboard": "Dasbor",
+    "profile": "Profil",
+    "settings": "Pengaturan",
+    "logout": "Keluar",
+    "chat": "Pesan",
+    "email": "Email",
+    "calendar": "Kalender",
+    "timeline": "Linimasa"
+  },
+  "auth": {
+    "login": "Masuk",
+    "register": "Buat Akun",
+    "forgotPassword": "Lupa Kata Sandi?",
+    "email": "Alamat Email",
+    "password": "Kata Sandi",
+    "confirmPassword": "Konfirmasi Kata Sandi",
+    "rememberMe": "Ingat saya",
+    "noAccount": "Belum punya akun?",
+    "hasAccount": "Sudah punya akun?"
+  },
+  "dashboard": {
+    "welcome": "Selamat datang kembali, {name}",
+    "totalRevenue": "Total Pendapatan",
+    "totalUsers": "Total Pengguna",
+    "totalOrders": "Total Pesanan",
+    "recentOrders": "Pesanan Terbaru",
+    "fromLastMonth": "dari bulan lalu"
+  },
+  "users": {
+    "title": "Pengguna",
+    "addUser": "Tambah Pengguna",
+    "name": "Nama",
+    "email": "Email",
+    "role": "Peran",
+    "status": "Status",
+    "active": "Aktif",
+    "inactive": "Nonaktif",
+    "lastLogin": "Login Terakhir"
+  },
+  "i18nDemo": {
+    "title": "Internasionalisasi (i18n)",
+    "description": "Sistem i18n berbasis composable yang ringan dengan file locale JSON dan perpindahan bahasa reaktif.",
+    "currentLocale": "Bahasa Saat Ini",
+    "switchLanguage": "Ganti Bahasa",
+    "interpolation": "Interpolasi string: {message}",
+    "greeting": "Halo, {name}! Kamu punya {count} pesan belum dibaca."
+  }
+}

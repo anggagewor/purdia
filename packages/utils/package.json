@@ -12,8 +12,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/purdia-utils.js",
-      "require": "./dist/purdia-utils.umd.cjs"
+      "import": "./src/index.ts"
     }
   },
   "scripts": {

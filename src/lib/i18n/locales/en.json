@@ -1,0 +1,67 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "loading": "Loading...",
+    "noData": "No data available",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "chat": "Chat",
+    "email": "Email",
+    "calendar": "Calendar",
+    "timeline": "Timeline"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Create Account",
+    "forgotPassword": "Forgot Password?",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember me",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {name}",
+    "totalRevenue": "Total Revenue",
+    "totalUsers": "Total Users",
+    "totalOrders": "Total Orders",
+    "recentOrders": "Recent Orders",
+    "fromLastMonth": "from last month"
+  },
+  "users": {
+    "title": "Users",
+    "addUser": "Add User",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "lastLogin": "Last Login"
+  },
+  "i18nDemo": {
+    "title": "Internationalization (i18n)",
+    "description": "Lightweight composable-based i18n with JSON locale files and reactive language switching.",
+    "currentLocale": "Current Locale",
+    "switchLanguage": "Switch Language",
+    "interpolation": "String interpolation: {message}",
+    "greeting": "Hello, {name}! You have {count} unread messages."
+  }
+}
