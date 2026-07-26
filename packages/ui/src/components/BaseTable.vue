@@ -152,12 +152,7 @@ function isExpanded(index: number) {
         </caption>
 
         <!-- Thead -->
-        <thead
-          :class="[
-            'bg-gray-50 dark:bg-gray-800',
-            stickyHeader ? 'sticky top-0 z-10' : '',
-          ]"
-        >
+        <thead :class="['bg-gray-50 dark:bg-gray-800', stickyHeader ? 'sticky top-0 z-10' : '']">
           <slot name="thead" :columns="columns" :cell-padding="cellPadding">
             <tr>
               <th

@@ -20,7 +20,7 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@purdia/http": "^0.1.0"
+    "@purdia/http": "*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",

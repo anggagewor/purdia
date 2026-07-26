@@ -344,7 +344,12 @@ export const usePosStore = defineStore('pos', () => {
   const allOrders = computed(() => [...qrOrders.value].sort((a, b) => b.createdAt - a.createdAt))
 
   function generateOrderId() {
-    return 'QR-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2, 5).toUpperCase()
+    return (
+      'QR-' +
+      Date.now().toString(36).toUpperCase() +
+      '-' +
+      Math.random().toString(36).slice(2, 5).toUpperCase()
+    )
   }
 
   function calculateSubtotal(items: OrderItem[]) {

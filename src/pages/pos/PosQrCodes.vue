@@ -39,7 +39,7 @@ function getQrSvg(tableId: string): string {
         modules[r]!.push(border || inner)
       } else {
         // Pseudo-random data modules
-        const val = ((seed * (r + 1) * (c + 1) + r * 7 + c * 13) % 100) > 45
+        const val = (seed * (r + 1) * (c + 1) + r * 7 + c * 13) % 100 > 45
         modules[r]!.push(val)
       }
     }
@@ -94,7 +94,7 @@ function printTable(tableId: string) {
       <h2>${tableName}</h2>
       <p class="scan-text">Scan untuk pesan</p>
       <p class="url">${url}</p>
-      <script>window.onload = () => { window.print(); window.close(); }<\/script>
+      <script>window.onload = () => { window.print(); window.close(); }${'<'}/script>
     </body>
     </html>
   `)
@@ -137,7 +137,7 @@ function printAll() {
     </head>
     <body>
       <div class="grid">${cards}</div>
-      <script>window.onload = () => { window.print(); window.close(); }<\/script>
+      <script>window.onload = () => { window.print(); window.close(); }${'<'}/script>
     </body>
     </html>
   `)
@@ -150,11 +150,11 @@ function printAll() {
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">QR Code Meja</h1>
-        <p class="text-gray-500 mt-1 dark:text-gray-400">Generate & print QR code untuk self-order per meja</p>
+        <p class="text-gray-500 mt-1 dark:text-gray-400">
+          Generate & print QR code untuk self-order per meja
+        </p>
       </div>
-      <BaseButton @click="printAll">
-        <Printer class="w-4 h-4" /> Print Semua
-      </BaseButton>
+      <BaseButton @click="printAll"> <Printer class="w-4 h-4" /> Print Semua </BaseButton>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

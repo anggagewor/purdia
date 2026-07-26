@@ -7,9 +7,33 @@ import { useI18n, availableLocales } from '@/lib/i18n'
 const { t, locale, setLocale } = useI18n()
 
 // Demo keys to show
-const commonKeys = ['common.save', 'common.cancel', 'common.delete', 'common.edit', 'common.create', 'common.search', 'common.loading', 'common.submit']
-const navKeys = ['nav.dashboard', 'nav.profile', 'nav.settings', 'nav.logout', 'nav.chat', 'nav.email', 'nav.calendar']
-const authKeys = ['auth.login', 'auth.register', 'auth.forgotPassword', 'auth.email', 'auth.password', 'auth.rememberMe']
+const commonKeys = [
+  'common.save',
+  'common.cancel',
+  'common.delete',
+  'common.edit',
+  'common.create',
+  'common.search',
+  'common.loading',
+  'common.submit',
+]
+const navKeys = [
+  'nav.dashboard',
+  'nav.profile',
+  'nav.settings',
+  'nav.logout',
+  'nav.chat',
+  'nav.email',
+  'nav.calendar',
+]
+const authKeys = [
+  'auth.login',
+  'auth.register',
+  'auth.forgotPassword',
+  'auth.email',
+  'auth.password',
+  'auth.rememberMe',
+]
 
 const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code === locale.value))
 </script>
@@ -26,7 +50,9 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
       <template #header>
         <div class="flex items-center gap-2">
           <Globe class="w-4 h-4 text-primary-600" />
-          <h3 class="font-semibold text-gray-900 dark:text-white">{{ t('i18nDemo.switchLanguage') }}</h3>
+          <h3 class="font-semibold text-gray-900 dark:text-white">
+            {{ t('i18nDemo.switchLanguage') }}
+          </h3>
         </div>
       </template>
 
@@ -45,7 +71,11 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
           <span class="text-lg">{{ loc.flag }}</span>
           <span
             class="text-sm font-medium"
-            :class="locale === loc.code ? 'text-primary-700 dark:text-primary-300' : 'text-gray-700 dark:text-gray-300'"
+            :class="
+              locale === loc.code
+                ? 'text-primary-700 dark:text-primary-300'
+                : 'text-gray-700 dark:text-gray-300'
+            "
           >
             {{ loc.label }}
           </span>
@@ -73,19 +103,25 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
       </template>
 
       <div class="space-y-3">
-        <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+        <div
+          class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800"
+        >
           <p class="text-sm font-medium text-blue-800 dark:text-blue-200">
             {{ t('i18nDemo.greeting', { name: 'Angga', count: 5 }) }}
           </p>
         </div>
 
-        <div class="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+        <div
+          class="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"
+        >
           <p class="text-sm font-medium text-green-800 dark:text-green-200">
             {{ t('dashboard.welcome', { name: 'Angga' }) }}
           </p>
         </div>
 
-        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 font-mono text-xs text-gray-600 dark:text-gray-300">
+        <div
+          class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 font-mono text-xs text-gray-600 dark:text-gray-300"
+        >
           <p>t('i18nDemo.greeting', { name: 'Angga', count: 5 })</p>
           <p>t('dashboard.welcome', { name: 'Angga' })</p>
         </div>
@@ -105,7 +141,9 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
             :key="key"
             class="flex items-center justify-between py-1.5 border-b border-gray-100 dark:border-gray-700/50 last:border-0"
           >
-            <code class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{ key.split('.')[1] }}</code>
+            <code class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{
+              key.split('.')[1]
+            }}</code>
             <span class="text-sm font-medium text-gray-900 dark:text-white">{{ t(key) }}</span>
           </div>
         </div>
@@ -122,7 +160,9 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
             :key="key"
             class="flex items-center justify-between py-1.5 border-b border-gray-100 dark:border-gray-700/50 last:border-0"
           >
-            <code class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{ key.split('.')[1] }}</code>
+            <code class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{
+              key.split('.')[1]
+            }}</code>
             <span class="text-sm font-medium text-gray-900 dark:text-white">{{ t(key) }}</span>
           </div>
         </div>
@@ -139,7 +179,9 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
             :key="key"
             class="flex items-center justify-between py-1.5 border-b border-gray-100 dark:border-gray-700/50 last:border-0"
           >
-            <code class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{ key.split('.')[1] }}</code>
+            <code class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{
+              key.split('.')[1]
+            }}</code>
             <span class="text-sm font-medium text-gray-900 dark:text-white">{{ t(key) }}</span>
           </div>
         </div>
@@ -151,7 +193,9 @@ const currentLocaleInfo = computed(() => availableLocales.find((l) => l.code ===
       <template #header>
         <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Usage</h3>
       </template>
-      <pre class="p-4 rounded-lg bg-gray-900 text-gray-100 text-sm overflow-x-auto font-mono leading-relaxed"><code>&lt;script setup&gt;
+      <pre
+        class="p-4 rounded-lg bg-gray-900 text-gray-100 text-sm overflow-x-auto font-mono leading-relaxed"
+      ><code>&lt;script setup&gt;
 import { useI18n } from '@/lib/i18n'
 
 const { t, locale, setLocale } = useI18n()

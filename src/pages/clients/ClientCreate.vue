@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTabs, TabPanel, BaseTextarea } from '@purdia/ui'
+import {
+  BaseCard,
+  BaseInput,
+  BaseButton,
+  BaseSelect,
+  BaseTabs,
+  TabPanel,
+  BaseTextarea,
+} from '@purdia/ui'
 import { ArrowLeft, Plus, Trash2 } from '@lucide/vue'
 import type { SelectOption } from '@purdia/ui'
 import type { TabItem } from '@purdia/ui'

@@ -14,7 +14,7 @@ initHttp({
   onUnauthorized: () => router.push({ name: 'login' }),
   onError: (err) => {
     // Lazy-import toast store to avoid circular dep during init
-    import('./stores/toast').then(({ useToastStore }) => {
+    import('@purdia/toast').then(({ useToastStore }) => {
       const toastStore = useToastStore()
       toastStore.error(err.message)
     })

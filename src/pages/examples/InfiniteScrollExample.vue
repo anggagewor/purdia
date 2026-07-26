@@ -53,9 +53,27 @@ const sampleContents = [
   'Our team just adopted trunk-based development. Feature flags > long-lived branches. Merge conflicts are now rare.',
 ]
 
-const tagOptions = ['vue', 'react', 'typescript', 'css', 'devops', 'testing', 'architecture', 'performance', 'accessibility', 'tooling']
+const tagOptions = [
+  'vue',
+  'react',
+  'typescript',
+  'css',
+  'devops',
+  'testing',
+  'architecture',
+  'performance',
+  'accessibility',
+  'tooling',
+]
 
-const imageColors = ['from-blue-400 to-indigo-500', 'from-green-400 to-emerald-500', 'from-amber-400 to-orange-500', 'from-pink-400 to-rose-500', 'from-purple-400 to-violet-500', 'from-cyan-400 to-teal-500']
+const imageColors = [
+  'from-blue-400 to-indigo-500',
+  'from-green-400 to-emerald-500',
+  'from-amber-400 to-orange-500',
+  'from-pink-400 to-rose-500',
+  'from-purple-400 to-violet-500',
+  'from-cyan-400 to-teal-500',
+]
 
 function generatePost(id: number): Post {
   const author = authors[id % authors.length]
@@ -74,7 +92,7 @@ function generatePost(id: number): Post {
     role: author.role,
     content,
     time: `${(id % 24) + 1}h ago`,
-    likes: 10 + (id * 7) % 200,
+    likes: 10 + ((id * 7) % 200),
     comments: (id * 3) % 50,
     image: hasImage ? imageColors[id % imageColors.length] : undefined,
     tags,
@@ -188,8 +206,12 @@ onUnmounted(() => {
           <div class="flex items-center gap-2.5 mb-3">
             <BaseAvatar :name="post.author" size="sm" />
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ post.author }}</p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">{{ post.role }} · {{ post.time }}</p>
+              <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                {{ post.author }}
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                {{ post.role }} · {{ post.time }}
+              </p>
             </div>
           </div>
 
@@ -210,16 +232,24 @@ onUnmounted(() => {
           </div>
 
           <!-- Actions -->
-          <div class="flex items-center gap-4 pt-3 border-t border-gray-100 dark:border-gray-700/50">
-            <button class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors">
+          <div
+            class="flex items-center gap-4 pt-3 border-t border-gray-100 dark:border-gray-700/50"
+          >
+            <button
+              class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors"
+            >
               <Heart class="w-3.5 h-3.5" />
               {{ post.likes }}
             </button>
-            <button class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors">
+            <button
+              class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors"
+            >
               <MessageCircle class="w-3.5 h-3.5" />
               {{ post.comments }}
             </button>
-            <button class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-green-500 transition-colors">
+            <button
+              class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-green-500 transition-colors"
+            >
               <Share2 class="w-3.5 h-3.5" />
               Share
             </button>
@@ -229,10 +259,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Loading indicator -->
-    <div
-      v-if="loading"
-      class="flex items-center justify-center gap-3 py-8"
-    >
+    <div v-if="loading" class="flex items-center justify-center gap-3 py-8">
       <Loader class="w-5 h-5 text-primary-600 animate-spin" />
       <span class="text-sm text-gray-500 dark:text-gray-400">Loading more posts...</span>
     </div>

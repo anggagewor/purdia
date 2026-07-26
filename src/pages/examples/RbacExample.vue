@@ -87,8 +87,11 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
         Role-Based Access Control (RBAC)
       </h1>
       <p class="text-gray-500 dark:text-gray-400 mt-1">
-        Mock permission system with <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">v-permission</code> directive and
-        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">useRbac()</code> composable.
+        Mock permission system with
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">v-permission</code>
+        directive and
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">useRbac()</code>
+        composable.
       </p>
     </div>
 
@@ -102,7 +105,8 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
       </template>
 
       <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        Change your role to see how the UI adapts. Elements below will show/hide based on permissions.
+        Change your role to see how the UI adapts. Elements below will show/hide based on
+        permissions.
       </p>
 
       <div class="flex flex-wrap items-center gap-3">
@@ -120,7 +124,11 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
           <Shield class="w-4 h-4" :class="role === r.name ? 'text-primary-600' : 'text-gray-400'" />
           <span
             class="text-sm font-medium"
-            :class="role === r.name ? 'text-primary-700 dark:text-primary-300' : 'text-gray-700 dark:text-gray-300'"
+            :class="
+              role === r.name
+                ? 'text-primary-700 dark:text-primary-300'
+                : 'text-gray-700 dark:text-gray-300'
+            "
           >
             {{ r.label }}
           </span>
@@ -130,8 +138,11 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
         </button>
       </div>
 
-      <div class="mt-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-sm text-gray-600 dark:text-gray-300">
-        Current: <strong>{{ currentRoleInfo?.label }}</strong> — {{ currentPermissions.length }} permissions
+      <div
+        class="mt-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-sm text-gray-600 dark:text-gray-300"
+      >
+        Current: <strong>{{ currentRoleInfo?.label }}</strong> —
+        {{ currentPermissions.length }} permissions
       </div>
     </BaseCard>
 
@@ -140,12 +151,16 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
       <template #header>
         <div class="flex items-center gap-2">
           <Lock class="w-4 h-4 text-primary-600" />
-          <h3 class="font-semibold text-gray-900 dark:text-white">Live Demo — v-permission Directive</h3>
+          <h3 class="font-semibold text-gray-900 dark:text-white">
+            Live Demo — v-permission Directive
+          </h3>
         </div>
       </template>
 
       <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        These buttons use <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">v-permission</code>. Switch roles above to see them appear/disappear.
+        These buttons use
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">v-permission</code
+        >. Switch roles above to see them appear/disappear.
       </p>
 
       <div class="space-y-4">
@@ -216,7 +231,11 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
               <ShieldX v-else class="w-4 h-4 text-gray-400 shrink-0" />
               <span
                 class="text-xs"
-                :class="hasPermission(perm.key) ? 'text-green-700 dark:text-green-300 font-medium' : 'text-gray-400 dark:text-gray-500'"
+                :class="
+                  hasPermission(perm.key)
+                    ? 'text-green-700 dark:text-green-300 font-medium'
+                    : 'text-gray-400 dark:text-gray-500'
+                "
               >
                 {{ perm.label }}
               </span>
@@ -231,7 +250,9 @@ function getRoleColor(roleName: string): 'danger' | 'warning' | 'info' | 'succes
       <template #header>
         <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Usage</h3>
       </template>
-      <pre class="p-4 rounded-lg bg-gray-900 text-gray-100 text-sm overflow-x-auto font-mono leading-relaxed"><code>&lt;script setup&gt;
+      <pre
+        class="p-4 rounded-lg bg-gray-900 text-gray-100 text-sm overflow-x-auto font-mono leading-relaxed"
+      ><code>&lt;script setup&gt;
 import { useRbac, vPermission } from '@/lib/rbac'
 
 const { hasPermission, role, setRole } = useRbac()

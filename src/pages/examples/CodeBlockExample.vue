@@ -78,7 +78,7 @@ const columns: TableColumn[] = [
 ]
 
 onMounted(() => fetch())
-<\/script>
+${'<'}/script>
 
 <template>
   <BaseTable
@@ -191,12 +191,44 @@ function highlight(code: string, language: string): string {
   html = html.replace(/(#.*)$/gm, '<span class="text-gray-500 italic">$1</span>')
 
   // Strings
-  html = html.replace(/(&#x27;[^&#]*?&#x27;|&quot;[^&]*?&quot;|`[^`]*?`)/g, '<span class="text-green-400">$1</span>')
+  html = html.replace(
+    /(&#x27;[^&#]*?&#x27;|&quot;[^&]*?&quot;|`[^`]*?`)/g,
+    '<span class="text-green-400">$1</span>',
+  )
 
   // Keywords
-  const keywords = ['import', 'export', 'from', 'const', 'let', 'var', 'function', 'return', 'async', 'await', 'try', 'catch', 'finally', 'if', 'else', 'interface', 'type', 'extends', 'default', 'new', 'true', 'false', 'null', 'typeof', 'onMounted']
+  const keywords = [
+    'import',
+    'export',
+    'from',
+    'const',
+    'let',
+    'var',
+    'function',
+    'return',
+    'async',
+    'await',
+    'try',
+    'catch',
+    'finally',
+    'if',
+    'else',
+    'interface',
+    'type',
+    'extends',
+    'default',
+    'new',
+    'true',
+    'false',
+    'null',
+    'typeof',
+    'onMounted',
+  ]
   for (const kw of keywords) {
-    html = html.replace(new RegExp(`\\b(${kw})\\b`, 'g'), '<span class="text-purple-400 font-medium">$1</span>')
+    html = html.replace(
+      new RegExp(`\\b(${kw})\\b`, 'g'),
+      '<span class="text-purple-400 font-medium">$1</span>',
+    )
   }
 
   // Types / classes
@@ -235,7 +267,9 @@ function escapeHtml(str: string): string {
 
     <!-- Language tabs -->
     <BaseCard>
-      <div class="flex items-center gap-1 border-b border-gray-200 dark:border-gray-700 -mx-5 -mt-5 px-4">
+      <div
+        class="flex items-center gap-1 border-b border-gray-200 dark:border-gray-700 -mx-5 -mt-5 px-4"
+      >
         <button
           v-for="(sample, index) in samples"
           :key="index"
@@ -254,7 +288,9 @@ function escapeHtml(str: string): string {
       <!-- Code block -->
       <div class="mt-4 rounded-lg overflow-hidden border border-gray-700 bg-gray-900">
         <!-- Header -->
-        <div class="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+        <div
+          class="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700"
+        >
           <div class="flex items-center gap-2">
             <div class="flex items-center gap-1.5">
               <div class="w-3 h-3 rounded-full bg-red-500"></div>
@@ -294,7 +330,9 @@ function escapeHtml(str: string): string {
             </div>
 
             <!-- Code -->
-            <pre class="flex-1 py-4 px-4 text-sm text-gray-100 font-mono leading-6 overflow-x-auto"><code v-html="highlight(samples[activeTab].code, samples[activeTab].language)"></code></pre>
+            <pre
+              class="flex-1 py-4 px-4 text-sm text-gray-100 font-mono leading-6 overflow-x-auto"
+            ><code v-html="highlight(samples[activeTab].code, samples[activeTab].language)"></code></pre>
           </div>
         </div>
       </div>
@@ -308,13 +346,29 @@ function escapeHtml(str: string): string {
 
       <div class="space-y-4">
         <p class="text-sm text-gray-600 dark:text-gray-300">
-          Use the <code class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded">useApi()</code> composable to fetch data from any endpoint.
-          The response is typed via generics like <code class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded">useApi&lt;User[]&gt;('/api/users')</code>.
+          Use the
+          <code
+            class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded"
+            >useApi()</code
+          >
+          composable to fetch data from any endpoint. The response is typed via generics like
+          <code
+            class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded"
+            >useApi&lt;User[]&gt;('/api/users')</code
+          >.
         </p>
 
         <p class="text-sm text-gray-600 dark:text-gray-300">
-          Install with <code class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded">npm install</code> and start the dev server with
-          <code class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded">npm run dev</code>.
+          Install with
+          <code
+            class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded"
+            >npm install</code
+          >
+          and start the dev server with
+          <code
+            class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded"
+            >npm run dev</code
+          >.
         </p>
 
         <!-- Terminal style -->
@@ -325,7 +379,9 @@ function escapeHtml(str: string): string {
           </div>
           <div class="text-green-400">$ npm run dev</div>
           <div class="text-gray-300 mt-1">VITE v8.1.4 ready in 838 ms</div>
-          <div class="text-gray-500 mt-0.5">  ➜ Local: <span class="text-cyan-400">http://localhost:5173/</span></div>
+          <div class="text-gray-500 mt-0.5">
+            ➜ Local: <span class="text-cyan-400">http://localhost:5173/</span>
+          </div>
         </div>
       </div>
     </BaseCard>

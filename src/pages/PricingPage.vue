@@ -84,9 +84,7 @@ const yearlyDiscount = computed(() => '20%')
   <div class="space-y-8">
     <!-- Header -->
     <div class="text-center max-w-2xl mx-auto">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-        Simple, transparent pricing
-      </h1>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Simple, transparent pricing</h1>
       <p class="text-gray-500 dark:text-gray-400 mt-3 text-lg">
         Choose the plan that fits your needs. Upgrade or downgrade at any time.
       </p>
@@ -126,9 +124,7 @@ const yearlyDiscount = computed(() => '20%')
       >
         <!-- Popular badge -->
         <div v-if="plan.popular" class="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span
-            class="px-3 py-1 text-xs font-semibold text-white bg-primary-600 rounded-full"
-          >
+          <span class="px-3 py-1 text-xs font-semibold text-white bg-primary-600 rounded-full">
             Most Popular
           </span>
         </div>
@@ -165,10 +161,7 @@ const yearlyDiscount = computed(() => '20%')
         </div>
 
         <!-- CTA -->
-        <BaseButton
-          :variant="plan.popular ? 'primary' : 'outline'"
-          class="w-full mb-6"
-        >
+        <BaseButton :variant="plan.popular ? 'primary' : 'outline'" class="w-full mb-6">
           {{ plan.cta }}
         </BaseButton>
 
@@ -183,14 +176,8 @@ const yearlyDiscount = computed(() => '20%')
               :key="feature.label"
               class="flex items-center gap-2.5 text-sm"
             >
-              <Check
-                v-if="feature.included"
-                class="w-4 h-4 text-green-500 shrink-0"
-              />
-              <X
-                v-else
-                class="w-4 h-4 text-gray-300 dark:text-gray-600 shrink-0"
-              />
+              <Check v-if="feature.included" class="w-4 h-4 text-green-500 shrink-0" />
+              <X v-else class="w-4 h-4 text-gray-300 dark:text-gray-600 shrink-0" />
               <span
                 :class="
                   feature.included

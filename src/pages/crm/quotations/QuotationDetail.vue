@@ -127,12 +127,19 @@ const lineItemData = computed(() =>
 
           <!-- Line Items Table -->
           <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-            <BaseTable :columns="lineItemColumns" :data="lineItemData" :compact="true" :hoverable="false">
+            <BaseTable
+              :columns="lineItemColumns"
+              :data="lineItemData"
+              :compact="true"
+              :hoverable="false"
+            >
               <template #cell-price="{ value }">
                 {{ formatCurrency(value as number) }}
               </template>
               <template #cell-amount="{ value }">
-                <span class="font-medium text-gray-900 dark:text-gray-100">{{ formatCurrency(value as number) }}</span>
+                <span class="font-medium text-gray-900 dark:text-gray-100">{{
+                  formatCurrency(value as number)
+                }}</span>
               </template>
               <template #footer>
                 <tr>

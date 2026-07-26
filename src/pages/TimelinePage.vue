@@ -41,7 +41,8 @@ const posts = ref<Post[]>([
     author: 'Sarah Johnson',
     role: 'Product Designer',
     time: '2 hours ago',
-    content: 'Just shipped the new dashboard redesign! Really proud of what the team accomplished in just 3 sprints. The key improvements include a simplified navigation, card-based widgets, and a fully responsive sidebar. Check it out and let me know what you think.',
+    content:
+      'Just shipped the new dashboard redesign! Really proud of what the team accomplished in just 3 sprints. The key improvements include a simplified navigation, card-based widgets, and a fully responsive sidebar. Check it out and let me know what you think.',
     likes: 42,
     comments: 8,
     shares: 5,
@@ -55,7 +56,8 @@ const posts = ref<Post[]>([
     author: 'Purdia Team',
     role: 'Official',
     time: '5 hours ago',
-    content: 'We are thrilled to announce Purdia v1.0! After months of development, we are launching with 40+ components, 9 business modules, and a monorepo architecture that makes customization a breeze.',
+    content:
+      'We are thrilled to announce Purdia v1.0! After months of development, we are launching with 40+ components, 9 business modules, and a monorepo architecture that makes customization a breeze.',
     likes: 128,
     comments: 23,
     shares: 45,
@@ -69,7 +71,8 @@ const posts = ref<Post[]>([
     author: 'Mike Chen',
     role: 'Senior Developer',
     time: '8 hours ago',
-    content: 'TIL: You can use `defineModel()` in Vue 3.4+ to create two-way bindings without all the emit boilerplate. Game changer for form components!',
+    content:
+      'TIL: You can use `defineModel()` in Vue 3.4+ to create two-way bindings without all the emit boilerplate. Game changer for form components!',
     likes: 67,
     comments: 12,
     shares: 18,
@@ -83,7 +86,8 @@ const posts = ref<Post[]>([
     author: 'Emily Davis',
     role: 'Engineering Manager',
     time: '1 day ago',
-    content: 'Big congrats to the frontend team for reaching 95% test coverage on the UI library! Huge effort across all 40+ components.',
+    content:
+      'Big congrats to the frontend team for reaching 95% test coverage on the UI library! Huge effort across all 40+ components.',
     likes: 89,
     comments: 15,
     shares: 7,
@@ -96,7 +100,8 @@ const posts = ref<Post[]>([
     author: 'Alex Turner',
     role: 'UI Engineer',
     time: '1 day ago',
-    content: 'Shared an interesting article about micro-frontend architecture patterns that could work well for our module system.',
+    content:
+      'Shared an interesting article about micro-frontend architecture patterns that could work well for our module system.',
     likes: 23,
     comments: 4,
     shares: 2,
@@ -110,7 +115,8 @@ const posts = ref<Post[]>([
     author: 'Lisa Wang',
     role: 'DevOps Engineer',
     time: '2 days ago',
-    content: 'Successfully migrated our CI/CD pipeline to GitHub Actions. Build times are now 3x faster and we saved $200/month on infrastructure costs. Here are the key changes we made...',
+    content:
+      'Successfully migrated our CI/CD pipeline to GitHub Actions. Build times are now 3x faster and we saved $200/month on infrastructure costs. Here are the key changes we made...',
     likes: 56,
     comments: 9,
     shares: 11,
@@ -122,10 +128,30 @@ const posts = ref<Post[]>([
 ])
 
 const milestones = [
-  { icon: Rocket, label: 'v1.0 Released', time: '2 days ago', color: 'text-blue-500 bg-blue-100 dark:bg-blue-900/30' },
-  { icon: Users, label: '1000 Users', time: '1 week ago', color: 'text-green-500 bg-green-100 dark:bg-green-900/30' },
-  { icon: Code, label: '100 PRs Merged', time: '2 weeks ago', color: 'text-purple-500 bg-purple-100 dark:bg-purple-900/30' },
-  { icon: Award, label: 'First Contributor', time: '1 month ago', color: 'text-amber-500 bg-amber-100 dark:bg-amber-900/30' },
+  {
+    icon: Rocket,
+    label: 'v1.0 Released',
+    time: '2 days ago',
+    color: 'text-blue-500 bg-blue-100 dark:bg-blue-900/30',
+  },
+  {
+    icon: Users,
+    label: '1000 Users',
+    time: '1 week ago',
+    color: 'text-green-500 bg-green-100 dark:bg-green-900/30',
+  },
+  {
+    icon: Code,
+    label: '100 PRs Merged',
+    time: '2 weeks ago',
+    color: 'text-purple-500 bg-purple-100 dark:bg-purple-900/30',
+  },
+  {
+    icon: Award,
+    label: 'First Contributor',
+    time: '1 month ago',
+    color: 'text-amber-500 bg-amber-100 dark:bg-amber-900/30',
+  },
 ]
 
 const trending = [
@@ -176,15 +202,21 @@ function getPostIcon(type: string) {
                 What's on your mind?
               </div>
               <div class="flex items-center gap-2 mt-3">
-                <button class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                <button
+                  class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
                   <Image class="w-4 h-4 text-green-500" />
                   Photo
                 </button>
-                <button class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                <button
+                  class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
                   <Code class="w-4 h-4 text-blue-500" />
                   Code Snippet
                 </button>
-                <button class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                <button
+                  class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
                   <GitBranch class="w-4 h-4 text-purple-500" />
                   PR Link
                 </button>
@@ -205,7 +237,9 @@ function getPostIcon(type: string) {
             class="px-4 pt-3 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"
           >
             <Repeat2 class="w-3.5 h-3.5" />
-            <span>Shared from <strong>{{ post.sharedFrom }}</strong></span>
+            <span
+              >Shared from <strong>{{ post.sharedFrom }}</strong></span
+            >
           </div>
           <div
             v-if="post.type === 'announcement'"
@@ -233,7 +267,9 @@ function getPostIcon(type: string) {
                 </p>
               </div>
             </div>
-            <button class="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+            <button
+              class="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
               <MoreHorizontal class="w-4 h-4" />
             </button>
           </div>
@@ -256,7 +292,9 @@ function getPostIcon(type: string) {
           </div>
 
           <!-- Stats -->
-          <div class="px-4 py-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700/50">
+          <div
+            class="px-4 py-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700/50"
+          >
             <div class="flex items-center gap-1">
               <ThumbsUp class="w-3.5 h-3.5 text-primary-500" />
               <span>{{ post.likes }} likes</span>
@@ -271,23 +309,35 @@ function getPostIcon(type: string) {
           <div class="px-4 py-2 flex items-center border-t border-gray-100 dark:border-gray-700/50">
             <button
               class="flex-1 flex items-center justify-center gap-2 py-2 text-sm rounded-lg transition-colors"
-              :class="post.liked ? 'text-primary-600 dark:text-primary-400 font-medium' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'"
+              :class="
+                post.liked
+                  ? 'text-primary-600 dark:text-primary-400 font-medium'
+                  : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+              "
               @click="toggleLike(post)"
             >
               <Heart class="w-4 h-4" :class="post.liked ? 'fill-current' : ''" />
               Like
             </button>
-            <button class="flex-1 flex items-center justify-center gap-2 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+            <button
+              class="flex-1 flex items-center justify-center gap-2 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            >
               <MessageCircle class="w-4 h-4" />
               Comment
             </button>
-            <button class="flex-1 flex items-center justify-center gap-2 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+            <button
+              class="flex-1 flex items-center justify-center gap-2 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            >
               <Share2 class="w-4 h-4" />
               Share
             </button>
             <button
               class="p-2 rounded-lg transition-colors"
-              :class="post.bookmarked ? 'text-amber-500' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'"
+              :class="
+                post.bookmarked
+                  ? 'text-amber-500'
+                  : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              "
               @click="toggleBookmark(post)"
             >
               <Bookmark class="w-4 h-4" :class="post.bookmarked ? 'fill-current' : ''" />
@@ -309,7 +359,10 @@ function getPostIcon(type: string) {
               :key="milestone.label"
               class="flex items-center gap-3"
             >
-              <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" :class="milestone.color">
+              <div
+                class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                :class="milestone.color"
+              >
                 <component :is="milestone.icon" class="w-4 h-4" />
               </div>
               <div class="flex-1 min-w-0">
@@ -361,7 +414,9 @@ function getPostIcon(type: string) {
             <div class="flex items-center gap-2">
               <BaseAvatar name="Rachel Green" size="xs" />
               <div class="flex-1 min-w-0">
-                <p class="text-xs font-medium text-gray-900 dark:text-white truncate">Rachel Green</p>
+                <p class="text-xs font-medium text-gray-900 dark:text-white truncate">
+                  Rachel Green
+                </p>
                 <p class="text-xs text-gray-400 truncate">QA Engineer</p>
               </div>
               <BaseButton variant="outline" size="sm" class="text-xs px-2 py-1">Follow</BaseButton>

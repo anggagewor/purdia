@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import DashboardLayout from '@/components/layout/DashboardLayout.vue'
-import ToastContainer from '@/components/ui/ToastContainer.vue'
+import { ToastContainer } from '@purdia/toast'
 
 const route = useRoute()
 

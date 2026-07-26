@@ -1,5 +1,5 @@
 import { ref, shallowRef, type Ref, type ShallowRef } from 'vue'
-import type { ApiError } from '@/lib/http'
+import type { ApiError } from '@purdia/http'
 
 // ---------------------------------------------------------------------------
 // Types

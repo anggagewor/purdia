@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-  BaseCard,
-  BaseTable,
-  BaseButton,
-  BaseBadge,
-  BaseModal,
-  DropdownButton,
-} from '@purdia/ui'
+import { BaseCard, BaseTable, BaseButton, BaseBadge, BaseModal, DropdownButton } from '@purdia/ui'
 import { Plus, MoreHorizontal, Edit, Trash2, MapPin } from '@lucide/vue'
 import type { TableColumn } from '@purdia/ui'
 import type { DropdownItem } from '@purdia/ui'

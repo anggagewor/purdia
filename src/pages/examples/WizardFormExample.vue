@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import {
-  User,
-  Building2,
-  CreditCard,
-  CheckCircle,
-  ArrowLeft,
-  ArrowRight,
-  Check,
-} from '@lucide/vue'
+import { User, Building2, CreditCard, CheckCircle, ArrowLeft, ArrowRight, Check } from '@lucide/vue'
 import { BaseCard, BaseInput, BaseButton, BaseAlert } from '@purdia/ui'
 
 interface StepItem {
@@ -115,7 +107,13 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
           <p class="text-gray-500 dark:text-gray-400 mb-6">
             Your account has been created successfully. You'll receive a confirmation email shortly.
           </p>
-          <BaseButton variant="primary" @click="submitted = false; currentStep = 0">
+          <BaseButton
+            variant="primary"
+            @click="
+              submitted = false
+              currentStep = 0
+            "
+          >
             Start Over
           </BaseButton>
         </div>
@@ -128,13 +126,11 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
       <div class="mb-8">
         <div class="flex items-center justify-between relative">
           <!-- Progress bar background -->
-          <div
-            class="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 dark:bg-gray-700"
-          ></div>
+          <div class="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 dark:bg-gray-700"></div>
           <!-- Progress bar fill -->
           <div
             class="absolute top-5 left-0 h-0.5 bg-primary-600 transition-all duration-300"
-            :style="{ width: `${progressWidth - (100 / steps.length / 2)}%` }"
+            :style="{ width: `${progressWidth - 100 / steps.length / 2}%` }"
           ></div>
 
           <div
@@ -207,21 +203,13 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
             :error="errors.email"
             required
           />
-          <BaseInput
-            v-model="form.phone"
-            label="Phone Number"
-            placeholder="+1 (555) 000-0000"
-          />
+          <BaseInput v-model="form.phone" label="Phone Number" placeholder="+1 (555) 000-0000" />
         </div>
 
         <!-- Step 2: Company -->
         <div v-if="currentStep === 1" class="space-y-4">
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-            Company Information
-          </h3>
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            Tell us about your organization.
-          </p>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Company Information</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Tell us about your organization.</p>
 
           <BaseInput
             v-model="form.company"
@@ -230,11 +218,7 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
             :error="errors.company"
             required
           />
-          <BaseInput
-            v-model="form.website"
-            label="Website"
-            placeholder="https://example.com"
-          />
+          <BaseInput v-model="form.website" label="Website" placeholder="https://example.com" />
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <BaseInput
               v-model="form.industry"
@@ -243,11 +227,7 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
               :error="errors.industry"
               required
             />
-            <BaseInput
-              v-model="form.employees"
-              label="Number of Employees"
-              placeholder="50-100"
-            />
+            <BaseInput v-model="form.employees" label="Number of Employees" placeholder="50-100" />
           </div>
         </div>
 
@@ -392,30 +372,20 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
         </div>
 
         <!-- Navigation -->
-        <div class="flex items-center justify-between mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <BaseButton
-            v-if="currentStep > 0"
-            variant="ghost"
-            @click="prevStep"
-          >
+        <div
+          class="flex items-center justify-between mt-8 pt-4 border-t border-gray-200 dark:border-gray-700"
+        >
+          <BaseButton v-if="currentStep > 0" variant="ghost" @click="prevStep">
             <template #icon-left><ArrowLeft class="w-4 h-4" /></template>
             Previous
           </BaseButton>
           <div v-else></div>
 
-          <BaseButton
-            v-if="currentStep < steps.length - 1"
-            variant="primary"
-            @click="nextStep"
-          >
+          <BaseButton v-if="currentStep < steps.length - 1" variant="primary" @click="nextStep">
             Next
             <template #icon-right><ArrowRight class="w-4 h-4" /></template>
           </BaseButton>
-          <BaseButton
-            v-else
-            variant="primary"
-            @click="submit"
-          >
+          <BaseButton v-else variant="primary" @click="submit">
             <template #icon-left><Check class="w-4 h-4" /></template>
             Submit
           </BaseButton>

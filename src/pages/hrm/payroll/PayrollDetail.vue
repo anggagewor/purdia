@@ -115,13 +115,20 @@ const payslipColumns: TableColumn[] = [
           <template #header>
             <h3 class="font-semibold text-gray-900 dark:text-gray-100">Earnings</h3>
           </template>
-          <BaseTable :columns="payslipColumns" :data="payroll.earnings" :compact="true" :hoverable="false">
+          <BaseTable
+            :columns="payslipColumns"
+            :data="payroll.earnings"
+            :compact="true"
+            :hoverable="false"
+          >
             <template #cell-amount="{ value }">
               <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
             </template>
             <template #footer>
               <tr class="border-t-2 border-gray-200 dark:border-gray-600">
-                <td class="px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">Total Earnings</td>
+                <td class="px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">
+                  Total Earnings
+                </td>
                 <td class="px-3 py-2 text-right font-bold text-gray-900 dark:text-gray-100">
                   {{ payroll.totalEarnings }}
                 </td>
@@ -134,7 +141,12 @@ const payslipColumns: TableColumn[] = [
           <template #header>
             <h3 class="font-semibold text-gray-900 dark:text-gray-100">Deductions</h3>
           </template>
-          <BaseTable :columns="payslipColumns" :data="payroll.deductions" :compact="true" :hoverable="false">
+          <BaseTable
+            :columns="payslipColumns"
+            :data="payroll.deductions"
+            :compact="true"
+            :hoverable="false"
+          >
             <template #cell-amount="{ value }">
               <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
             </template>

@@ -21,7 +21,15 @@ import {
   GitBranch,
   Check,
 } from '@lucide/vue'
-import { BaseAvatar, BaseButton, BaseCard, BaseInput, BaseBadge, BaseTabs, BaseCheckbox } from '@purdia/ui'
+import {
+  BaseAvatar,
+  BaseButton,
+  BaseCard,
+  BaseInput,
+  BaseBadge,
+  BaseTabs,
+  BaseCheckbox,
+} from '@purdia/ui'
 
 const activeTab = ref('activity')
 
@@ -119,8 +127,16 @@ const activities = [
 ]
 
 const notifications = [
-  { label: 'Email notifications', description: 'Receive email for important updates', enabled: true },
-  { label: 'Push notifications', description: 'Get push notifications on your devices', enabled: true },
+  {
+    label: 'Email notifications',
+    description: 'Receive email for important updates',
+    enabled: true,
+  },
+  {
+    label: 'Push notifications',
+    description: 'Get push notifications on your devices',
+    enabled: true,
+  },
   { label: 'Weekly digest', description: 'Summary of activity every week', enabled: false },
   { label: 'Marketing emails', description: 'New features and product updates', enabled: false },
 ]
@@ -201,7 +217,9 @@ const notifications = [
           </div>
 
           <!-- Stats -->
-          <div class="flex items-center gap-4 mt-5 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div
+            class="flex items-center gap-4 mt-5 pt-4 border-t border-gray-200 dark:border-gray-700"
+          >
             <div class="text-center">
               <p class="text-lg font-bold text-gray-900 dark:text-white">{{ profile.followers }}</p>
               <p class="text-xs text-gray-500 dark:text-gray-400">Followers</p>
@@ -244,7 +262,10 @@ const notifications = [
             :key="index"
             class="flex gap-4 p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
           >
-            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" :class="item.color">
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+              :class="item.color"
+            >
               <component :is="item.icon" class="w-4 h-4" />
             </div>
             <div class="flex-1 min-w-0">
@@ -363,7 +384,11 @@ const notifications = [
               <div>
                 <p class="text-sm text-gray-700 dark:text-gray-300">
                   Two-factor authentication is currently
-                  <span :class="twoFactorEnabled ? 'text-green-600 font-medium' : 'text-red-600 font-medium'">
+                  <span
+                    :class="
+                      twoFactorEnabled ? 'text-green-600 font-medium' : 'text-red-600 font-medium'
+                    "
+                  >
                     {{ twoFactorEnabled ? 'enabled' : 'disabled' }}
                   </span>
                 </p>
@@ -396,7 +421,9 @@ const notifications = [
                 class="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50"
               >
                 <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
+                  <div
+                    class="w-8 h-8 rounded-lg bg-gray-200 dark:bg-gray-600 flex items-center justify-center"
+                  >
                     <Globe class="w-4 h-4 text-gray-500 dark:text-gray-400" />
                   </div>
                   <div>

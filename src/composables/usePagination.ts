@@ -1,6 +1,6 @@
 import { ref, computed, watch, type Ref, type ComputedRef, type ShallowRef } from 'vue'
 import { useApi, type UseApiOptions } from './useApi'
-import type { ApiError, ApiResponse, PaginationMeta } from '@/lib/http'
+import type { ApiError, ApiResponse, PaginationMeta } from '@purdia/http'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -133,7 +133,7 @@ export function usePagination<T>(
         return endpoint(buildParams())
       }
       // String endpoint — use dynamic import to avoid circular deps
-      const { get } = await import('@/lib/http')
+      const { get } = await import('@purdia/http')
       const response = await get<T[]>(endpoint, { params: buildParams() })
       return response
     },
@@ -171,7 +171,7 @@ export function usePagination<T>(
       try {
         loading.value = true
         error.value = null
-        const { get } = await import('@/lib/http')
+        const { get } = await import('@purdia/http')
         const response = await get<T[]>(endpoint, { params: buildParams() })
         data.value = response.data
         if (response.meta) {

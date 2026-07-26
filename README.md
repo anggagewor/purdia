@@ -32,7 +32,7 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
 - 📦 **Composables** — `useApi`, `usePagination`, `useToast`, `useI18n`, `useRbac` for clean page logic
 - 📱 **Collapsible Sidebar** — Icon-only mode with flyout popover submenus
 - 📲 **QR Self-Order** — Public mobile menu page, customers scan & order from table
-- 🏗️ **Monorepo Architecture** — 11 internal packages for maximum reusability
+- 🏗️ **Monorepo Architecture** — 12 internal packages for maximum reusability
 - 💬 **App Pages** — Chat, Email Client, Calendar, Timeline/Feed, Profile
 - 🎯 **Landing & Marketing** — Landing page, Pricing page with monthly/yearly toggle
 - 🚨 **Error Pages** — 404, 403, 500, Maintenance with illustrations and countdown
@@ -147,7 +147,7 @@ Full-featured application pages ready to use as reference or starting point.
 
 ## 📦 Packages
 
-Monorepo with 11 internal `@purdia/*` packages. → [Full documentation](./docs/packages.md)
+Monorepo with 12 internal `@purdia/*` packages. → [Full documentation](./docs/packages.md)
 
 | Package | Description |
 |---------|-------------|
@@ -256,6 +256,30 @@ npm run preview
 
 ---
 
+## 🧪 Development Scripts
+
+| Script | Command | Description |
+|--------|---------|-------------|
+| Dev Server | `npm run dev` | Start Vite dev server |
+| Build | `npm run build` | Type-check + production build |
+| Preview | `npm run preview` | Preview production build |
+| Type Check | `npm run type-check` | Run `vue-tsc` type checking |
+| Lint | `npm run lint` | ESLint check (src + packages) |
+| Lint Fix | `npm run lint:fix` | Auto-fix lint issues |
+| Test | `npm test` | Run Vitest test suites |
+| Test Watch | `npm run test:watch` | Vitest in watch mode |
+| Test Coverage | `npm run test:coverage` | Run tests with coverage report |
+| Format | `npm run format` | Format code with oxfmt |
+
+### Tooling
+
+- **Linter:** ESLint 9 (flat config) with `@purdia/eslint-config` — Vue 3 + TypeScript rules
+- **Formatter:** [oxfmt](https://github.com/nicolo-ribaudo/oxfmt) — Rust-based, no semicolons, single quotes
+- **Test Runner:** Vitest 3 — fast, Vite-native, with workspace alias support
+- **Type Checker:** vue-tsc — full Vue + TypeScript validation
+
+---
+
 ## ⚠️ Disclaimer
 
 Purdia is a long-term project that I actively use as the foundation for my own applications. New features are added as real-world needs arise, which means development is continuous but not tied to a fixed release schedule. Contributions, bug reports, and ideas are always welcome.
@@ -268,9 +292,21 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+3. Make your changes
+4. Run checks before committing:
+   ```bash
+   npm run lint        # ensure no lint errors
+   npm test            # ensure tests pass
+   npm run type-check  # ensure no type errors
+   ```
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Requirements
+
+- Node.js `^22.18.0 || >=24.12.0` (see `.nvmrc`)
+- npm 11+
 
 ## 📄 License
 

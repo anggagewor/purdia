@@ -84,7 +84,7 @@ function confirmVariant() {
     }
   }
   const selected: SelectedVariant[] = Object.entries(variantSelections.value).map(
-    ([name, option]) => ({ name, option })
+    ([name, option]) => ({ name, option }),
   )
   addToCartDirect(product, selected, itemNotes.value)
   showVariantPicker.value = false
@@ -128,7 +128,11 @@ const cartCount = computed(() => cart.value.reduce((sum, item) => sum + item.qty
 
 function submitOrder() {
   if (cart.value.length === 0) return
-  const order = posStore.submitOrder(tableId.value, [...cart.value], customerName.value || 'Customer')
+  const order = posStore.submitOrder(
+    tableId.value,
+    [...cart.value],
+    customerName.value || 'Customer',
+  )
   submittedOrderId.value = order.id
   orderSubmitted.value = true
   cart.value = []
@@ -170,7 +174,9 @@ function formatRp(n: number) {
 
     <!-- Success state -->
     <div v-if="orderSubmitted" class="max-w-lg mx-auto px-4 py-12 text-center">
-      <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div
+        class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"
+      >
         <span class="text-4xl">✅</span>
       </div>
       <h2 class="text-xl font-bold text-gray-900 mb-2">Pesanan Diterima!</h2>
@@ -224,13 +230,19 @@ function formatRp(n: number) {
           class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm active:scale-[0.98] transition-transform"
         >
           <button class="w-full text-left p-3 cursor-pointer" @click="addToCart(product)">
-            <div class="w-full h-16 bg-gray-100 rounded-lg flex items-center justify-center text-2xl mb-2">
-              {{ product.category === 'Beverages' ? '☕' : product.category === 'Food' ? '🍽️' : '🍟' }}
+            <div
+              class="w-full h-16 bg-gray-100 rounded-lg flex items-center justify-center text-2xl mb-2"
+            >
+              {{
+                product.category === 'Beverages' ? '☕' : product.category === 'Food' ? '🍽️' : '🍟'
+              }}
             </div>
             <p class="text-sm font-medium text-gray-800 truncate">{{ product.name }}</p>
             <div class="flex items-center justify-between mt-1">
               <span class="text-sm font-bold text-primary-600">{{ formatRp(product.price) }}</span>
-              <span v-if="product.variants?.length" class="text-[0.6rem] text-amber-500">✦ opsi</span>
+              <span v-if="product.variants?.length" class="text-[0.6rem] text-amber-500"
+                >✦ opsi</span
+              >
             </div>
           </button>
         </div>
@@ -238,7 +250,10 @@ function formatRp(n: number) {
 
       <!-- Cart Section -->
       <div id="cart-section" class="pt-4">
-        <div v-if="cart.length > 0" class="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
+        <div
+          v-if="cart.length > 0"
+          class="bg-white rounded-xl border border-gray-200 p-4 space-y-3"
+        >
           <h3 class="font-semibold text-gray-900">Pesananmu</h3>
 
           <!-- Customer name -->
@@ -255,10 +270,15 @@ function formatRp(n: number) {
               <div class="flex items-start justify-between gap-2">
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium text-gray-800">{{ item.product.name }}</p>
-                  <p v-if="item.selectedVariants.length > 0" class="text-[0.65rem] text-primary-600">
-                    {{ item.selectedVariants.map(v => v.option.label).join(', ') }}
+                  <p
+                    v-if="item.selectedVariants.length > 0"
+                    class="text-[0.65rem] text-primary-600"
+                  >
+                    {{ item.selectedVariants.map((v) => v.option.label).join(', ') }}
                   </p>
-                  <p v-if="item.notes" class="text-[0.625rem] text-gray-400 italic">📝 {{ item.notes }}</p>
+                  <p v-if="item.notes" class="text-[0.625rem] text-gray-400 italic">
+                    📝 {{ item.notes }}
+                  </p>
                 </div>
                 <p class="text-sm font-semibold text-gray-900 shrink-0">
                   {{ formatRp((item.product.price + getItemExtra(item)) * item.qty) }}
@@ -268,16 +288,22 @@ function formatRp(n: number) {
                 <button
                   class="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 cursor-pointer active:bg-gray-100"
                   @click="updateQty(idx, -1)"
-                >−</button>
+                >
+                  −
+                </button>
                 <span class="text-sm font-medium w-5 text-center">{{ item.qty }}</span>
                 <button
                   class="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 cursor-pointer active:bg-gray-100"
                   @click="updateQty(idx, 1)"
-                >+</button>
+                >
+                  +
+                </button>
                 <button
                   class="ml-auto text-xs text-red-400 cursor-pointer"
                   @click="removeItem(idx)"
-                >Hapus</button>
+                >
+                  Hapus
+                </button>
               </div>
             </div>
           </div>
@@ -309,9 +335,16 @@ function formatRp(n: number) {
         >
           <div class="bg-white rounded-t-2xl w-full max-w-lg max-h-[80vh] flex flex-col">
             <!-- Sheet header -->
-            <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
+            <div
+              class="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0"
+            >
               <h3 class="font-semibold text-gray-900">{{ variantProduct?.name }}</h3>
-              <button class="text-gray-400 text-xl cursor-pointer" @click="showVariantPicker = false">&times;</button>
+              <button
+                class="text-gray-400 text-xl cursor-pointer"
+                @click="showVariantPicker = false"
+              >
+                &times;
+              </button>
             </div>
 
             <!-- Sheet content -->
@@ -325,10 +358,18 @@ function formatRp(n: number) {
               </div>
 
               <!-- Variants -->
-              <div v-for="variant in variantProduct?.variants" :key="variant.name" class="space-y-2">
+              <div
+                v-for="variant in variantProduct?.variants"
+                :key="variant.name"
+                class="space-y-2"
+              >
                 <div class="flex items-center gap-2">
                   <p class="text-sm font-medium text-gray-700">{{ variant.name }}</p>
-                  <span v-if="variant.required" class="text-[0.6rem] px-1.5 py-0.5 bg-red-100 text-red-600 rounded-full font-medium">Wajib</span>
+                  <span
+                    v-if="variant.required"
+                    class="text-[0.6rem] px-1.5 py-0.5 bg-red-100 text-red-600 rounded-full font-medium"
+                    >Wajib</span
+                  >
                 </div>
                 <div class="flex flex-wrap gap-2">
                   <button

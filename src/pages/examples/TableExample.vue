@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import {
-  BaseTable,
-  BaseCard,
-  BaseBadge,
-  BaseAvatar,
-  BaseButton,
-  DropdownButton,
-} from '@purdia/ui'
+import { BaseTable, BaseCard, BaseBadge, BaseAvatar, BaseButton, DropdownButton } from '@purdia/ui'
 import {
   Plus,
   Download,
@@ -445,9 +438,13 @@ const earningsData = [
 
     <!-- Footer (tfoot) — Invoice Style -->
     <BaseCard>
-      <template #header><h4 class="font-semibold">Footer Slot (tfoot) — Invoice / Totals</h4></template>
+      <template #header
+        ><h4 class="font-semibold">Footer Slot (tfoot) — Invoice / Totals</h4></template
+      >
       <p class="text-sm text-gray-500 mb-4">
-        Gunakan slot <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#footer</code> untuk render tfoot. Cocok buat summary row, totals, dsb.
+        Gunakan slot
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#footer</code>
+        untuk render tfoot. Cocok buat summary row, totals, dsb.
       </p>
       <BaseTable :columns="invoiceColumns" :data="invoiceData" :hoverable="false">
         <template #cell-price="{ value }">
@@ -458,7 +455,10 @@ const earningsData = [
         </template>
         <template #footer>
           <tr>
-            <td colspan="3" class="px-4 py-3 text-right font-semibold text-gray-700 dark:text-gray-300">
+            <td
+              colspan="3"
+              class="px-4 py-3 text-right font-semibold text-gray-700 dark:text-gray-300"
+            >
               Subtotal
             </td>
             <td class="px-4 py-3 text-right font-bold text-gray-900 dark:text-gray-100 font-mono">
@@ -477,7 +477,9 @@ const earningsData = [
             <td colspan="3" class="px-4 py-3 text-right font-bold text-gray-900 dark:text-gray-100">
               Grand Total
             </td>
-            <td class="px-4 py-3 text-right font-bold text-lg text-primary-600 dark:text-primary-400 font-mono">
+            <td
+              class="px-4 py-3 text-right font-bold text-lg text-primary-600 dark:text-primary-400 font-mono"
+            >
               ${{ Math.round(invoiceTotal * 1.11).toLocaleString() }}
             </td>
           </tr>
@@ -487,7 +489,9 @@ const earningsData = [
 
     <!-- Footer — Earnings Summary -->
     <BaseCard>
-      <template #header><h4 class="font-semibold">Footer — Key-Value Summary (Payroll)</h4></template>
+      <template #header
+        ><h4 class="font-semibold">Footer — Key-Value Summary (Payroll)</h4></template
+      >
       <p class="text-sm text-gray-500 mb-4">
         Bisa juga buat table sederhana 2 kolom dengan total di footer.
       </p>
@@ -498,7 +502,9 @@ const earningsData = [
         <template #footer>
           <tr class="border-t-2 border-gray-200 dark:border-gray-600">
             <td class="px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">Total Earnings</td>
-            <td class="px-3 py-2 text-right font-bold text-gray-900 dark:text-gray-100">Rp 17.500.000</td>
+            <td class="px-3 py-2 text-right font-bold text-gray-900 dark:text-gray-100">
+              Rp 17.500.000
+            </td>
           </tr>
         </template>
       </BaseTable>
@@ -508,7 +514,11 @@ const earningsData = [
     <BaseCard>
       <template #header><h4 class="font-semibold">Caption</h4></template>
       <p class="text-sm text-gray-500 mb-4">
-        Gunakan prop <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">caption</code> atau slot <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#caption</code> untuk menambahkan keterangan di atas table.
+        Gunakan prop
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">caption</code> atau
+        slot
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#caption</code>
+        untuk menambahkan keterangan di atas table.
       </p>
       <BaseTable
         :columns="basicColumns"
@@ -528,7 +538,11 @@ const earningsData = [
     <BaseCard>
       <template #header><h4 class="font-semibold">Custom Header Cell Slot</h4></template>
       <p class="text-sm text-gray-500 mb-4">
-        Gunakan slot <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#header-[key]</code> untuk override render header cell tertentu.
+        Gunakan slot
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded"
+          >#header-[key]</code
+        >
+        untuk override render header cell tertentu.
       </p>
       <BaseTable :columns="basicColumns" :data="basicData.slice(0, 3)" :compact="true">
         <template #header-status>

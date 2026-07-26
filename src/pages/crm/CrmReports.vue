@@ -133,12 +133,18 @@ const performerColumns = [
         <template #header>
           <h3 class="font-semibold text-gray-900 dark:text-gray-100">Top Performers</h3>
         </template>
-        <BaseTable :columns="performerColumns" :data="topPerformers" :compact="true" :hoverable="false">
+        <BaseTable
+          :columns="performerColumns"
+          :data="topPerformers"
+          :compact="true"
+          :hoverable="false"
+        >
           <template #cell-name="{ value, index }">
             <div class="flex items-center gap-2">
               <span
                 class="w-5 h-5 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold"
-              >{{ index + 1 }}</span>
+                >{{ index + 1 }}</span
+              >
               <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
             </div>
           </template>
@@ -149,7 +155,8 @@ const performerColumns = [
             <BaseBadge
               :variant="parseInt(value as string) >= 60 ? 'success' : 'warning'"
               size="sm"
-            >{{ value }}</BaseBadge>
+              >{{ value }}</BaseBadge
+            >
           </template>
         </BaseTable>
       </BaseCard>

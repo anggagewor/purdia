@@ -2,14 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import draggable from 'vuedraggable'
-import {
-  BaseButton,
-  BaseModal,
-  BaseInput,
-  BaseSelect,
-  BaseBadge,
-  BaseAvatar,
-} from '@purdia/ui'
+import { BaseButton, BaseModal, BaseInput, BaseSelect, BaseBadge, BaseAvatar } from '@purdia/ui'
 import {
   Plus,
   MoreHorizontal,

@@ -64,44 +64,80 @@ function printInvoice() {
     </div>
 
     <!-- Invoice -->
-    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 md:p-12 print:border-none print:shadow-none print:p-0 print:rounded-none print:bg-white max-w-4xl">
+    <div
+      class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 md:p-12 print:border-none print:shadow-none print:p-0 print:rounded-none print:bg-white max-w-4xl"
+    >
       <!-- Header -->
       <div class="flex items-start justify-between mb-10">
         <div>
           <div class="flex items-center gap-2 mb-2">
-            <div class="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center print:bg-black">
+            <div
+              class="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center print:bg-black"
+            >
               <span class="text-sm font-bold text-white">P</span>
             </div>
-            <span class="text-xl font-bold text-gray-900 dark:text-white print:text-black">Purdia</span>
+            <span class="text-xl font-bold text-gray-900 dark:text-white print:text-black"
+              >Purdia</span
+            >
           </div>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">{{ invoiceData.from.address }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">{{ invoiceData.from.city }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">{{ invoiceData.from.email }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+            {{ invoiceData.from.address }}
+          </p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+            {{ invoiceData.from.city }}
+          </p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+            {{ invoiceData.from.email }}
+          </p>
         </div>
         <div class="text-right">
           <h2 class="text-3xl font-bold text-gray-900 dark:text-white print:text-black">INVOICE</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600 mt-1">{{ invoiceData.number }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600 mt-1">
+            {{ invoiceData.number }}
+          </p>
         </div>
       </div>
 
       <!-- Bill To / Dates -->
       <div class="grid grid-cols-2 gap-8 mb-10">
         <div>
-          <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-2 print:text-gray-500">Bill To</p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white print:text-black">{{ invoiceData.to.name }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">{{ invoiceData.to.address }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">{{ invoiceData.to.city }}</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">{{ invoiceData.to.email }}</p>
+          <p
+            class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-2 print:text-gray-500"
+          >
+            Bill To
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white print:text-black">
+            {{ invoiceData.to.name }}
+          </p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+            {{ invoiceData.to.address }}
+          </p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+            {{ invoiceData.to.city }}
+          </p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+            {{ invoiceData.to.email }}
+          </p>
         </div>
         <div class="text-right">
           <div class="space-y-1.5">
             <div class="flex items-center justify-end gap-4">
-              <span class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase print:text-gray-500">Issue Date</span>
-              <span class="text-sm text-gray-900 dark:text-white print:text-black">{{ invoiceData.date }}</span>
+              <span
+                class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase print:text-gray-500"
+                >Issue Date</span
+              >
+              <span class="text-sm text-gray-900 dark:text-white print:text-black">{{
+                invoiceData.date
+              }}</span>
             </div>
             <div class="flex items-center justify-end gap-4">
-              <span class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase print:text-gray-500">Due Date</span>
-              <span class="text-sm text-gray-900 dark:text-white print:text-black">{{ invoiceData.dueDate }}</span>
+              <span
+                class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase print:text-gray-500"
+                >Due Date</span
+              >
+              <span class="text-sm text-gray-900 dark:text-white print:text-black">{{
+                invoiceData.dueDate
+              }}</span>
             </div>
           </div>
         </div>
@@ -112,10 +148,26 @@ function printInvoice() {
         <table class="w-full">
           <thead>
             <tr class="border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300">
-              <th class="text-left py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600">Description</th>
-              <th class="text-center py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600 w-20">Qty</th>
-              <th class="text-right py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600 w-28">Rate</th>
-              <th class="text-right py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600 w-28">Amount</th>
+              <th
+                class="text-left py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600"
+              >
+                Description
+              </th>
+              <th
+                class="text-center py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600 w-20"
+              >
+                Qty
+              </th>
+              <th
+                class="text-right py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600 w-28"
+              >
+                Rate
+              </th>
+              <th
+                class="text-right py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase print:text-gray-600 w-28"
+              >
+                Amount
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -124,10 +176,24 @@ function printInvoice() {
               :key="index"
               class="border-b border-gray-100 dark:border-gray-700/50 print:border-gray-200"
             >
-              <td class="py-3 text-sm text-gray-900 dark:text-white print:text-black">{{ item.description }}</td>
-              <td class="py-3 text-sm text-gray-600 dark:text-gray-400 text-center print:text-gray-700">{{ item.qty }}</td>
-              <td class="py-3 text-sm text-gray-600 dark:text-gray-400 text-right print:text-gray-700">${{ item.rate.toLocaleString() }}</td>
-              <td class="py-3 text-sm font-medium text-gray-900 dark:text-white text-right print:text-black">${{ item.amount.toLocaleString() }}</td>
+              <td class="py-3 text-sm text-gray-900 dark:text-white print:text-black">
+                {{ item.description }}
+              </td>
+              <td
+                class="py-3 text-sm text-gray-600 dark:text-gray-400 text-center print:text-gray-700"
+              >
+                {{ item.qty }}
+              </td>
+              <td
+                class="py-3 text-sm text-gray-600 dark:text-gray-400 text-right print:text-gray-700"
+              >
+                ${{ item.rate.toLocaleString() }}
+              </td>
+              <td
+                class="py-3 text-sm font-medium text-gray-900 dark:text-white text-right print:text-black"
+              >
+                ${{ item.amount.toLocaleString() }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -137,35 +203,65 @@ function printInvoice() {
       <div class="flex justify-end mb-10">
         <div class="w-64">
           <div class="flex items-center justify-between py-2">
-            <span class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">Subtotal</span>
-            <span class="text-sm text-gray-900 dark:text-white print:text-black">${{ invoiceData.subtotal.toLocaleString() }}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600"
+              >Subtotal</span
+            >
+            <span class="text-sm text-gray-900 dark:text-white print:text-black"
+              >${{ invoiceData.subtotal.toLocaleString() }}</span
+            >
           </div>
           <div class="flex items-center justify-between py-2">
-            <span class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">Tax (10%)</span>
-            <span class="text-sm text-gray-900 dark:text-white print:text-black">${{ invoiceData.tax.toLocaleString() }}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400 print:text-gray-600"
+              >Tax (10%)</span
+            >
+            <span class="text-sm text-gray-900 dark:text-white print:text-black"
+              >${{ invoiceData.tax.toLocaleString() }}</span
+            >
           </div>
-          <div class="flex items-center justify-between py-3 border-t-2 border-gray-200 dark:border-gray-700 print:border-gray-300 mt-2">
-            <span class="text-base font-semibold text-gray-900 dark:text-white print:text-black">Total</span>
-            <span class="text-base font-bold text-gray-900 dark:text-white print:text-black">${{ invoiceData.total.toLocaleString() }}</span>
+          <div
+            class="flex items-center justify-between py-3 border-t-2 border-gray-200 dark:border-gray-700 print:border-gray-300 mt-2"
+          >
+            <span class="text-base font-semibold text-gray-900 dark:text-white print:text-black"
+              >Total</span
+            >
+            <span class="text-base font-bold text-gray-900 dark:text-white print:text-black"
+              >${{ invoiceData.total.toLocaleString() }}</span
+            >
           </div>
         </div>
       </div>
 
       <!-- Footer -->
-      <div class="border-t border-gray-200 dark:border-gray-700 print:border-gray-300 pt-6 space-y-3">
+      <div
+        class="border-t border-gray-200 dark:border-gray-700 print:border-gray-300 pt-6 space-y-3"
+      >
         <div>
-          <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1 print:text-gray-500">Payment Method</p>
-          <p class="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">{{ invoiceData.paymentMethod }}</p>
+          <p
+            class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1 print:text-gray-500"
+          >
+            Payment Method
+          </p>
+          <p class="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">
+            {{ invoiceData.paymentMethod }}
+          </p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1 print:text-gray-500">Notes</p>
-          <p class="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">{{ invoiceData.notes }}</p>
+          <p
+            class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1 print:text-gray-500"
+          >
+            Notes
+          </p>
+          <p class="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">
+            {{ invoiceData.notes }}
+          </p>
         </div>
       </div>
 
       <!-- Thank you -->
       <div class="mt-10 text-center">
-        <p class="text-sm text-gray-400 dark:text-gray-500 print:text-gray-500">Thank you for your business!</p>
+        <p class="text-sm text-gray-400 dark:text-gray-500 print:text-gray-500">
+          Thank you for your business!
+        </p>
       </div>
     </div>
   </div>

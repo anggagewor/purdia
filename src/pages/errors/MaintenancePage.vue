@@ -45,9 +45,7 @@ function pad(n: number): string {
     <div class="text-center max-w-lg">
       <!-- Illustration -->
       <div class="relative mx-auto w-64 h-64 mb-8">
-        <div
-          class="absolute inset-0 bg-amber-100 dark:bg-amber-900/30 rounded-full"
-        ></div>
+        <div class="absolute inset-0 bg-amber-100 dark:bg-amber-900/30 rounded-full"></div>
         <div class="relative flex flex-col items-center justify-center h-full">
           <Wrench class="w-20 h-20 text-amber-500 dark:text-amber-400 animate-bounce" />
         </div>

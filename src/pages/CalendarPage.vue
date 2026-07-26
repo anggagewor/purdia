@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import {
-  ChevronLeft,
-  ChevronRight,
-  Plus,
-  Clock,
-  MapPin,
-  X,
-} from '@lucide/vue'
+import { ChevronLeft, ChevronRight, Plus, Clock, MapPin, X } from '@lucide/vue'
 import { BaseButton, BaseCard, BaseBadge } from '@purdia/ui'
 
 interface CalendarEvent {
@@ -109,8 +102,18 @@ const events = ref<CalendarEvent[]>([
 ])
 
 const monthNames = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ]
 
 const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -127,7 +130,11 @@ const calendarDays = computed(() => {
     const d = prevMonthDays - i
     const m = currentMonth.value === 0 ? 12 : currentMonth.value
     const y = currentMonth.value === 0 ? currentYear.value - 1 : currentYear.value
-    days.push({ date: d, currentMonth: false, dateStr: `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}` })
+    days.push({
+      date: d,
+      currentMonth: false,
+      dateStr: `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`,
+    })
   }
 
   // Current month days
@@ -141,7 +148,11 @@ const calendarDays = computed(() => {
   for (let i = 1; i <= remaining; i++) {
     const m = currentMonth.value + 2 > 12 ? 1 : currentMonth.value + 2
     const y = currentMonth.value + 2 > 12 ? currentYear.value + 1 : currentYear.value
-    days.push({ date: i, currentMonth: false, dateStr: `${y}-${String(m).padStart(2, '0')}-${String(i).padStart(2, '0')}` })
+    days.push({
+      date: i,
+      currentMonth: false,
+      dateStr: `${y}-${String(m).padStart(2, '0')}-${String(i).padStart(2, '0')}`,
+    })
   }
 
   return days
@@ -311,7 +322,15 @@ function getTypeVariant(type: string): 'info' | 'danger' | 'success' | 'warning'
         <BaseCard>
           <template #header>
             <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
-              {{ selectedDate ? new Date(selectedDate + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) : 'Select a date' }}
+              {{
+                selectedDate
+                  ? new Date(selectedDate + 'T00:00:00').toLocaleDateString('en-US', {
+                      weekday: 'long',
+                      month: 'long',
+                      day: 'numeric',
+                    })
+                  : 'Select a date'
+              }}
             </h3>
           </template>
 
@@ -330,7 +349,9 @@ function getTypeVariant(type: string): 'info' | 'danger' | 'success' | 'warning'
                 <span class="w-2 h-2 rounded-full mt-1.5 shrink-0" :class="event.color"></span>
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium text-gray-900 dark:text-white">{{ event.title }}</p>
-                  <div class="flex items-center gap-1 mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <div
+                    class="flex items-center gap-1 mt-1 text-xs text-gray-500 dark:text-gray-400"
+                  >
                     <Clock class="w-3 h-3" />
                     {{ event.time }} - {{ event.endTime }}
                   </div>

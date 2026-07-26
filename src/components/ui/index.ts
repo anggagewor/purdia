@@ -23,5 +23,4 @@ export {
   BaseFileUpload,
 } from '@purdia/ui'
 
-// ToastContainer stays local (depends on app-specific Pinia store)
-export { default as ToastContainer } from './ToastContainer.vue'
+export { ToastContainer } from '@purdia/toast'

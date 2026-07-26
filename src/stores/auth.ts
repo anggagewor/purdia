@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { secureGet, secureSet, secureRemove } from '@/lib/crypto'
+import { secureGet, secureSet, secureRemove } from '@purdia/crypto'
 
 export interface User {
   id: number

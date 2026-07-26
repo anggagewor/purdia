@@ -33,7 +33,9 @@ import { CheckCircle, AlertCircle, Clock, Star } from '@lucide/vue'
           <div
             class="absolute -left-[1.85rem] w-3 h-3 rounded-full bg-gray-300 border-2 border-white dark:border-gray-800"
           ></div>
-          <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Development in progress</p>
+          <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+            Development in progress
+          </p>
           <p class="text-xs text-gray-500 mt-0.5">March 10, 2024</p>
         </div>
       </div>
@@ -42,7 +44,9 @@ import { CheckCircle, AlertCircle, Clock, Star } from '@lucide/vue'
     <BaseCard>
       <template #header><h4 class="font-semibold">Alternate (Left/Right)</h4></template>
       <div class="relative">
-        <div class="absolute left-1/2 w-0.5 h-full bg-gray-200 dark:bg-gray-700 -translate-x-1/2"></div>
+        <div
+          class="absolute left-1/2 w-0.5 h-full bg-gray-200 dark:bg-gray-700 -translate-x-1/2"
+        ></div>
         <div class="space-y-8">
           <div class="flex items-center">
             <div class="w-1/2 pr-8 text-right">
@@ -60,7 +64,9 @@ import { CheckCircle, AlertCircle, Clock, Star } from '@lucide/vue'
               class="w-3 h-3 rounded-full bg-green-500 border-2 border-white z-10 shrink-0"
             ></div>
             <div class="w-1/2 pl-8">
-              <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Phase 2: Development</p>
+              <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Phase 2: Development
+              </p>
               <p class="text-xs text-gray-500">Feb 2024</p>
             </div>
           </div>

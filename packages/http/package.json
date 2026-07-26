@@ -20,7 +20,7 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@purdia/crypto": "^0.1.0",
+    "@purdia/crypto": "*",
     "axios": "^1.18.1"
   },
   "devDependencies": {

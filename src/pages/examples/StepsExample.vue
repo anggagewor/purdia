@@ -9,7 +9,9 @@ const currentStep = ref(2)
   <div class="space-y-8">
     <div>
       <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Steps</h1>
-      <p class="text-gray-500 mt-1 dark:text-gray-400">Step indicator component for multi-step processes.</p>
+      <p class="text-gray-500 mt-1 dark:text-gray-400">
+        Step indicator component for multi-step processes.
+      </p>
     </div>
 
     <BaseCard>

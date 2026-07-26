@@ -38,26 +38,179 @@ interface Employee {
 }
 
 const columns = ref<Column[]>([
-  { key: 'name', label: 'Name', width: 200, minWidth: 150, pinned: true, sortable: true, editable: false, align: 'left' },
-  { key: 'email', label: 'Email', width: 220, minWidth: 150, pinned: false, sortable: true, editable: true, align: 'left' },
-  { key: 'role', label: 'Role', width: 160, minWidth: 120, pinned: false, sortable: true, editable: true, align: 'left' },
-  { key: 'department', label: 'Department', width: 140, minWidth: 100, pinned: false, sortable: true, editable: true, align: 'left' },
-  { key: 'salary', label: 'Salary', width: 120, minWidth: 90, pinned: false, sortable: true, editable: true, align: 'right' },
-  { key: 'status', label: 'Status', width: 110, minWidth: 90, pinned: false, sortable: true, editable: false, align: 'center' },
-  { key: 'joinDate', label: 'Join Date', width: 120, minWidth: 100, pinned: false, sortable: true, editable: false, align: 'center' },
+  {
+    key: 'name',
+    label: 'Name',
+    width: 200,
+    minWidth: 150,
+    pinned: true,
+    sortable: true,
+    editable: false,
+    align: 'left',
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    width: 220,
+    minWidth: 150,
+    pinned: false,
+    sortable: true,
+    editable: true,
+    align: 'left',
+  },
+  {
+    key: 'role',
+    label: 'Role',
+    width: 160,
+    minWidth: 120,
+    pinned: false,
+    sortable: true,
+    editable: true,
+    align: 'left',
+  },
+  {
+    key: 'department',
+    label: 'Department',
+    width: 140,
+    minWidth: 100,
+    pinned: false,
+    sortable: true,
+    editable: true,
+    align: 'left',
+  },
+  {
+    key: 'salary',
+    label: 'Salary',
+    width: 120,
+    minWidth: 90,
+    pinned: false,
+    sortable: true,
+    editable: true,
+    align: 'right',
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    width: 110,
+    minWidth: 90,
+    pinned: false,
+    sortable: true,
+    editable: false,
+    align: 'center',
+  },
+  {
+    key: 'joinDate',
+    label: 'Join Date',
+    width: 120,
+    minWidth: 100,
+    pinned: false,
+    sortable: true,
+    editable: false,
+    align: 'center',
+  },
 ])
 
 const data = ref<Employee[]>([
-  { id: 1, name: 'Sarah Johnson', email: 'sarah@company.com', role: 'Product Designer', department: 'Design', salary: 85000, status: 'active', joinDate: '2023-03-15' },
-  { id: 2, name: 'Mike Chen', email: 'mike@company.com', role: 'Senior Developer', department: 'Engineering', salary: 120000, status: 'active', joinDate: '2022-08-01' },
-  { id: 3, name: 'Emily Davis', email: 'emily@company.com', role: 'Eng. Manager', department: 'Engineering', salary: 145000, status: 'active', joinDate: '2021-01-20' },
-  { id: 4, name: 'Alex Turner', email: 'alex@company.com', role: 'UI Engineer', department: 'Design', salary: 95000, status: 'on-leave', joinDate: '2023-06-10' },
-  { id: 5, name: 'Lisa Wang', email: 'lisa@company.com', role: 'DevOps Engineer', department: 'Infrastructure', salary: 110000, status: 'active', joinDate: '2022-11-05' },
-  { id: 6, name: 'David Kim', email: 'david@company.com', role: 'Mobile Developer', department: 'Engineering', salary: 105000, status: 'active', joinDate: '2023-01-08' },
-  { id: 7, name: 'Rachel Green', email: 'rachel@company.com', role: 'QA Engineer', department: 'Quality', salary: 88000, status: 'inactive', joinDate: '2022-04-22' },
-  { id: 8, name: 'Tom Wilson', email: 'tom@company.com', role: 'Backend Dev', department: 'Engineering', salary: 115000, status: 'active', joinDate: '2022-09-14' },
-  { id: 9, name: 'Anna Martinez', email: 'anna@company.com', role: 'Data Analyst', department: 'Analytics', salary: 92000, status: 'active', joinDate: '2023-07-01' },
-  { id: 10, name: 'James Lee', email: 'james@company.com', role: 'Tech Lead', department: 'Engineering', salary: 140000, status: 'active', joinDate: '2021-05-10' },
+  {
+    id: 1,
+    name: 'Sarah Johnson',
+    email: 'sarah@company.com',
+    role: 'Product Designer',
+    department: 'Design',
+    salary: 85000,
+    status: 'active',
+    joinDate: '2023-03-15',
+  },
+  {
+    id: 2,
+    name: 'Mike Chen',
+    email: 'mike@company.com',
+    role: 'Senior Developer',
+    department: 'Engineering',
+    salary: 120000,
+    status: 'active',
+    joinDate: '2022-08-01',
+  },
+  {
+    id: 3,
+    name: 'Emily Davis',
+    email: 'emily@company.com',
+    role: 'Eng. Manager',
+    department: 'Engineering',
+    salary: 145000,
+    status: 'active',
+    joinDate: '2021-01-20',
+  },
+  {
+    id: 4,
+    name: 'Alex Turner',
+    email: 'alex@company.com',
+    role: 'UI Engineer',
+    department: 'Design',
+    salary: 95000,
+    status: 'on-leave',
+    joinDate: '2023-06-10',
+  },
+  {
+    id: 5,
+    name: 'Lisa Wang',
+    email: 'lisa@company.com',
+    role: 'DevOps Engineer',
+    department: 'Infrastructure',
+    salary: 110000,
+    status: 'active',
+    joinDate: '2022-11-05',
+  },
+  {
+    id: 6,
+    name: 'David Kim',
+    email: 'david@company.com',
+    role: 'Mobile Developer',
+    department: 'Engineering',
+    salary: 105000,
+    status: 'active',
+    joinDate: '2023-01-08',
+  },
+  {
+    id: 7,
+    name: 'Rachel Green',
+    email: 'rachel@company.com',
+    role: 'QA Engineer',
+    department: 'Quality',
+    salary: 88000,
+    status: 'inactive',
+    joinDate: '2022-04-22',
+  },
+  {
+    id: 8,
+    name: 'Tom Wilson',
+    email: 'tom@company.com',
+    role: 'Backend Dev',
+    department: 'Engineering',
+    salary: 115000,
+    status: 'active',
+    joinDate: '2022-09-14',
+  },
+  {
+    id: 9,
+    name: 'Anna Martinez',
+    email: 'anna@company.com',
+    role: 'Data Analyst',
+    department: 'Analytics',
+    salary: 92000,
+    status: 'active',
+    joinDate: '2023-07-01',
+  },
+  {
+    id: 10,
+    name: 'James Lee',
+    email: 'james@company.com',
+    role: 'Tech Lead',
+    department: 'Engineering',
+    salary: 140000,
+    status: 'active',
+    joinDate: '2021-05-10',
+  },
 ])
 
 // Sort
@@ -221,17 +374,32 @@ function formatSalary(val: number) {
                 <div
                   class="flex items-center gap-1.5 px-3 py-2.5"
                   :class="[
-                    col.align === 'right' ? 'justify-end' : col.align === 'center' ? 'justify-center' : 'justify-start',
-                    col.sortable ? 'cursor-pointer hover:text-primary-600 dark:hover:text-primary-400' : '',
+                    col.align === 'right'
+                      ? 'justify-end'
+                      : col.align === 'center'
+                        ? 'justify-center'
+                        : 'justify-start',
+                    col.sortable
+                      ? 'cursor-pointer hover:text-primary-600 dark:hover:text-primary-400'
+                      : '',
                   ]"
                   @click="toggleSort(col)"
                 >
                   <span class="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase">
                     {{ col.label }}
                   </span>
-                  <ArrowUp v-if="sortKey === col.key && sortDir === 'asc'" class="w-3 h-3 text-primary-600" />
-                  <ArrowDown v-else-if="sortKey === col.key && sortDir === 'desc'" class="w-3 h-3 text-primary-600" />
-                  <ArrowUpDown v-else-if="col.sortable" class="w-3 h-3 text-gray-300 dark:text-gray-600 opacity-0 group-hover:opacity-100" />
+                  <ArrowUp
+                    v-if="sortKey === col.key && sortDir === 'asc'"
+                    class="w-3 h-3 text-primary-600"
+                  />
+                  <ArrowDown
+                    v-else-if="sortKey === col.key && sortDir === 'desc'"
+                    class="w-3 h-3 text-primary-600"
+                  />
+                  <ArrowUpDown
+                    v-else-if="col.sortable"
+                    class="w-3 h-3 text-gray-300 dark:text-gray-600 opacity-0 group-hover:opacity-100"
+                  />
                 </div>
 
                 <!-- Pin toggle -->
@@ -262,8 +430,14 @@ function formatSalary(val: number) {
                 :key="col.key"
                 class="px-3 py-2.5"
                 :class="[
-                  col.pinned ? 'bg-white dark:bg-gray-800 sticky left-0 z-10 border-r border-gray-100 dark:border-gray-700' : '',
-                  col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left',
+                  col.pinned
+                    ? 'bg-white dark:bg-gray-800 sticky left-0 z-10 border-r border-gray-100 dark:border-gray-700'
+                    : '',
+                  col.align === 'right'
+                    ? 'text-right'
+                    : col.align === 'center'
+                      ? 'text-center'
+                      : 'text-left',
                 ]"
                 :style="{ width: col.width + 'px', minWidth: col.minWidth + 'px' }"
                 @dblclick="startEdit(row, col)"
@@ -296,7 +470,9 @@ function formatSalary(val: number) {
                   <!-- Name column -->
                   <div v-if="col.key === 'name'" class="flex items-center gap-2">
                     <BaseAvatar :name="String(row[col.key])" size="xs" />
-                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{ row[col.key] }}</span>
+                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{
+                      row[col.key]
+                    }}</span>
                   </div>
 
                   <!-- Status column -->
@@ -313,7 +489,11 @@ function formatSalary(val: number) {
                   <span
                     v-else-if="col.key === 'salary'"
                     class="text-sm text-gray-900 dark:text-white font-mono"
-                    :class="col.editable ? 'cursor-pointer hover:text-primary-600 dark:hover:text-primary-400' : ''"
+                    :class="
+                      col.editable
+                        ? 'cursor-pointer hover:text-primary-600 dark:hover:text-primary-400'
+                        : ''
+                    "
                   >
                     {{ formatSalary(row[col.key] as number) }}
                   </span>
@@ -322,7 +502,11 @@ function formatSalary(val: number) {
                   <span
                     v-else
                     class="text-sm text-gray-600 dark:text-gray-300"
-                    :class="col.editable ? 'cursor-pointer hover:text-primary-600 dark:hover:text-primary-400' : ''"
+                    :class="
+                      col.editable
+                        ? 'cursor-pointer hover:text-primary-600 dark:hover:text-primary-400'
+                        : ''
+                    "
                   >
                     {{ row[col.key] }}
                   </span>

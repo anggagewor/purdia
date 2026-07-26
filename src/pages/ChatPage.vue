@@ -235,7 +235,9 @@ async function sendMessage() {
 </script>
 
 <template>
-  <div class="flex h-[calc(100vh-theme(spacing.32))] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
+  <div
+    class="flex h-[calc(100vh-theme(spacing.32))] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800"
+  >
     <!-- Sidebar -->
     <div class="w-80 border-r border-gray-200 dark:border-gray-700 flex flex-col shrink-0">
       <!-- Header -->

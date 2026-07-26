@@ -5,4 +5,4 @@ export {
   type UsePaginationOptions,
   type PaginationParams,
 } from './usePagination'
-export { useToast } from './useToast'
+export { useToast } from '@purdia/toast'

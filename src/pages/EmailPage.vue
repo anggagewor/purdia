@@ -271,7 +271,9 @@ function sendEmail() {
 </script>
 
 <template>
-  <div class="flex h-[calc(100vh-theme(spacing.32))] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
+  <div
+    class="flex h-[calc(100vh-theme(spacing.32))] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800"
+  >
     <!-- Sidebar -->
     <div class="w-56 border-r border-gray-200 dark:border-gray-700 flex flex-col shrink-0">
       <div class="p-4">
@@ -293,7 +295,10 @@ function sendEmail() {
               ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-medium'
               : ''
           "
-          @click="currentFolder = folder.id; selectedEmail = null"
+          @click="
+            currentFolder = folder.id
+            selectedEmail = null
+          "
         >
           <template #icon-left><component :is="folder.icon" class="w-4 h-4" /></template>
           <span class="flex-1 text-left">{{ folder.label }}</span>
@@ -351,7 +356,10 @@ function sendEmail() {
       </div>
 
       <!-- Email list -->
-      <div v-if="!selectedEmail" class="flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-700/50">
+      <div
+        v-if="!selectedEmail"
+        class="flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-700/50"
+      >
         <div
           v-for="email in filteredEmails"
           :key="email.id"
@@ -368,7 +376,11 @@ function sendEmail() {
             <div class="flex items-center justify-between gap-2">
               <span
                 class="text-sm truncate"
-                :class="email.read ? 'text-gray-700 dark:text-gray-300' : 'font-semibold text-gray-900 dark:text-white'"
+                :class="
+                  email.read
+                    ? 'text-gray-700 dark:text-gray-300'
+                    : 'font-semibold text-gray-900 dark:text-white'
+                "
               >
                 {{ email.from }}
               </span>
@@ -379,7 +391,11 @@ function sendEmail() {
             </div>
             <p
               class="text-sm truncate mt-0.5"
-              :class="email.read ? 'text-gray-600 dark:text-gray-400' : 'font-medium text-gray-900 dark:text-white'"
+              :class="
+                email.read
+                  ? 'text-gray-600 dark:text-gray-400'
+                  : 'font-medium text-gray-900 dark:text-white'
+              "
             >
               {{ email.subject }}
             </p>
@@ -395,7 +411,11 @@ function sendEmail() {
               >
                 <Star
                   class="w-4 h-4 transition-colors"
-                  :class="email.starred ? 'text-amber-400 fill-amber-400' : 'text-gray-300 dark:text-gray-600 hover:text-amber-400'"
+                  :class="
+                    email.starred
+                      ? 'text-amber-400 fill-amber-400'
+                      : 'text-gray-300 dark:text-gray-600 hover:text-amber-400'
+                  "
                 />
               </BaseButton>
             </div>
@@ -429,7 +449,11 @@ function sendEmail() {
             >
               <Star
                 class="w-5 h-5 shrink-0"
-                :class="selectedEmail.starred ? 'text-amber-400 fill-amber-400' : 'text-gray-300 dark:text-gray-600'"
+                :class="
+                  selectedEmail.starred
+                    ? 'text-amber-400 fill-amber-400'
+                    : 'text-gray-300 dark:text-gray-600'
+                "
               />
             </BaseButton>
           </div>
@@ -447,7 +471,9 @@ function sendEmail() {
           </div>
 
           <!-- Sender info -->
-          <div class="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700">
+          <div
+            class="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700"
+          >
             <div class="flex items-center gap-3">
               <BaseAvatar :name="selectedEmail.from" size="md" />
               <div>
@@ -460,13 +486,18 @@ function sendEmail() {
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs text-gray-400">{{ selectedEmail.date }} at {{ selectedEmail.time }}</span>
+              <span class="text-xs text-gray-400"
+                >{{ selectedEmail.date }} at {{ selectedEmail.time }}</span
+              >
             </div>
           </div>
 
           <!-- Body -->
           <div class="py-6">
-            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap font-sans leading-relaxed">{{ selectedEmail.body }}</pre>
+            <pre
+              class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap font-sans leading-relaxed"
+              >{{ selectedEmail.body }}</pre
+            >
           </div>
 
           <!-- Attachment indicator -->
@@ -476,7 +507,10 @@ function sendEmail() {
           >
             <Paperclip class="w-4 h-4 text-gray-400" />
             <span class="text-sm text-gray-600 dark:text-gray-400">1 attachment</span>
-            <span class="text-xs text-primary-600 dark:text-primary-400 ml-auto cursor-pointer hover:underline">Download</span>
+            <span
+              class="text-xs text-primary-600 dark:text-primary-400 ml-auto cursor-pointer hover:underline"
+              >Download</span
+            >
           </div>
 
           <!-- Actions -->
@@ -503,15 +537,14 @@ function sendEmail() {
 
     <!-- Compose modal -->
     <Teleport to="body">
-      <div
-        v-if="showCompose"
-        class="fixed inset-0 z-50 flex items-end justify-end p-6"
-      >
+      <div v-if="showCompose" class="fixed inset-0 z-50 flex items-end justify-end p-6">
         <div
           class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col max-h-[70vh]"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+          <div
+            class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700"
+          >
             <h3 class="text-sm font-semibold text-gray-900 dark:text-white">New Message</h3>
             <BaseButton variant="ghost" size="sm" :icon="X" @click="closeCompose" />
           </div>
@@ -540,7 +573,9 @@ function sendEmail() {
           </div>
 
           <!-- Footer -->
-          <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700">
+          <div
+            class="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700"
+          >
             <div class="flex items-center gap-1">
               <BaseButton variant="ghost" size="sm" :icon="Paperclip" />
             </div>

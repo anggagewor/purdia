@@ -50,19 +50,9 @@ async function handleLogin() {
             {{ error }}
           </BaseAlert>
 
-          <BaseInput
-            v-model="email"
-            type="email"
-            label="Email"
-            placeholder="nama@email.com"
-          />
+          <BaseInput v-model="email" type="email" label="Email" placeholder="nama@email.com" />
 
-          <BaseInput
-            v-model="password"
-            type="password"
-            label="Password"
-            placeholder="••••••••"
-          />
+          <BaseInput v-model="password" type="password" label="Password" placeholder="••••••••" />
 
           <div class="flex items-center justify-between">
             <BaseCheckbox v-model="rememberMe" label="Ingat saya" />
@@ -74,12 +64,7 @@ async function handleLogin() {
             </RouterLink>
           </div>
 
-          <BaseButton
-            type="submit"
-            variant="primary"
-            :disabled="loading"
-            class="w-full"
-          >
+          <BaseButton type="submit" variant="primary" :disabled="loading" class="w-full">
             {{ loading ? 'Memproses...' : 'Masuk' }}
           </BaseButton>
         </form>

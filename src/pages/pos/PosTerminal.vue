@@ -166,24 +166,31 @@ const products: Product[] = [
       },
     ],
   },
-  { id: 4, name: 'Es Teh Manis', price: 10000, category: 'Beverages', stock: 100, variants: [
-    {
-      name: 'Size',
-      required: true,
-      options: [
-        { label: 'Regular', value: 'regular', extraPrice: 0 },
-        { label: 'Large', value: 'large', extraPrice: 3000 },
-      ],
-    },
-    {
-      name: 'Sugar Level',
-      required: false,
-      options: [
-        { label: 'Normal', value: 'normal', extraPrice: 0 },
-        { label: 'Less Sugar', value: 'less', extraPrice: 0 },
-      ],
-    },
-  ]},
+  {
+    id: 4,
+    name: 'Es Teh Manis',
+    price: 10000,
+    category: 'Beverages',
+    stock: 100,
+    variants: [
+      {
+        name: 'Size',
+        required: true,
+        options: [
+          { label: 'Regular', value: 'regular', extraPrice: 0 },
+          { label: 'Large', value: 'large', extraPrice: 3000 },
+        ],
+      },
+      {
+        name: 'Sugar Level',
+        required: false,
+        options: [
+          { label: 'Normal', value: 'normal', extraPrice: 0 },
+          { label: 'Less Sugar', value: 'less', extraPrice: 0 },
+        ],
+      },
+    ],
+  },
   {
     id: 5,
     name: 'Nasi Goreng Spesial',
@@ -240,26 +247,33 @@ const products: Product[] = [
     ],
   },
   { id: 7, name: 'Roti Bakar Coklat', price: 18000, category: 'Food', stock: 20 },
-  { id: 8, name: 'French Fries', price: 15000, category: 'Snacks', stock: 40, variants: [
-    {
-      name: 'Size',
-      required: true,
-      options: [
-        { label: 'Regular', value: 'regular', extraPrice: 0 },
-        { label: 'Large', value: 'large', extraPrice: 5000 },
-      ],
-    },
-    {
-      name: 'Sauce',
-      required: false,
-      options: [
-        { label: 'Ketchup', value: 'ketchup', extraPrice: 0 },
-        { label: 'Mayo', value: 'mayo', extraPrice: 0 },
-        { label: 'BBQ', value: 'bbq', extraPrice: 2000 },
-        { label: 'Cheese', value: 'cheese', extraPrice: 3000 },
-      ],
-    },
-  ]},
+  {
+    id: 8,
+    name: 'French Fries',
+    price: 15000,
+    category: 'Snacks',
+    stock: 40,
+    variants: [
+      {
+        name: 'Size',
+        required: true,
+        options: [
+          { label: 'Regular', value: 'regular', extraPrice: 0 },
+          { label: 'Large', value: 'large', extraPrice: 5000 },
+        ],
+      },
+      {
+        name: 'Sauce',
+        required: false,
+        options: [
+          { label: 'Ketchup', value: 'ketchup', extraPrice: 0 },
+          { label: 'Mayo', value: 'mayo', extraPrice: 0 },
+          { label: 'BBQ', value: 'bbq', extraPrice: 2000 },
+          { label: 'Cheese', value: 'cheese', extraPrice: 3000 },
+        ],
+      },
+    ],
+  },
   { id: 9, name: 'Dimsum Ayam', price: 25000, category: 'Snacks', stock: 30 },
   { id: 10, name: 'Mineral Water', price: 5000, category: 'Beverages', stock: 200 },
   {
@@ -288,18 +302,25 @@ const products: Product[] = [
       },
     ],
   },
-  { id: 12, name: 'Chicken Wings', price: 28000, category: 'Snacks', stock: 18, variants: [
-    {
-      name: 'Flavor',
-      required: true,
-      options: [
-        { label: 'Original', value: 'original', extraPrice: 0 },
-        { label: 'Spicy', value: 'spicy', extraPrice: 0 },
-        { label: 'BBQ', value: 'bbq', extraPrice: 2000 },
-        { label: 'Honey Garlic', value: 'honey-garlic', extraPrice: 3000 },
-      ],
-    },
-  ]},
+  {
+    id: 12,
+    name: 'Chicken Wings',
+    price: 28000,
+    category: 'Snacks',
+    stock: 18,
+    variants: [
+      {
+        name: 'Flavor',
+        required: true,
+        options: [
+          { label: 'Original', value: 'original', extraPrice: 0 },
+          { label: 'Spicy', value: 'spicy', extraPrice: 0 },
+          { label: 'BBQ', value: 'bbq', extraPrice: 2000 },
+          { label: 'Honey Garlic', value: 'honey-garlic', extraPrice: 3000 },
+        ],
+      },
+    ],
+  },
 ]
 
 const categories = ['All', 'Beverages', 'Food', 'Snacks']
@@ -378,11 +399,43 @@ interface Voucher {
 }
 
 const availableVouchers: Voucher[] = [
-  { code: 'HEMAT10', description: 'Diskon 10%', discountType: 'percent', discountValue: 10, minPurchase: 50000, maxDiscount: 20000 },
-  { code: 'MAKAN20K', description: 'Potongan Rp 20.000', discountType: 'nominal', discountValue: 20000, minPurchase: 80000 },
-  { code: 'NEWUSER', description: 'Diskon 15% New User', discountType: 'percent', discountValue: 15, minPurchase: 30000, maxDiscount: 25000 },
-  { code: 'JUMAT50', description: 'Potongan Rp 50.000', discountType: 'nominal', discountValue: 50000, minPurchase: 150000 },
-  { code: 'KOPI5K', description: 'Potongan Rp 5.000', discountType: 'nominal', discountValue: 5000, minPurchase: 20000 },
+  {
+    code: 'HEMAT10',
+    description: 'Diskon 10%',
+    discountType: 'percent',
+    discountValue: 10,
+    minPurchase: 50000,
+    maxDiscount: 20000,
+  },
+  {
+    code: 'MAKAN20K',
+    description: 'Potongan Rp 20.000',
+    discountType: 'nominal',
+    discountValue: 20000,
+    minPurchase: 80000,
+  },
+  {
+    code: 'NEWUSER',
+    description: 'Diskon 15% New User',
+    discountType: 'percent',
+    discountValue: 15,
+    minPurchase: 30000,
+    maxDiscount: 25000,
+  },
+  {
+    code: 'JUMAT50',
+    description: 'Potongan Rp 50.000',
+    discountType: 'nominal',
+    discountValue: 50000,
+    minPurchase: 150000,
+  },
+  {
+    code: 'KOPI5K',
+    description: 'Potongan Rp 5.000',
+    discountType: 'nominal',
+    discountValue: 5000,
+    minPurchase: 20000,
+  },
 ]
 
 const voucherCode = ref('')
@@ -524,7 +577,7 @@ function confirmVariant() {
   }
 
   const selected: SelectedVariant[] = Object.entries(variantSelections.value).map(
-    ([name, option]) => ({ name, option })
+    ([name, option]) => ({ name, option }),
   )
 
   addToCartDirect(product, selected)
@@ -575,7 +628,9 @@ const globalDiscountAmount = computed(() => {
   return globalDiscount.value
 })
 
-const grandTotal = computed(() => Math.max(0, subtotal.value - globalDiscountAmount.value - voucherDiscountAmount.value))
+const grandTotal = computed(() =>
+  Math.max(0, subtotal.value - globalDiscountAmount.value - voucherDiscountAmount.value),
+)
 const change = computed(() => Math.max(0, cashReceived.value - grandTotal.value))
 
 function openPayment() {
@@ -675,7 +730,9 @@ function holdOrder() {
         const variantKey = item.selectedVariants.map((v) => `${v.name}:${v.option.value}`).join('|')
         const existing = existingOrder.items.find((c) => {
           if (c.product.id !== item.product.id) return false
-          return c.selectedVariants.map((v) => `${v.name}:${v.option.value}`).join('|') === variantKey
+          return (
+            c.selectedVariants.map((v) => `${v.name}:${v.option.value}`).join('|') === variantKey
+          )
         })
         if (existing) {
           existing.qty += item.qty
@@ -704,7 +761,9 @@ function holdOrder() {
     globalDiscountType: globalDiscountType.value,
     appliedVoucher: appliedVoucher.value,
     table: holdTable.value,
-    label: holdLabel.value || (holdTable.value ? tables.find((t) => t.id === holdTable.value)?.name ?? '' : 'Order'),
+    label:
+      holdLabel.value ||
+      (holdTable.value ? (tables.find((t) => t.id === holdTable.value)?.name ?? '') : 'Order'),
     createdAt: Date.now(),
     subtotal: subtotal.value,
   }
@@ -859,11 +918,15 @@ type NumpadField = 'cash' | 'card' | 'phone'
 const activeNumpadField = ref<NumpadField>('cash')
 
 // Auto-set active field based on payment method
-watch(() => paymentMethod.value, (method) => {
-  if (method === 'cash') activeNumpadField.value = 'cash'
-  else if (method === 'debit' || method === 'credit') activeNumpadField.value = 'card'
-  else if (method === 'ewallet') activeNumpadField.value = 'phone'
-}, { immediate: true })
+watch(
+  () => paymentMethod.value,
+  (method) => {
+    if (method === 'cash') activeNumpadField.value = 'cash'
+    else if (method === 'debit' || method === 'credit') activeNumpadField.value = 'card'
+    else if (method === 'ewallet') activeNumpadField.value = 'phone'
+  },
+  { immediate: true },
+)
 
 const quickAmounts = computed(() => {
   const total = grandTotal.value
@@ -873,7 +936,10 @@ const quickAmounts = computed(() => {
   amounts.add(roundUp(total, 10000))
   amounts.add(roundUp(total, 50000))
   amounts.add(roundUp(total, 100000))
-  return [...amounts].filter((a) => a >= total).sort((a, b) => a - b).slice(0, 4)
+  return [...amounts]
+    .filter((a) => a >= total)
+    .sort((a, b) => a - b)
+    .slice(0, 4)
 })
 
 function handleNumpad(key: string) {
@@ -1033,7 +1099,11 @@ const numpadLabel = computed(() => {
                 <span class="text-sm font-bold text-primary-600 dark:text-primary-400">{{
                   formatRp(product.price)
                 }}</span>
-                <span v-if="product.variants?.length" class="text-[0.625rem] text-amber-500 dark:text-amber-400">✦ opsi</span>
+                <span
+                  v-if="product.variants?.length"
+                  class="text-[0.625rem] text-amber-500 dark:text-amber-400"
+                  >✦ opsi</span
+                >
                 <span v-else class="text-[0.625rem] text-gray-400 dark:text-gray-500"
                   >stk: {{ product.stock }}</span
                 >
@@ -1117,11 +1187,15 @@ const numpadLabel = computed(() => {
                 <p class="text-sm font-medium text-gray-800 truncate dark:text-gray-200">
                   {{ item.product.name }}
                 </p>
-                <p v-if="item.selectedVariants.length > 0" class="text-[0.625rem] text-primary-600 dark:text-primary-400 truncate">
-                  {{ item.selectedVariants.map(v => v.option.label).join(', ') }}
+                <p
+                  v-if="item.selectedVariants.length > 0"
+                  class="text-[0.625rem] text-primary-600 dark:text-primary-400 truncate"
+                >
+                  {{ item.selectedVariants.map((v) => v.option.label).join(', ') }}
                 </p>
                 <p class="text-xs text-gray-500 dark:text-gray-400">
-                  {{ formatRp(item.product.price + getCartItemVariantExtra(item)) }} x {{ item.qty }}
+                  {{ formatRp(item.product.price + getCartItemVariantExtra(item)) }} x
+                  {{ item.qty }}
                 </p>
               </div>
               <div class="flex items-center gap-1">
@@ -1211,7 +1285,10 @@ const numpadLabel = computed(() => {
           />
           <BaseSelect
             v-model="globalDiscountType"
-            :options="[{ label: '%', value: 'percent' }, { label: 'Rp', value: 'nominal' }]"
+            :options="[
+              { label: '%', value: 'percent' },
+              { label: 'Rp', value: 'nominal' },
+            ]"
             :searchable="false"
             :clearable="false"
             size="sm"
@@ -1229,17 +1306,24 @@ const numpadLabel = computed(() => {
             class="flex-1 uppercase"
             @keyup.enter="applyVoucher"
           />
-          <BaseButton variant="primary" size="sm" @click="applyVoucher">
-            Apply
-          </BaseButton>
+          <BaseButton variant="primary" size="sm" @click="applyVoucher"> Apply </BaseButton>
         </div>
-        <p v-if="voucherError" class="text-[0.625rem] text-red-500 dark:text-red-400 pl-6">{{ voucherError }}</p>
+        <p v-if="voucherError" class="text-[0.625rem] text-red-500 dark:text-red-400 pl-6">
+          {{ voucherError }}
+        </p>
         <!-- Applied voucher -->
-        <div v-if="appliedVoucher" class="flex items-center gap-2 px-2 py-1.5 bg-emerald-50 rounded-md dark:bg-emerald-900/20">
+        <div
+          v-if="appliedVoucher"
+          class="flex items-center gap-2 px-2 py-1.5 bg-emerald-50 rounded-md dark:bg-emerald-900/20"
+        >
           <Ticket class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
           <div class="flex-1 min-w-0">
-            <p class="text-xs font-medium text-emerald-700 dark:text-emerald-300">{{ appliedVoucher.code }}</p>
-            <p class="text-[0.625rem] text-emerald-600 dark:text-emerald-400">{{ appliedVoucher.description }}</p>
+            <p class="text-xs font-medium text-emerald-700 dark:text-emerald-300">
+              {{ appliedVoucher.code }}
+            </p>
+            <p class="text-[0.625rem] text-emerald-600 dark:text-emerald-400">
+              {{ appliedVoucher.description }}
+            </p>
           </div>
           <button
             class="text-gray-400 hover:text-red-500 cursor-pointer dark:text-gray-500 dark:hover:text-red-400"
@@ -1372,7 +1456,9 @@ const numpadLabel = computed(() => {
         <div
           class="w-56 shrink-0 bg-gray-50 rounded-xl p-3 flex flex-col gap-2 dark:bg-gray-900/50"
         >
-          <p class="text-xs font-medium text-gray-500 text-center mb-1 dark:text-gray-400">{{ numpadLabel }}</p>
+          <p class="text-xs font-medium text-gray-500 text-center mb-1 dark:text-gray-400">
+            {{ numpadLabel }}
+          </p>
           <div class="grid grid-cols-3 gap-1.5">
             <button
               v-for="key in numpadKeys"
@@ -1404,12 +1490,24 @@ const numpadLabel = computed(() => {
     </BaseModal>
 
     <!-- Variant Picker Modal -->
-    <BaseModal v-model="showVariantPicker" :title="variantProduct?.name ?? 'Select Options'" size="md">
+    <BaseModal
+      v-model="showVariantPicker"
+      :title="variantProduct?.name ?? 'Select Options'"
+      size="md"
+    >
       <div v-if="variantProduct" class="space-y-4">
         <!-- Product info -->
         <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg dark:bg-gray-900/50">
-          <div class="w-12 h-12 bg-gray-100 rounded-md flex items-center justify-center text-2xl dark:bg-gray-700">
-            {{ variantProduct.category === 'Beverages' ? '☕' : variantProduct.category === 'Food' ? '🍽️' : '🍟' }}
+          <div
+            class="w-12 h-12 bg-gray-100 rounded-md flex items-center justify-center text-2xl dark:bg-gray-700"
+          >
+            {{
+              variantProduct.category === 'Beverages'
+                ? '☕'
+                : variantProduct.category === 'Food'
+                  ? '🍽️'
+                  : '🍟'
+            }}
           </div>
           <div>
             <p class="font-medium text-gray-900 dark:text-gray-100">{{ variantProduct.name }}</p>
@@ -1469,7 +1567,9 @@ const numpadLabel = computed(() => {
         </p>
         <!-- Label -->
         <div>
-          <label class="text-sm font-medium text-gray-700 block mb-1 dark:text-gray-300">Label / Nama Customer</label>
+          <label class="text-sm font-medium text-gray-700 block mb-1 dark:text-gray-300"
+            >Label / Nama Customer</label
+          >
           <input
             v-model="holdLabel"
             type="text"
@@ -1496,11 +1596,17 @@ const numpadLabel = computed(() => {
               "
               @click="holdTable = holdTable === table.id ? null : table.id"
             >
-              <MapPin v-if="isTableOccupied(table.id) && holdTable !== table.id" class="w-3 h-3 mx-auto mb-0.5 text-amber-500 dark:text-amber-400" />
+              <MapPin
+                v-if="isTableOccupied(table.id) && holdTable !== table.id"
+                class="w-3 h-3 mx-auto mb-0.5 text-amber-500 dark:text-amber-400"
+              />
               <span>{{ table.name.replace('Meja ', '') }}</span>
             </button>
           </div>
-          <p v-if="holdTable && isTableOccupied(holdTable)" class="text-[0.625rem] text-amber-600 mt-1.5 dark:text-amber-400">
+          <p
+            v-if="holdTable && isTableOccupied(holdTable)"
+            class="text-[0.625rem] text-amber-600 mt-1.5 dark:text-amber-400"
+          >
             Meja ini sudah ada order — item akan digabung.
           </p>
         </div>
@@ -1528,16 +1634,20 @@ const numpadLabel = computed(() => {
           <div class="flex items-start justify-between mb-2">
             <div>
               <div class="flex items-center gap-2">
-                <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ order.label || order.id }}</p>
+                <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {{ order.label || order.id }}
+                </p>
                 <BaseBadge v-if="order.table" variant="info" size="sm">
-                  <MapPin class="w-3 h-3" /> {{ tables.find(t => t.id === order.table)?.name }}
+                  <MapPin class="w-3 h-3" /> {{ tables.find((t) => t.id === order.table)?.name }}
                 </BaseBadge>
               </div>
               <p class="text-xs text-gray-400 dark:text-gray-500">
                 {{ order.id }} · {{ getTimeSince(order.createdAt) }}
               </p>
             </div>
-            <p class="text-sm font-bold text-gray-900 dark:text-gray-100">{{ formatRp(order.subtotal) }}</p>
+            <p class="text-sm font-bold text-gray-900 dark:text-gray-100">
+              {{ formatRp(order.subtotal) }}
+            </p>
           </div>
           <!-- Items preview -->
           <div class="flex flex-wrap gap-1 mb-3">
@@ -1590,19 +1700,36 @@ const numpadLabel = computed(() => {
           <div class="flex items-start justify-between mb-2">
             <div>
               <div class="flex items-center gap-2">
-                <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ order.customerName }}</p>
+                <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {{ order.customerName }}
+                </p>
                 <BaseBadge
-                  :variant="order.status === 'pending' ? 'warning' : order.status === 'accepted' ? 'success' : 'danger'"
+                  :variant="
+                    order.status === 'pending'
+                      ? 'warning'
+                      : order.status === 'accepted'
+                        ? 'success'
+                        : 'danger'
+                  "
                   size="sm"
                 >
-                  {{ order.status === 'pending' ? 'Pending' : order.status === 'accepted' ? 'Accepted' : 'Rejected' }}
+                  {{
+                    order.status === 'pending'
+                      ? 'Pending'
+                      : order.status === 'accepted'
+                        ? 'Accepted'
+                        : 'Rejected'
+                  }}
                 </BaseBadge>
               </div>
               <p class="text-xs text-gray-400 dark:text-gray-500">
-                {{ order.id }} · {{ tables.find(t => t.id === order.tableId)?.name }} · {{ getTimeSince(order.createdAt) }}
+                {{ order.id }} · {{ tables.find((t) => t.id === order.tableId)?.name }} ·
+                {{ getTimeSince(order.createdAt) }}
               </p>
             </div>
-            <p class="text-sm font-bold text-gray-900 dark:text-gray-100">{{ formatRp(order.subtotal) }}</p>
+            <p class="text-sm font-bold text-gray-900 dark:text-gray-100">
+              {{ formatRp(order.subtotal) }}
+            </p>
           </div>
           <!-- Items -->
           <div class="flex flex-wrap gap-1 mb-3">
@@ -1613,7 +1740,7 @@ const numpadLabel = computed(() => {
             >
               {{ item.qty }}x {{ item.product.name }}
               <template v-if="item.selectedVariants.length > 0">
-                ({{ item.selectedVariants.map(v => v.option.label).join(', ') }})
+                ({{ item.selectedVariants.map((v) => v.option.label).join(', ') }})
               </template>
             </span>
             <span

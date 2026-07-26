@@ -104,58 +104,104 @@ function renderMarkdown(md: string): string {
   })
 
   // Headings
-  html = html.replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-2">$1</h3>')
-  html = html.replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">$1</h2>')
-  html = html.replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">$1</h1>')
+  html = html.replace(
+    /^### (.+)$/gm,
+    '<h3 class="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-2">$1</h3>',
+  )
+  html = html.replace(
+    /^## (.+)$/gm,
+    '<h2 class="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">$1</h2>',
+  )
+  html = html.replace(
+    /^# (.+)$/gm,
+    '<h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">$1</h1>',
+  )
 
   // Horizontal rule
   html = html.replace(/^---$/gm, '<hr class="border-gray-200 dark:border-gray-700 my-6" />')
 
   // Blockquotes
-  html = html.replace(/^> (.+)$/gm, '<blockquote class="border-l-4 border-primary-500 pl-4 py-1 my-4 text-gray-600 dark:text-gray-400 italic">$1</blockquote>')
+  html = html.replace(
+    /^> (.+)$/gm,
+    '<blockquote class="border-l-4 border-primary-500 pl-4 py-1 my-4 text-gray-600 dark:text-gray-400 italic">$1</blockquote>',
+  )
 
   // Images
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="rounded-lg my-4 max-w-full border border-gray-200 dark:border-gray-700" />')
+  html = html.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    '<img src="$2" alt="$1" class="rounded-lg my-4 max-w-full border border-gray-200 dark:border-gray-700" />',
+  )
 
   // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">$1</a>')
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">$1</a>',
+  )
 
   // Tables
-  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm, (_match, header, body) => {
-    const headers = header.split('|').map((h: string) => h.trim()).filter(Boolean)
-    const rows = body.trim().split('\n').map((row: string) =>
-      row.split('|').map((cell: string) => cell.trim()).filter(Boolean)
-    )
+  html = html.replace(
+    /^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm,
+    (_match, header, body) => {
+      const headers = header
+        .split('|')
+        .map((h: string) => h.trim())
+        .filter(Boolean)
+      const rows = body
+        .trim()
+        .split('\n')
+        .map((row: string) =>
+          row
+            .split('|')
+            .map((cell: string) => cell.trim())
+            .filter(Boolean),
+        )
 
-    let table = '<div class="overflow-x-auto my-4"><table class="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">'
-    table += '<thead class="bg-gray-50 dark:bg-gray-800"><tr>'
-    for (const h of headers) {
-      table += `<th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">${h}</th>`
-    }
-    table += '</tr></thead><tbody>'
-    for (const row of rows) {
-      table += '<tr class="border-b border-gray-100 dark:border-gray-700/50">'
-      for (const cell of row) {
-        table += `<td class="px-4 py-2 text-gray-600 dark:text-gray-300">${cell}</td>`
+      let table =
+        '<div class="overflow-x-auto my-4"><table class="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">'
+      table += '<thead class="bg-gray-50 dark:bg-gray-800"><tr>'
+      for (const h of headers) {
+        table += `<th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">${h}</th>`
       }
-      table += '</tr>'
-    }
-    table += '</tbody></table></div>'
-    return table
-  })
+      table += '</tr></thead><tbody>'
+      for (const row of rows) {
+        table += '<tr class="border-b border-gray-100 dark:border-gray-700/50">'
+        for (const cell of row) {
+          table += `<td class="px-4 py-2 text-gray-600 dark:text-gray-300">${cell}</td>`
+        }
+        table += '</tr>'
+      }
+      table += '</tbody></table></div>'
+      return table
+    },
+  )
 
   // Task lists
-  html = html.replace(/^- \[x\] (.+)$/gm, '<div class="flex items-center gap-2 my-1"><input type="checkbox" checked disabled class="rounded border-gray-300 text-primary-600" /><span class="text-sm text-gray-700 dark:text-gray-300 line-through">$1</span></div>')
-  html = html.replace(/^- \[ \] (.+)$/gm, '<div class="flex items-center gap-2 my-1"><input type="checkbox" disabled class="rounded border-gray-300" /><span class="text-sm text-gray-700 dark:text-gray-300">$1</span></div>')
+  html = html.replace(
+    /^- \[x\] (.+)$/gm,
+    '<div class="flex items-center gap-2 my-1"><input type="checkbox" checked disabled class="rounded border-gray-300 text-primary-600" /><span class="text-sm text-gray-700 dark:text-gray-300 line-through">$1</span></div>',
+  )
+  html = html.replace(
+    /^- \[ \] (.+)$/gm,
+    '<div class="flex items-center gap-2 my-1"><input type="checkbox" disabled class="rounded border-gray-300" /><span class="text-sm text-gray-700 dark:text-gray-300">$1</span></div>',
+  )
 
   // Unordered lists
-  html = html.replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 my-1"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 shrink-0"></span><span class="text-sm text-gray-700 dark:text-gray-300">$1</span></li>')
+  html = html.replace(
+    /^- (.+)$/gm,
+    '<li class="flex items-start gap-2 my-1"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 shrink-0"></span><span class="text-sm text-gray-700 dark:text-gray-300">$1</span></li>',
+  )
 
   // Ordered lists
-  html = html.replace(/^(\d+)\. (.+)$/gm, '<li class="flex items-start gap-2 my-1"><span class="text-sm font-medium text-gray-500 dark:text-gray-400 shrink-0">$1.</span><span class="text-sm text-gray-700 dark:text-gray-300">$2</span></li>')
+  html = html.replace(
+    /^(\d+)\. (.+)$/gm,
+    '<li class="flex items-start gap-2 my-1"><span class="text-sm font-medium text-gray-500 dark:text-gray-400 shrink-0">$1.</span><span class="text-sm text-gray-700 dark:text-gray-300">$2</span></li>',
+  )
 
   // Bold
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900 dark:text-white">$1</strong>')
+  html = html.replace(
+    /\*\*(.+?)\*\*/g,
+    '<strong class="font-semibold text-gray-900 dark:text-white">$1</strong>',
+  )
 
   // Italic
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>')
@@ -164,19 +210,22 @@ function renderMarkdown(md: string): string {
   html = html.replace(/~~(.+?)~~/g, '<del class="text-gray-400">$1</del>')
 
   // Inline code (careful not to match code blocks)
-  html = html.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded">$1</code>')
+  html = html.replace(
+    /`([^`]+)`/g,
+    '<code class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-700 text-pink-600 dark:text-pink-400 rounded">$1</code>',
+  )
 
   // Paragraphs (lines that aren't already wrapped)
-  html = html.replace(/^(?!<[a-z/]|$)(.+)$/gm, '<p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed my-2">$1</p>')
+  html = html.replace(
+    /^(?!<[a-z/]|$)(.+)$/gm,
+    '<p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed my-2">$1</p>',
+  )
 
   return html
 }
 
 function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
 const renderedHtml = computed(() => renderMarkdown(markdownSource.value))
@@ -185,7 +234,9 @@ const copied = ref(false)
 async function copySource() {
   await navigator.clipboard.writeText(markdownSource.value)
   copied.value = true
-  setTimeout(() => { copied.value = false }, 2000)
+  setTimeout(() => {
+    copied.value = false
+  }, 2000)
 }
 </script>
 
@@ -201,21 +252,33 @@ async function copySource() {
       <div class="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
         <button
           class="px-3 py-1.5 text-xs font-medium rounded-md transition-colors"
-          :class="activeView === 'source' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'"
+          :class="
+            activeView === 'source'
+              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-500 dark:text-gray-400'
+          "
           @click="activeView = 'source'"
         >
           <Edit3 class="w-3.5 h-3.5 inline mr-1" />Source
         </button>
         <button
           class="px-3 py-1.5 text-xs font-medium rounded-md transition-colors"
-          :class="activeView === 'split' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'"
+          :class="
+            activeView === 'split'
+              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-500 dark:text-gray-400'
+          "
           @click="activeView = 'split'"
         >
           Split
         </button>
         <button
           class="px-3 py-1.5 text-xs font-medium rounded-md transition-colors"
-          :class="activeView === 'preview' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'"
+          :class="
+            activeView === 'preview'
+              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-500 dark:text-gray-400'
+          "
           @click="activeView = 'preview'"
         >
           <Eye class="w-3.5 h-3.5 inline mr-1" />Preview
@@ -234,7 +297,9 @@ async function copySource() {
         class="flex flex-col"
         :class="activeView === 'split' ? 'border-r border-gray-200 dark:border-gray-700' : ''"
       >
-        <div class="flex items-center justify-between px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div
+          class="flex items-center justify-between px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
+        >
           <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
             <FileText class="w-3.5 h-3.5" />
             <span>Markdown Source</span>
@@ -256,7 +321,9 @@ async function copySource() {
 
       <!-- Preview -->
       <div v-if="activeView !== 'source'" class="flex flex-col">
-        <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div
+          class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
+        >
           <Eye class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
           <span class="text-xs text-gray-500 dark:text-gray-400">Preview</span>
         </div>
@@ -274,7 +341,21 @@ async function copySource() {
       </template>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         <div
-          v-for="item in ['Headings (h1-h3)', 'Bold / Italic', 'Strikethrough', 'Inline Code', 'Code Blocks', 'Links', 'Images', 'Tables', 'Blockquotes', 'Ordered Lists', 'Unordered Lists', 'Task Lists', 'Horizontal Rules']"
+          v-for="item in [
+            'Headings (h1-h3)',
+            'Bold / Italic',
+            'Strikethrough',
+            'Inline Code',
+            'Code Blocks',
+            'Links',
+            'Images',
+            'Tables',
+            'Blockquotes',
+            'Ordered Lists',
+            'Unordered Lists',
+            'Task Lists',
+            'Horizontal Rules',
+          ]"
           :key="item"
           class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"
         >

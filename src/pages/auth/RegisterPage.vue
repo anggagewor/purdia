@@ -59,19 +59,9 @@ async function handleRegister() {
             {{ error }}
           </BaseAlert>
 
-          <BaseInput
-            v-model="name"
-            type="text"
-            label="Nama Lengkap"
-            placeholder="Nama lengkap"
-          />
+          <BaseInput v-model="name" type="text" label="Nama Lengkap" placeholder="Nama lengkap" />
 
-          <BaseInput
-            v-model="email"
-            type="email"
-            label="Email"
-            placeholder="nama@email.com"
-          />
+          <BaseInput v-model="email" type="email" label="Email" placeholder="nama@email.com" />
 
           <BaseInput
             v-model="password"
@@ -87,12 +77,7 @@ async function handleRegister() {
             placeholder="Ulangi password"
           />
 
-          <BaseButton
-            type="submit"
-            variant="primary"
-            :disabled="loading"
-            class="w-full"
-          >
+          <BaseButton type="submit" variant="primary" :disabled="loading" class="w-full">
             {{ loading ? 'Memproses...' : 'Daftar' }}
           </BaseButton>
         </form>
