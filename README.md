@@ -14,6 +14,7 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
   <img src="https://img.shields.io/badge/Vue_3-3.5-42b883?style=for-the-badge&logo=vuedotjs&logoColor=white">
   <img src="https://img.shields.io/badge/TypeScript-6.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
   <img src="https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <a href="https://saweria.co/anggagewor"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee"></a>
 </p>
 
 ---
@@ -264,6 +265,12 @@ npm run preview
 ```
 
 > **Note:** This is a monorepo with internal `@purdia/*` packages linked via npm workspaces. All packages export their source TypeScript/Vue files directly, so Vite can resolve and bundle them without a separate build step. Just `npm install` and `npm run dev` — that's it.
+
+---
+
+## ⚠️ Disclaimer
+
+This is a weekend/side project that I also use for my own personal tools. Updates are not guaranteed on a fixed schedule, but I actively maintain it since I depend on it myself. Issues and PRs are welcome — I'll review them when I can.
 
 ---
 
