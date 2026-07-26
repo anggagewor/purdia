@@ -37,3 +37,8 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# Tools (Playwright artifacts)
+tools/screenshots/test-results/
+tools/screenshots/playwright-report/
+tools/screenshots/.cache/

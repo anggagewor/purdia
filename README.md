@@ -21,6 +21,7 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
 
 ## ✨ Features
 
+- 📄 **200+ Pages** — Full-featured app modules (CRM, HRM, POS, Accounting, Inventory, Invoices, and more)
 - 🧩 **40+ UI Components** — Built from scratch, no external UI library
 - 🌙 **Dark Mode** — Full light/dark theme with per-user persistence
 - 🎨 **8 Color Themes** — Switchable primary colors (Indigo, Blue, Emerald, Rose, Amber, Teal, Violet, Slate)
@@ -42,38 +43,25 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
 
 > **Mock Auth Enabled:** Any email/password combination works.
 
-<table width="100%">
-  <tr>
-    <td width="50%" align="center">
-      <b>Main Dashboard</b><br/>
-      <img src="./docs/dashboard.png" alt="Main Dashboard" width="100%"/>
-    </td>
-    <td width="50%" align="center">
-      <b>CRM Dashboard</b><br/>
-      <img src="./docs/crm_dashboard.png" alt="CRM Dashboard" width="100%"/>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <b>HRM Dashboard</b><br/>
-      <img src="./docs/hrm_dashboard.png" alt="HRM Dashboard" width="100%"/>
-    </td>
-    <td width="50%" align="center">
-      <b>POS Terminal & Dashboard</b><br/>
-      <img src="./docs/Pos_dashboard.png" alt="POS Dashboard" width="100%"/>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <b>Accounting & Ledger</b><br/>
-      <img src="./docs/Accounting.png" alt="Accounting Dashboard" width="100%"/>
-    </td>
-    <td width="50%" align="center">
-      <b>UI Component Library</b><br/>
-      <img src="./docs/component_Index.png" alt="Component Index" width="100%"/>
-    </td>
-  </tr>
-</table>
+### 📸 All Module Screenshots
+
+Semua halaman bisa di-capture otomatis — lihat [tools/screenshots](./tools/screenshots/) untuk setup.
+
+| Category | Preview | All Pages |
+|----------|---------|-----------|
+| Dashboard | ![](./docs/screenshots/dashboard/dashboard.png) | [View all](./docs/screenshots/dashboard/index.md) |
+| POS | ![](./docs/screenshots/pos/dashboard.png) | [View all](./docs/screenshots/pos/index.md) |
+| Accounting | ![](./docs/screenshots/accounting/dashboard.png) | [View all](./docs/screenshots/accounting/index.md) |
+| CRM | ![](./docs/screenshots/crm/dashboard.png) | [View all](./docs/screenshots/crm/index.md) |
+| HRM | ![](./docs/screenshots/hrm/dashboard.png) | [View all](./docs/screenshots/hrm/index.md) |
+| Inventory | ![](./docs/screenshots/inventory/dashboard.png) | [View all](./docs/screenshots/inventory/index.md) |
+| Invoices | ![](./docs/screenshots/invoices/list.png) | [View all](./docs/screenshots/invoices/index.md) |
+| Projects | ![](./docs/screenshots/projects/kanban.png) | [View all](./docs/screenshots/projects/index.md) |
+| Clients | ![](./docs/screenshots/clients/list.png) | [View all](./docs/screenshots/clients/index.md) |
+| Users & Roles | ![](./docs/screenshots/users/list.png) | [View all](./docs/screenshots/users/index.md) |
+| Pages | ![](./docs/screenshots/pages/landing.png) | [View all](./docs/screenshots/pages/index.md) |
+| Auth | ![](./docs/screenshots/auth/login.png) | [View all](./docs/screenshots/auth/index.md) |
+| Error Pages | ![](./docs/screenshots/errors/not-found.png) | [View all](./docs/screenshots/errors/index.md) |
 
 ---
 

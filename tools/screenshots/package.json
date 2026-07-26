@@ -1,0 +1,15 @@
+{
+  "name": "@purdia/screenshots",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automated page capture tool for Purdia documentation",
+  "type": "module",
+  "scripts": {
+    "capture": "npx playwright test capture.ts",
+    "capture:headed": "npx playwright test capture.ts --headed",
+    "install-browsers": "npx playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}
