@@ -270,7 +270,7 @@ npm run preview
 
 ## ⚠️ Disclaimer
 
-This is a weekend/side project that I also use for my own personal tools. Updates are not guaranteed on a fixed schedule, but I actively maintain it since I depend on it myself. Issues and PRs are welcome — I'll review them when I can.
+Purdia is a long-term project that I actively use as the foundation for my own applications. New features are added as real-world needs arise, which means development is continuous but not tied to a fixed release schedule. Contributions, bug reports, and ideas are always welcome.
 
 ---
 
