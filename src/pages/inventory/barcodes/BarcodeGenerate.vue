@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseSelect } from '@purdia/ui'
+import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseCheckbox } from '@purdia/ui'
 import { ArrowLeft, Printer, Barcode } from '@lucide/vue'
 import type { SelectOption } from '@purdia/ui'
 
@@ -90,19 +90,11 @@ function handlePrint() {
           <BaseInput v-model="copies" label="Number of Copies" type="number" placeholder="1" />
           <div class="space-y-2">
             <label class="flex items-center gap-2 cursor-pointer">
-              <input
-                v-model="includeProductName"
-                type="checkbox"
-                class="rounded border-gray-300 text-primary-500 focus:ring-primary-500"
-              />
+              <BaseCheckbox v-model="includeProductName" />
               <span class="text-sm text-gray-700 dark:text-gray-300">Include product name</span>
             </label>
             <label class="flex items-center gap-2 cursor-pointer">
-              <input
-                v-model="includePrice"
-                type="checkbox"
-                class="rounded border-gray-300 text-primary-500 focus:ring-primary-500"
-              />
+              <BaseCheckbox v-model="includePrice" />
               <span class="text-sm text-gray-700 dark:text-gray-300">Include price</span>
             </label>
           </div>

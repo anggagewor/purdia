@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseCard, BaseBadge } from '@purdia/ui'
+import { BaseCard, BaseBadge, BaseTable } from '@purdia/ui'
 import { StatCard } from '@purdia/ui'
 import {
   TrendingUp,
@@ -60,6 +60,13 @@ const topPerformers = ref([
   { name: 'Maya Sari', deals: 7, revenue: 'Rp 280M', conversion: '58%' },
   { name: 'Bambang Widodo', deals: 6, revenue: 'Rp 210M', conversion: '50%' },
 ])
+
+const performerColumns = [
+  { key: 'name', label: 'Name' },
+  { key: 'deals', label: 'Deals', align: 'center' as const },
+  { key: 'revenue', label: 'Revenue', align: 'right' as const },
+  { key: 'conversion', label: 'Conversion', align: 'right' as const },
+]
 </script>
 
 <template>
@@ -126,46 +133,25 @@ const topPerformers = ref([
         <template #header>
           <h3 class="font-semibold text-gray-900 dark:text-gray-100">Top Performers</h3>
         </template>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <th class="text-left py-2 font-medium text-gray-500">Name</th>
-                <th class="text-center py-2 font-medium text-gray-500">Deals</th>
-                <th class="text-right py-2 font-medium text-gray-500">Revenue</th>
-                <th class="text-right py-2 font-medium text-gray-500">Conversion</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-              <tr v-for="(person, idx) in topPerformers" :key="person.name">
-                <td class="py-2.5">
-                  <div class="flex items-center gap-2">
-                    <span
-                      class="w-5 h-5 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold"
-                      >{{ idx + 1 }}</span
-                    >
-                    <span class="font-medium text-gray-900 dark:text-gray-100">{{
-                      person.name
-                    }}</span>
-                  </div>
-                </td>
-                <td class="py-2.5 text-center text-gray-600 dark:text-gray-400">
-                  {{ person.deals }}
-                </td>
-                <td class="py-2.5 text-right font-medium text-gray-900 dark:text-gray-100">
-                  {{ person.revenue }}
-                </td>
-                <td class="py-2.5 text-right">
-                  <BaseBadge
-                    :variant="parseInt(person.conversion) >= 60 ? 'success' : 'warning'"
-                    size="sm"
-                    >{{ person.conversion }}</BaseBadge
-                  >
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <BaseTable :columns="performerColumns" :data="topPerformers" :compact="true" :hoverable="false">
+          <template #cell-name="{ value, index }">
+            <div class="flex items-center gap-2">
+              <span
+                class="w-5 h-5 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold"
+              >{{ index + 1 }}</span>
+              <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
+            </div>
+          </template>
+          <template #cell-revenue="{ value }">
+            <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
+          </template>
+          <template #cell-conversion="{ value }">
+            <BaseBadge
+              :variant="parseInt(value as string) >= 60 ? 'success' : 'warning'"
+              size="sm"
+            >{{ value }}</BaseBadge>
+          </template>
+        </BaseTable>
       </BaseCard>
     </div>
   </div>

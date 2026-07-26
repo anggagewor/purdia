@@ -20,7 +20,7 @@ import {
   Clock,
   ChevronLeft,
 } from '@lucide/vue'
-import { BaseAvatar, BaseBadge, BaseButton } from '@purdia/ui'
+import { BaseAvatar, BaseBadge, BaseButton, BaseInput, BaseTextarea } from '@purdia/ui'
 
 interface Email {
   id: number
@@ -282,18 +282,20 @@ function sendEmail() {
       </div>
 
       <nav class="flex-1 px-2 space-y-0.5">
-        <button
+        <BaseButton
           v-for="folder in folders"
           :key="folder.id"
-          class="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors"
+          variant="ghost"
+          size="sm"
+          class="w-full justify-start"
           :class="
             currentFolder === folder.id
               ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-medium'
-              : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50'
+              : ''
           "
           @click="currentFolder = folder.id; selectedEmail = null"
         >
-          <component :is="folder.icon" class="w-4 h-4 shrink-0" />
+          <template #icon-left><component :is="folder.icon" class="w-4 h-4" /></template>
           <span class="flex-1 text-left">{{ folder.label }}</span>
           <span
             v-if="folder.count"
@@ -306,7 +308,7 @@ function sendEmail() {
           >
             {{ folder.count }}
           </span>
-        </button>
+        </BaseButton>
       </nav>
 
       <!-- Labels -->
@@ -329,27 +331,23 @@ function sendEmail() {
     <div class="flex-1 flex flex-col min-w-0">
       <!-- Toolbar -->
       <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-        <button
+        <BaseButton
           v-if="selectedEmail"
-          class="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+          variant="ghost"
+          size="sm"
+          :icon="ChevronLeft"
           @click="goBack"
-        >
-          <ChevronLeft class="w-5 h-5" />
-        </button>
-        <div class="flex-1 relative">
-          <Search class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
+        />
+        <div class="flex-1">
+          <BaseInput
             v-model="searchQuery"
             type="text"
             placeholder="Search emails..."
-            class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            size="sm"
+            :icon="Search"
           />
         </div>
-        <button
-          class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-        >
-          <RefreshCw class="w-4 h-4" />
-        </button>
+        <BaseButton variant="ghost" size="sm" :icon="RefreshCw" />
       </div>
 
       <!-- Email list -->
@@ -389,15 +387,17 @@ function sendEmail() {
               <p class="text-xs text-gray-400 dark:text-gray-500 truncate flex-1">
                 {{ email.preview }}
               </p>
-              <button
-                class="shrink-0"
+              <BaseButton
+                variant="ghost"
+                size="sm"
+                class="!p-0 shrink-0"
                 @click="toggleStar(email, $event)"
               >
                 <Star
                   class="w-4 h-4 transition-colors"
                   :class="email.starred ? 'text-amber-400 fill-amber-400' : 'text-gray-300 dark:text-gray-600 hover:text-amber-400'"
                 />
-              </button>
+              </BaseButton>
             </div>
             <div v-if="email.labels.length" class="flex items-center gap-1.5 mt-1.5">
               <span
@@ -421,12 +421,17 @@ function sendEmail() {
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
               {{ selectedEmail.subject }}
             </h2>
-            <button @click="toggleStar(selectedEmail, $event)">
+            <BaseButton
+              variant="ghost"
+              size="sm"
+              class="!p-0"
+              @click="toggleStar(selectedEmail, $event)"
+            >
               <Star
                 class="w-5 h-5 shrink-0"
                 :class="selectedEmail.starred ? 'text-amber-400 fill-amber-400' : 'text-gray-300 dark:text-gray-600'"
               />
-            </button>
+            </BaseButton>
           </div>
 
           <!-- Labels -->
@@ -489,12 +494,8 @@ function sendEmail() {
               Forward
             </BaseButton>
             <div class="flex-1"></div>
-            <BaseButton variant="ghost" size="sm">
-              <template #icon-left><Archive class="w-4 h-4" /></template>
-            </BaseButton>
-            <BaseButton variant="ghost" size="sm">
-              <template #icon-left><Trash2 class="w-4 h-4" /></template>
-            </BaseButton>
+            <BaseButton variant="ghost" size="sm" :icon="Archive" />
+            <BaseButton variant="ghost" size="sm" :icon="Trash2" />
           </div>
         </div>
       </div>
@@ -512,48 +513,36 @@ function sendEmail() {
           <!-- Header -->
           <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <h3 class="text-sm font-semibold text-gray-900 dark:text-white">New Message</h3>
-            <button
-              class="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded"
-              @click="closeCompose"
-            >
-              <X class="w-4 h-4" />
-            </button>
+            <BaseButton variant="ghost" size="sm" :icon="X" @click="closeCompose" />
           </div>
 
           <!-- Form -->
           <div class="flex-1 overflow-y-auto p-4 space-y-3">
-            <div>
-              <input
-                v-model="composeForm.to"
-                type="email"
-                placeholder="To"
-                class="w-full px-3 py-2 text-sm border-b border-gray-200 dark:border-gray-700 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary-500"
-              />
-            </div>
-            <div>
-              <input
-                v-model="composeForm.subject"
-                type="text"
-                placeholder="Subject"
-                class="w-full px-3 py-2 text-sm border-b border-gray-200 dark:border-gray-700 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary-500"
-              />
-            </div>
-            <div>
-              <textarea
-                v-model="composeForm.body"
-                placeholder="Write your message..."
-                rows="8"
-                class="w-full px-3 py-2 text-sm bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none resize-none"
-              ></textarea>
-            </div>
+            <BaseInput
+              v-model="composeForm.to"
+              type="email"
+              placeholder="To"
+              variant="underlined"
+              size="sm"
+            />
+            <BaseInput
+              v-model="composeForm.subject"
+              type="text"
+              placeholder="Subject"
+              variant="underlined"
+              size="sm"
+            />
+            <BaseTextarea
+              v-model="composeForm.body"
+              placeholder="Write your message..."
+              :rows="8"
+            />
           </div>
 
           <!-- Footer -->
           <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700">
             <div class="flex items-center gap-1">
-              <button class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-                <Paperclip class="w-4 h-4" />
-              </button>
+              <BaseButton variant="ghost" size="sm" :icon="Paperclip" />
             </div>
             <div class="flex items-center gap-2">
               <BaseButton variant="ghost" size="sm" @click="closeCompose">Discard</BaseButton>

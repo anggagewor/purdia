@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore } from '@/stores/theme'
+import { BaseInput, BaseButton, BaseCheckbox, BaseAlert } from '@purdia/ui'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -10,6 +11,7 @@ const themeStore = useThemeStore()
 
 const email = ref('')
 const password = ref('')
+const rememberMe = ref(false)
 const loading = ref(false)
 const error = ref('')
 
@@ -44,50 +46,26 @@ async function handleLogin() {
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-5">
-          <div
-            v-if="error"
-            class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm dark:bg-red-900/20 dark:border-red-800 dark:text-red-400"
-          >
+          <BaseAlert v-if="error" variant="danger">
             {{ error }}
-          </div>
+          </BaseAlert>
 
-          <div>
-            <label
-              for="email"
-              class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
-              >Email</label
-            >
-            <input
-              id="email"
-              v-model="email"
-              type="email"
-              autocomplete="email"
-              placeholder="nama@email.com"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder:text-gray-500"
-            />
-          </div>
+          <BaseInput
+            v-model="email"
+            type="email"
+            label="Email"
+            placeholder="nama@email.com"
+          />
 
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
-              >Password</label
-            >
-            <input
-              id="password"
-              v-model="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="••••••••"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder:text-gray-500"
-            />
-          </div>
+          <BaseInput
+            v-model="password"
+            type="password"
+            label="Password"
+            placeholder="••••••••"
+          />
 
           <div class="flex items-center justify-between">
-            <label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-              <input type="checkbox" class="rounded border-gray-300 dark:border-gray-600" />
-              Ingat saya
-            </label>
+            <BaseCheckbox v-model="rememberMe" label="Ingat saya" />
             <RouterLink
               :to="{ name: 'forgot-password' }"
               class="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
@@ -96,13 +74,14 @@ async function handleLogin() {
             </RouterLink>
           </div>
 
-          <button
+          <BaseButton
             type="submit"
+            variant="primary"
             :disabled="loading"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full"
           >
             {{ loading ? 'Memproses...' : 'Masuk' }}
-          </button>
+          </BaseButton>
         </form>
 
         <p class="text-center text-sm text-gray-500 mt-6 dark:text-gray-400">

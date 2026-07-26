@@ -24,6 +24,8 @@ interface Props {
   expandable?: boolean
   sortColumn?: string
   sortDirection?: SortDirection
+  caption?: string
+  stickyHeader?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,6 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
   searchPlaceholder: 'Search...',
   expandable: false,
   sortDirection: null,
+  stickyHeader: false,
 })
 
 const emit = defineEmits<{
@@ -140,47 +143,67 @@ function isExpanded(index: number) {
     <!-- Table -->
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
-        <thead class="bg-gray-50 dark:bg-gray-800">
-          <tr>
-            <th
-              v-if="expandable"
-              :class="[cellPadding, 'w-10 border-b border-gray-200 dark:border-gray-700']"
-            />
-            <th
-              v-for="col in columns"
-              :key="col.key"
-              :style="{ width: col.width }"
-              :class="[
-                cellPadding,
-                'font-semibold text-gray-600 uppercase text-[0.6875rem] tracking-wide border-b border-gray-200 dark:border-gray-700 dark:text-gray-400',
-                col.align === 'center'
-                  ? 'text-center'
-                  : col.align === 'right'
-                    ? 'text-right'
-                    : 'text-left',
-                col.sortable
-                  ? 'cursor-pointer select-none hover:text-gray-900 transition-colors dark:hover:text-gray-200'
-                  : '',
-              ]"
-              @click="handleSort(col)"
-            >
-              <div class="inline-flex items-center gap-1">
-                {{ col.label }}
-                <template v-if="col.sortable">
-                  <ArrowUp
-                    v-if="activeSortCol === col.key && activeSortDir === 'asc'"
-                    class="w-3 h-3 text-primary-500"
-                  />
-                  <ArrowDown
-                    v-else-if="activeSortCol === col.key && activeSortDir === 'desc'"
-                    class="w-3 h-3 text-primary-500"
-                  />
-                  <span v-else class="w-3 h-3 opacity-0 group-hover:opacity-30">↕</span>
-                </template>
-              </div>
-            </th>
-          </tr>
+        <!-- Caption -->
+        <caption
+          v-if="caption || $slots.caption"
+          class="text-left text-xs text-gray-500 dark:text-gray-400 px-4 py-2 caption-top"
+        >
+          <slot name="caption">{{ caption }}</slot>
+        </caption>
+
+        <!-- Thead -->
+        <thead
+          :class="[
+            'bg-gray-50 dark:bg-gray-800',
+            stickyHeader ? 'sticky top-0 z-10' : '',
+          ]"
+        >
+          <slot name="thead" :columns="columns" :cell-padding="cellPadding">
+            <tr>
+              <th
+                v-if="expandable"
+                :class="[cellPadding, 'w-10 border-b border-gray-200 dark:border-gray-700']"
+              />
+              <th
+                v-for="col in columns"
+                :key="col.key"
+                :style="{ width: col.width }"
+                :class="[
+                  cellPadding,
+                  'font-semibold text-gray-600 uppercase text-[0.6875rem] tracking-wide border-b border-gray-200 dark:border-gray-700 dark:text-gray-400',
+                  col.align === 'center'
+                    ? 'text-center'
+                    : col.align === 'right'
+                      ? 'text-right'
+                      : 'text-left',
+                  col.sortable
+                    ? 'cursor-pointer select-none hover:text-gray-900 transition-colors dark:hover:text-gray-200'
+                    : '',
+                ]"
+                @click="handleSort(col)"
+              >
+                <slot :name="`header-${col.key}`" :column="col">
+                  <div class="inline-flex items-center gap-1">
+                    {{ col.label }}
+                    <template v-if="col.sortable">
+                      <ArrowUp
+                        v-if="activeSortCol === col.key && activeSortDir === 'asc'"
+                        class="w-3 h-3 text-primary-500"
+                      />
+                      <ArrowDown
+                        v-else-if="activeSortCol === col.key && activeSortDir === 'desc'"
+                        class="w-3 h-3 text-primary-500"
+                      />
+                      <span v-else class="w-3 h-3 opacity-0 group-hover:opacity-30">↕</span>
+                    </template>
+                  </div>
+                </slot>
+              </th>
+            </tr>
+          </slot>
         </thead>
+
+        <!-- Tbody -->
         <tbody>
           <template v-for="(row, index) in filteredData" :key="index">
             <tr
@@ -251,6 +274,14 @@ function isExpanded(index: number) {
             </td>
           </tr>
         </tbody>
+
+        <!-- Tfoot -->
+        <tfoot
+          v-if="$slots.footer"
+          class="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700"
+        >
+          <slot name="footer" :columns="columns" :data="filteredData" :cell-padding="cellPadding" />
+        </tfoot>
       </table>
     </div>
   </div>

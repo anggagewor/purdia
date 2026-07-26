@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseSelect } from '@purdia/ui'
+import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTextarea } from '@purdia/ui'
 import { ArrowLeft } from '@lucide/vue'
 import type { SelectOption } from '@purdia/ui'
 
@@ -103,28 +103,18 @@ function handleSave() {
             placeholder="Select reviewer..."
           />
         </div>
-        <div>
-          <label class="text-sm font-medium text-gray-700 dark:text-gray-300 block mb-1"
-            >Goals</label
-          >
-          <textarea
-            v-model="form.goals"
-            rows="4"
-            class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 resize-none placeholder:text-gray-400 dark:placeholder:text-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-            placeholder="Describe the goals and objectives..."
-          />
-        </div>
-        <div>
-          <label class="text-sm font-medium text-gray-700 dark:text-gray-300 block mb-1"
-            >Feedback</label
-          >
-          <textarea
-            v-model="form.feedback"
-            rows="4"
-            class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 resize-none placeholder:text-gray-400 dark:placeholder:text-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-            placeholder="Provide feedback for this review..."
-          />
-        </div>
+        <BaseTextarea
+          v-model="form.goals"
+          label="Goals"
+          :rows="4"
+          placeholder="Describe the goals and objectives..."
+        />
+        <BaseTextarea
+          v-model="form.feedback"
+          label="Feedback"
+          :rows="4"
+          placeholder="Provide feedback for this review..."
+        />
       </div>
     </BaseCard>
 

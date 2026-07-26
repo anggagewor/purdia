@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseButton, BaseBadge } from '@purdia/ui'
+import { BaseCard, BaseButton, BaseBadge, BaseTable } from '@purdia/ui'
 import { ArrowLeft, Edit, Printer } from '@lucide/vue'
+import type { TableColumn } from '@purdia/ui'
 
 const router = useRouter()
 const route = useRoute()
@@ -34,6 +35,11 @@ const payroll = ref({
   totalDeductions: 'Rp 2.500.000',
   netSalary: 'Rp 27.500.000',
 })
+
+const payslipColumns: TableColumn[] = [
+  { key: 'label', label: 'Item' },
+  { key: 'amount', label: 'Amount', align: 'right' },
+]
 </script>
 
 <template>
@@ -109,58 +115,40 @@ const payroll = ref({
           <template #header>
             <h3 class="font-semibold text-gray-900 dark:text-gray-100">Earnings</h3>
           </template>
-          <table class="w-full text-sm">
-            <tbody>
-              <tr
-                v-for="(item, index) in payroll.earnings"
-                :key="index"
-                class="border-b border-gray-100 dark:border-gray-700 last:border-0"
-              >
-                <td class="py-2 text-gray-700 dark:text-gray-300">{{ item.label }}</td>
-                <td class="py-2 text-right font-medium text-gray-900 dark:text-gray-100">
-                  {{ item.amount }}
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
+          <BaseTable :columns="payslipColumns" :data="payroll.earnings" :compact="true" :hoverable="false">
+            <template #cell-amount="{ value }">
+              <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
+            </template>
+            <template #footer>
               <tr class="border-t-2 border-gray-200 dark:border-gray-600">
-                <td class="py-2 font-semibold text-gray-900 dark:text-gray-100">Total Earnings</td>
-                <td class="py-2 text-right font-bold text-gray-900 dark:text-gray-100">
+                <td class="px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">Total Earnings</td>
+                <td class="px-3 py-2 text-right font-bold text-gray-900 dark:text-gray-100">
                   {{ payroll.totalEarnings }}
                 </td>
               </tr>
-            </tfoot>
-          </table>
+            </template>
+          </BaseTable>
         </BaseCard>
 
         <BaseCard>
           <template #header>
             <h3 class="font-semibold text-gray-900 dark:text-gray-100">Deductions</h3>
           </template>
-          <table class="w-full text-sm">
-            <tbody>
-              <tr
-                v-for="(item, index) in payroll.deductions"
-                :key="index"
-                class="border-b border-gray-100 dark:border-gray-700 last:border-0"
-              >
-                <td class="py-2 text-gray-700 dark:text-gray-300">{{ item.label }}</td>
-                <td class="py-2 text-right font-medium text-gray-900 dark:text-gray-100">
-                  {{ item.amount }}
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
+          <BaseTable :columns="payslipColumns" :data="payroll.deductions" :compact="true" :hoverable="false">
+            <template #cell-amount="{ value }">
+              <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
+            </template>
+            <template #footer>
               <tr class="border-t-2 border-gray-200 dark:border-gray-600">
-                <td class="py-2 font-semibold text-gray-900 dark:text-gray-100">
+                <td class="px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">
                   Total Deductions
                 </td>
-                <td class="py-2 text-right font-bold text-danger-600">
+                <td class="px-3 py-2 text-right font-bold text-danger-600">
                   {{ payroll.totalDeductions }}
                 </td>
               </tr>
-            </tfoot>
-          </table>
+            </template>
+          </BaseTable>
         </BaseCard>
       </div>
 

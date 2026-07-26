@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseSelect } from '@purdia/ui'
+import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTextarea } from '@purdia/ui'
 import { ArrowLeft } from '@lucide/vue'
 import type { SelectOption } from '@purdia/ui'
 
@@ -99,17 +99,12 @@ function handleSave() {
           />
         </div>
         <BaseInput v-model="form.date" label="Date" type="date" />
-        <div>
-          <label class="text-sm font-medium text-gray-700 dark:text-gray-300 block mb-1"
-            >Notes</label
-          >
-          <textarea
-            v-model="form.notes"
-            rows="3"
-            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 resize-none placeholder:text-gray-400 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
-            placeholder="Activity notes..."
-          />
-        </div>
+        <BaseTextarea
+          v-model="form.notes"
+          label="Notes"
+          :rows="3"
+          placeholder="Activity notes..."
+        />
       </div>
     </BaseCard>
 

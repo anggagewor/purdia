@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore } from '@/stores/theme'
+import { BaseInput, BaseButton, BaseAlert } from '@purdia/ui'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -54,84 +55,46 @@ async function handleRegister() {
         </div>
 
         <form @submit.prevent="handleRegister" class="space-y-5">
-          <div
-            v-if="error"
-            class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm dark:bg-red-900/20 dark:border-red-800 dark:text-red-400"
-          >
+          <BaseAlert v-if="error" variant="danger">
             {{ error }}
-          </div>
+          </BaseAlert>
 
-          <div>
-            <label
-              for="name"
-              class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
-              >Nama Lengkap</label
-            >
-            <input
-              id="name"
-              v-model="name"
-              type="text"
-              autocomplete="name"
-              placeholder="Nama lengkap"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder:text-gray-500"
-            />
-          </div>
+          <BaseInput
+            v-model="name"
+            type="text"
+            label="Nama Lengkap"
+            placeholder="Nama lengkap"
+          />
 
-          <div>
-            <label
-              for="email"
-              class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
-              >Email</label
-            >
-            <input
-              id="email"
-              v-model="email"
-              type="email"
-              autocomplete="email"
-              placeholder="nama@email.com"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder:text-gray-500"
-            />
-          </div>
+          <BaseInput
+            v-model="email"
+            type="email"
+            label="Email"
+            placeholder="nama@email.com"
+          />
 
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
-              >Password</label
-            >
-            <input
-              id="password"
-              v-model="password"
-              type="password"
-              autocomplete="new-password"
-              placeholder="Minimal 8 karakter"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder:text-gray-500"
-            />
-          </div>
+          <BaseInput
+            v-model="password"
+            type="password"
+            label="Password"
+            placeholder="Minimal 8 karakter"
+          />
 
-          <div>
-            <label
-              for="password-confirmation"
-              class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
-              >Konfirmasi Password</label
-            >
-            <input
-              id="password-confirmation"
-              v-model="passwordConfirmation"
-              type="password"
-              autocomplete="new-password"
-              placeholder="Ulangi password"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder:text-gray-500"
-            />
-          </div>
+          <BaseInput
+            v-model="passwordConfirmation"
+            type="password"
+            label="Konfirmasi Password"
+            placeholder="Ulangi password"
+          />
 
-          <button
+          <BaseButton
             type="submit"
+            variant="primary"
             :disabled="loading"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full"
           >
             {{ loading ? 'Memproses...' : 'Daftar' }}
-          </button>
+          </BaseButton>
         </form>
 
         <p class="text-center text-sm text-gray-500 mt-6 dark:text-gray-400">

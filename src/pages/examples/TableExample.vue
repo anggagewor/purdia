@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import {
   BaseTable,
   BaseCard,
@@ -208,6 +209,36 @@ function getStatusVariant(status: string) {
 function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
   console.log('Action:', item.value, 'Row:', row)
 }
+
+// --- Footer (tfoot) table ---
+const invoiceColumns: TableColumn[] = [
+  { key: 'description', label: 'Description' },
+  { key: 'qty', label: 'Qty', align: 'center' },
+  { key: 'price', label: 'Unit Price', align: 'right' },
+  { key: 'amount', label: 'Amount', align: 'right' },
+]
+
+const invoiceData = [
+  { description: 'UI/UX Design Services', qty: 40, price: 150, amount: 6000 },
+  { description: 'Frontend Development', qty: 80, price: 125, amount: 10000 },
+  { description: 'Backend API Integration', qty: 60, price: 130, amount: 7800 },
+  { description: 'QA & Testing', qty: 20, price: 100, amount: 2000 },
+]
+
+const invoiceTotal = computed(() => invoiceData.reduce((sum, item) => sum + item.amount, 0))
+
+// --- Earnings/Deductions (key-value) ---
+const earningsColumns: TableColumn[] = [
+  { key: 'label', label: 'Item' },
+  { key: 'amount', label: 'Amount', align: 'right' },
+]
+
+const earningsData = [
+  { label: 'Basic Salary', amount: 'Rp 12.000.000' },
+  { label: 'Transport Allowance', amount: 'Rp 1.500.000' },
+  { label: 'Meal Allowance', amount: 'Rp 1.000.000' },
+  { label: 'Performance Bonus', amount: 'Rp 3.000.000' },
+]
 </script>
 
 <template>
@@ -412,6 +443,108 @@ function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
       </div>
     </BaseCard>
 
+    <!-- Footer (tfoot) — Invoice Style -->
+    <BaseCard>
+      <template #header><h4 class="font-semibold">Footer Slot (tfoot) — Invoice / Totals</h4></template>
+      <p class="text-sm text-gray-500 mb-4">
+        Gunakan slot <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#footer</code> untuk render tfoot. Cocok buat summary row, totals, dsb.
+      </p>
+      <BaseTable :columns="invoiceColumns" :data="invoiceData" :hoverable="false">
+        <template #cell-price="{ value }">
+          <span class="font-mono">${{ (value as number).toLocaleString() }}</span>
+        </template>
+        <template #cell-amount="{ value }">
+          <span class="font-mono font-medium">${{ (value as number).toLocaleString() }}</span>
+        </template>
+        <template #footer>
+          <tr>
+            <td colspan="3" class="px-4 py-3 text-right font-semibold text-gray-700 dark:text-gray-300">
+              Subtotal
+            </td>
+            <td class="px-4 py-3 text-right font-bold text-gray-900 dark:text-gray-100 font-mono">
+              ${{ invoiceTotal.toLocaleString() }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="px-4 py-2 text-right text-sm text-gray-500 dark:text-gray-400">
+              Tax (11%)
+            </td>
+            <td class="px-4 py-2 text-right text-sm text-gray-600 dark:text-gray-300 font-mono">
+              ${{ Math.round(invoiceTotal * 0.11).toLocaleString() }}
+            </td>
+          </tr>
+          <tr class="border-t-2 border-gray-300 dark:border-gray-600">
+            <td colspan="3" class="px-4 py-3 text-right font-bold text-gray-900 dark:text-gray-100">
+              Grand Total
+            </td>
+            <td class="px-4 py-3 text-right font-bold text-lg text-primary-600 dark:text-primary-400 font-mono">
+              ${{ Math.round(invoiceTotal * 1.11).toLocaleString() }}
+            </td>
+          </tr>
+        </template>
+      </BaseTable>
+    </BaseCard>
+
+    <!-- Footer — Earnings Summary -->
+    <BaseCard>
+      <template #header><h4 class="font-semibold">Footer — Key-Value Summary (Payroll)</h4></template>
+      <p class="text-sm text-gray-500 mb-4">
+        Bisa juga buat table sederhana 2 kolom dengan total di footer.
+      </p>
+      <BaseTable :columns="earningsColumns" :data="earningsData" :compact="true" :hoverable="false">
+        <template #cell-amount="{ value }">
+          <span class="font-medium text-gray-900 dark:text-gray-100">{{ value }}</span>
+        </template>
+        <template #footer>
+          <tr class="border-t-2 border-gray-200 dark:border-gray-600">
+            <td class="px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">Total Earnings</td>
+            <td class="px-3 py-2 text-right font-bold text-gray-900 dark:text-gray-100">Rp 17.500.000</td>
+          </tr>
+        </template>
+      </BaseTable>
+    </BaseCard>
+
+    <!-- Caption -->
+    <BaseCard>
+      <template #header><h4 class="font-semibold">Caption</h4></template>
+      <p class="text-sm text-gray-500 mb-4">
+        Gunakan prop <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">caption</code> atau slot <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#caption</code> untuk menambahkan keterangan di atas table.
+      </p>
+      <BaseTable
+        :columns="basicColumns"
+        :data="basicData.slice(0, 3)"
+        :compact="true"
+        caption="Table 1: Active team members as of July 2026"
+      >
+        <template #cell-status="{ value }">
+          <BaseBadge :variant="getStatusVariant(value as string)" :dot="true" size="sm">
+            {{ value }}
+          </BaseBadge>
+        </template>
+      </BaseTable>
+    </BaseCard>
+
+    <!-- Custom Header Slot -->
+    <BaseCard>
+      <template #header><h4 class="font-semibold">Custom Header Cell Slot</h4></template>
+      <p class="text-sm text-gray-500 mb-4">
+        Gunakan slot <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">#header-[key]</code> untuk override render header cell tertentu.
+      </p>
+      <BaseTable :columns="basicColumns" :data="basicData.slice(0, 3)" :compact="true">
+        <template #header-status>
+          <div class="inline-flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            Status
+          </div>
+        </template>
+        <template #cell-status="{ value }">
+          <BaseBadge :variant="getStatusVariant(value as string)" :dot="true" size="sm">
+            {{ value }}
+          </BaseBadge>
+        </template>
+      </BaseTable>
+    </BaseCard>
+
     <!-- Usage -->
     <BaseCard variant="flat">
       <template #header><h4 class="font-semibold">Usage</h4></template>
@@ -437,6 +570,39 @@ function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
 &lt;BaseTable :columns="columns" :data="data" :expandable="true"&gt;
   &lt;template #expanded="{ row }"&gt;
     &lt;p&gt;Details for &#123;&#123; row.name &#125;&#125;&lt;/p&gt;
+  &lt;/template&gt;
+&lt;/BaseTable&gt;
+
+&lt;!-- Footer (tfoot) for totals --&gt;
+&lt;BaseTable :columns="columns" :data="data"&gt;
+  &lt;template #footer&gt;
+    &lt;tr&gt;
+      &lt;td colspan="3" class="px-4 py-3 text-right font-semibold"&gt;Total&lt;/td&gt;
+      &lt;td class="px-4 py-3 text-right font-bold"&gt;$25,800&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/template&gt;
+&lt;/BaseTable&gt;
+
+&lt;!-- Caption --&gt;
+&lt;BaseTable :columns="columns" :data="data" caption="Table 1: Summary"&gt;
+  ...
+&lt;/BaseTable&gt;
+
+&lt;!-- Custom header cell --&gt;
+&lt;BaseTable :columns="columns" :data="data"&gt;
+  &lt;template #header-status="{ column }"&gt;
+    &lt;span class="flex items-center gap-1"&gt;● Status&lt;/span&gt;
+  &lt;/template&gt;
+&lt;/BaseTable&gt;
+
+&lt;!-- Full thead override --&gt;
+&lt;BaseTable :columns="columns" :data="data"&gt;
+  &lt;template #thead="{ columns: cols, cellPadding }"&gt;
+    &lt;tr&gt;
+      &lt;th v-for="col in cols" :key="col.key" :class="cellPadding"&gt;
+        &#123;&#123; col.label &#125;&#125;
+      &lt;/th&gt;
+    &lt;/tr&gt;
   &lt;/template&gt;
 &lt;/BaseTable&gt;</code></pre>
     </BaseCard>
@@ -503,13 +669,29 @@ function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
               <td class="py-2 pr-4">true</td>
               <td class="py-2">Hover highlight</td>
             </tr>
-            <tr>
+            <tr class="border-b border-gray-100">
               <td class="py-2 pr-4">
                 <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">compact</code>
               </td>
               <td class="py-2 pr-4">boolean</td>
               <td class="py-2 pr-4">false</td>
               <td class="py-2">Smaller padding</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="py-2 pr-4">
+                <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">caption</code>
+              </td>
+              <td class="py-2 pr-4">string</td>
+              <td class="py-2 pr-4">—</td>
+              <td class="py-2">Table caption text (or use #caption slot)</td>
+            </tr>
+            <tr>
+              <td class="py-2 pr-4">
+                <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">stickyHeader</code>
+              </td>
+              <td class="py-2 pr-4">boolean</td>
+              <td class="py-2 pr-4">false</td>
+              <td class="py-2">Make thead sticky on scroll</td>
             </tr>
           </tbody>
         </table>
@@ -550,6 +732,20 @@ function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
             </tr>
             <tr class="border-b border-gray-100">
               <td class="py-2 pr-4">
+                <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">#thead</code>
+              </td>
+              <td class="py-2 pr-4">{ columns, cellPadding }</td>
+              <td class="py-2">Full thead override (render your own &lt;tr&gt;)</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="py-2 pr-4">
+                <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">#header-[key]</code>
+              </td>
+              <td class="py-2 pr-4">{ column }</td>
+              <td class="py-2">Custom header cell content for specific column</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="py-2 pr-4">
                 <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">#cell-[key]</code>
               </td>
               <td class="py-2 pr-4">{ row, value, index }</td>
@@ -561,6 +757,20 @@ function handleRowAction(item: DropdownItem, row: Record<string, unknown>) {
               </td>
               <td class="py-2 pr-4">{ row, index }</td>
               <td class="py-2">Expanded row content (accordion)</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="py-2 pr-4">
+                <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">footer</code>
+              </td>
+              <td class="py-2 pr-4">{ columns, data, cellPadding }</td>
+              <td class="py-2">Table footer (tfoot) — for totals, summaries</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="py-2 pr-4">
+                <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">caption</code>
+              </td>
+              <td class="py-2 pr-4">—</td>
+              <td class="py-2">Table caption (overrides caption prop)</td>
             </tr>
             <tr>
               <td class="py-2 pr-4">

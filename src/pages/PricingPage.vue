@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Check, X, Zap, Building2, Rocket } from '@lucide/vue'
-import { BaseButton, BaseBadge } from '@purdia/ui'
+import { BaseButton, BaseBadge, BaseToggle } from '@purdia/ui'
 
 const isYearly = ref(false)
 
@@ -99,16 +99,7 @@ const yearlyDiscount = computed(() => '20%')
         >
           Monthly
         </span>
-        <button
-          class="relative w-12 h-6 rounded-full transition-colors"
-          :class="isYearly ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'"
-          @click="isYearly = !isYearly"
-        >
-          <span
-            class="absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform"
-            :class="isYearly ? 'translate-x-7' : 'translate-x-1'"
-          ></span>
-        </button>
+        <BaseToggle v-model="isYearly" size="md" />
         <span
           class="text-sm font-medium"
           :class="isYearly ? 'text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400'"

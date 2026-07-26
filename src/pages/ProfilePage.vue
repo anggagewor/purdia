@@ -21,7 +21,7 @@ import {
   GitBranch,
   Check,
 } from '@lucide/vue'
-import { BaseAvatar, BaseButton, BaseCard, BaseInput, BaseBadge, BaseTabs } from '@purdia/ui'
+import { BaseAvatar, BaseButton, BaseCard, BaseInput, BaseBadge, BaseTabs, BaseCheckbox } from '@purdia/ui'
 
 const activeTab = ref('activity')
 
@@ -343,15 +343,7 @@ const notifications = [
                 placeholder="Confirm new password"
               />
               <div class="flex items-center justify-between">
-                <label class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    :checked="showPassword"
-                    class="rounded border-gray-300"
-                    @change="showPassword = !showPassword"
-                  />
-                  Show passwords
-                </label>
+                <BaseCheckbox v-model="showPassword" label="Show passwords" />
                 <BaseButton variant="primary" size="sm">Update Password</BaseButton>
               </div>
             </div>

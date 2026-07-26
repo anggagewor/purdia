@@ -928,18 +928,14 @@ const numpadLabel = computed(() => {
       <!-- Search + Categories -->
       <div class="shrink-0 space-y-3 mb-4">
         <div class="flex items-center gap-2">
-          <div
-            class="flex-1 flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2 dark:bg-gray-800 dark:border-gray-700"
-          >
-            <Search class="w-4 h-4 text-gray-400 dark:text-gray-500" />
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Search product..."
-              class="flex-1 outline-none text-sm bg-transparent placeholder:text-gray-400 dark:text-gray-200 dark:placeholder:text-gray-500"
-              @input="currentPage = 1"
-            />
-          </div>
+          <BaseInput
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search product..."
+            size="sm"
+            :icon="Search"
+            @update:model-value="currentPage = 1"
+          />
           <!-- QR Orders notification -->
           <button
             class="relative flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 cursor-pointer transition-colors dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -1160,12 +1156,12 @@ const numpadLabel = computed(() => {
             <!-- Inline discount -->
             <div class="flex items-center gap-1.5 mt-1.5">
               <Percent class="w-3 h-3 text-gray-400 shrink-0 dark:text-gray-500" />
-              <input
+              <BaseInput
                 v-model.number="item.discount"
                 type="number"
-                min="0"
+                size="sm"
                 placeholder="Disc"
-                class="w-16 text-[0.6875rem] px-1.5 py-0.5 border border-gray-200 rounded outline-none focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                class="w-16"
               />
               <button
                 class="text-[0.625rem] px-1.5 py-0.5 rounded font-medium cursor-pointer transition-colors"
@@ -1206,37 +1202,36 @@ const numpadLabel = computed(() => {
       <div class="shrink-0 border-t border-gray-100 px-4 py-3 space-y-2 dark:border-gray-700">
         <div class="flex items-center gap-2">
           <Tag class="w-4 h-4 text-gray-400 dark:text-gray-500" />
-          <input
+          <BaseInput
             v-model.number="globalDiscount"
             type="number"
-            min="0"
-            class="flex-1 text-sm border border-gray-200 rounded px-2 py-1 outline-none focus:border-primary-500 w-20 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+            size="sm"
             placeholder="Discount"
+            class="flex-1 w-20"
           />
-          <select
+          <BaseSelect
             v-model="globalDiscountType"
-            class="text-xs border border-gray-200 rounded px-2 py-1 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-          >
-            <option value="percent">%</option>
-            <option value="nominal">Rp</option>
-          </select>
+            :options="[{ label: '%', value: 'percent' }, { label: 'Rp', value: 'nominal' }]"
+            :searchable="false"
+            :clearable="false"
+            size="sm"
+            class="w-20"
+          />
         </div>
         <!-- Voucher Code -->
         <div v-if="!appliedVoucher" class="flex items-center gap-2">
           <Ticket class="w-4 h-4 text-gray-400 dark:text-gray-500" />
-          <input
+          <BaseInput
             v-model="voucherCode"
             type="text"
-            class="flex-1 text-sm border border-gray-200 rounded px-2 py-1 outline-none focus:border-primary-500 uppercase placeholder:normal-case dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+            size="sm"
             placeholder="Kode voucher"
+            class="flex-1 uppercase"
             @keyup.enter="applyVoucher"
           />
-          <button
-            class="text-xs font-medium px-2.5 py-1 rounded bg-primary-500 text-white hover:bg-primary-600 transition-colors cursor-pointer"
-            @click="applyVoucher"
-          >
+          <BaseButton variant="primary" size="sm" @click="applyVoucher">
             Apply
-          </button>
+          </BaseButton>
         </div>
         <p v-if="voucherError" class="text-[0.625rem] text-red-500 dark:text-red-400 pl-6">{{ voucherError }}</p>
         <!-- Applied voucher -->
@@ -1313,14 +1308,11 @@ const numpadLabel = computed(() => {
             :searchable="false"
           />
           <div v-if="paymentMethod === 'cash'">
-            <label class="text-sm font-medium text-gray-700 block mb-1 dark:text-gray-300"
-              >Cash Received</label
-            >
-            <input
+            <BaseInput
               ref="cashInput"
               v-model.number="cashReceived"
               type="number"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:focus:ring-primary-900/30"
+              label="Cash Received"
               @focus="activeNumpadField = 'cash'"
             />
             <div

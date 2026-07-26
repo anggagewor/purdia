@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseButton, BaseBadge } from '@purdia/ui'
+import { BaseCard, BaseButton, BaseBadge, BaseTable } from '@purdia/ui'
 import { ArrowLeft, Edit, Printer } from '@lucide/vue'
+import type { TableColumn } from '@purdia/ui'
 
 const router = useRouter()
 const route = useRoute()
@@ -45,6 +46,22 @@ function statusVariant(s: string) {
   }
   return (map[s] || 'secondary') as 'secondary' | 'info' | 'success' | 'danger' | 'warning'
 }
+
+const lineItemColumns: TableColumn[] = [
+  { key: 'description', label: 'Description' },
+  { key: 'qty', label: 'Qty', align: 'center' },
+  { key: 'price', label: 'Unit Price', align: 'right' },
+  { key: 'amount', label: 'Amount', align: 'right' },
+]
+
+const lineItemData = computed(() =>
+  quotation.value.items.map((item) => ({
+    description: item.description,
+    qty: item.qty,
+    price: item.price,
+    amount: item.qty * item.price,
+  })),
+)
 </script>
 
 <template>
@@ -110,38 +127,14 @@ function statusVariant(s: string) {
 
           <!-- Line Items Table -->
           <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="bg-gray-50 dark:bg-gray-700">
-                <tr>
-                  <th class="text-left px-4 py-2 font-medium text-gray-600 dark:text-gray-300">
-                    Description
-                  </th>
-                  <th class="text-center px-4 py-2 font-medium text-gray-600 dark:text-gray-300">
-                    Qty
-                  </th>
-                  <th class="text-right px-4 py-2 font-medium text-gray-600 dark:text-gray-300">
-                    Unit Price
-                  </th>
-                  <th class="text-right px-4 py-2 font-medium text-gray-600 dark:text-gray-300">
-                    Amount
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                <tr v-for="item in quotation.items" :key="item.description">
-                  <td class="px-4 py-2 text-gray-900 dark:text-gray-100">{{ item.description }}</td>
-                  <td class="px-4 py-2 text-center text-gray-600 dark:text-gray-400">
-                    {{ item.qty }}
-                  </td>
-                  <td class="px-4 py-2 text-right text-gray-600 dark:text-gray-400">
-                    {{ formatCurrency(item.price) }}
-                  </td>
-                  <td class="px-4 py-2 text-right font-medium text-gray-900 dark:text-gray-100">
-                    {{ formatCurrency(item.qty * item.price) }}
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot class="bg-gray-50 dark:bg-gray-700">
+            <BaseTable :columns="lineItemColumns" :data="lineItemData" :compact="true" :hoverable="false">
+              <template #cell-price="{ value }">
+                {{ formatCurrency(value as number) }}
+              </template>
+              <template #cell-amount="{ value }">
+                <span class="font-medium text-gray-900 dark:text-gray-100">{{ formatCurrency(value as number) }}</span>
+              </template>
+              <template #footer>
                 <tr>
                   <td
                     colspan="3"
@@ -153,8 +146,8 @@ function statusVariant(s: string) {
                     {{ formatCurrency(total()) }}
                   </td>
                 </tr>
-              </tfoot>
-            </table>
+              </template>
+            </BaseTable>
           </div>
         </BaseCard>
 

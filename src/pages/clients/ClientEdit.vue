@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTabs, TabPanel } from '@purdia/ui'
+import { BaseCard, BaseInput, BaseButton, BaseSelect, BaseTabs, TabPanel, BaseTextarea } from '@purdia/ui'
 import { ArrowLeft, Plus, Trash2 } from '@lucide/vue'
 import type { SelectOption } from '@purdia/ui'
 import type { TabItem } from '@purdia/ui'
@@ -227,14 +227,11 @@ function handleSave() {
               v-model="clientTaxId"
               label="Tax ID / NPWP"
             />
-            <div>
-              <label class="text-sm font-medium text-gray-700 block mb-1">Notes</label>
-              <textarea
-                v-model="clientNotes"
-                rows="3"
-                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 resize-none placeholder:text-gray-400"
-              />
-            </div>
+            <BaseTextarea
+              v-model="clientNotes"
+              label="Notes"
+              :rows="3"
+            />
           </div>
         </TabPanel>
 
