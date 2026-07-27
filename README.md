@@ -19,6 +19,20 @@ Modern Vue 3 Admin Dashboard built with TypeScript & Tailwind CSS 4.
 
 ---
 
+## 📐 Architecture & Design Philosophy
+
+Purdia is **not** a monolithic frontend app — it's an incubation environment for publishable packages that happen to ship with a full-featured admin UI.
+
+### Key Architectural Decisions
+
+- **Package Isolation (NPM-Ready):** Core utilities (`@purdia/http`, `@purdia/crypto`, `@purdia/ui`) live in `packages/` because when they're proven and stable, they go straight to npm — no refactoring from `src/` needed. The monorepo is the workshop; npm is the destination.
+
+- **Stateless Presentation Layer:** The frontend only holds transient UI state (auth sessions, theme, sidebar). All heavy lifting — transactions, reconciliation, business rules — lives in the backend API. The client just renders what the API gives it.
+
+- **Template vs. Application Boundary:** Purdia provides UI primitives, design system, and utility contracts. Business-specific schemas, domain models, and workflows belong in whatever app consumes these packages.
+
+---
+
 ## ✨ Features
 
 - 📄 **200+ Pages** — Full-featured app modules (CRM, HRM, POS, Accounting, Inventory, Invoices, and more)
