@@ -223,3 +223,13 @@ Contributions, bug reports, and ideas are always welcome.
 ## License
 
 MIT License — free to use, modify, and distribute.
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=anggagewor%2Fpurdia&type=date&logscale=&legend=bottom-right">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=anggagewor/purdia&type=date&theme=dark&logscale&legend=bottom-right&sealed_token=JE9oknV5HScsOXX6hrr2UYZhU1_m8BMF0jcJztqB0BiU8HWqQreax4JpCr0nPJfc0jL_a_XjPaJrMf7lfsn7tB9ebbsTNY1XaUoK7fb-jp4pJFVYJk-MoA" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=anggagewor/purdia&type=date&logscale&legend=bottom-right&sealed_token=JE9oknV5HScsOXX6hrr2UYZhU1_m8BMF0jcJztqB0BiU8HWqQreax4JpCr0nPJfc0jL_a_XjPaJrMf7lfsn7tB9ebbsTNY1XaUoK7fb-jp4pJFVYJk-MoA" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=anggagewor/purdia&type=date&logscale&legend=bottom-right&sealed_token=JE9oknV5HScsOXX6hrr2UYZhU1_m8BMF0jcJztqB0BiU8HWqQreax4JpCr0nPJfc0jL_a_XjPaJrMf7lfsn7tB9ebbsTNY1XaUoK7fb-jp4pJFVYJk-MoA" />
+ </picture>
+</a>
