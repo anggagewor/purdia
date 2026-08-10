@@ -1,6 +1,6 @@
 import { ref, computed, watch, onScopeDispose } from 'vue'
 import { defineStore } from 'pinia'
-import { useAuthStore } from './auth'
+import { useAuthStore } from '@purdia/auth'
 
 export type Theme = 'light' | 'dark' | 'system'
 export type PrimaryColor =

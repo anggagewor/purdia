@@ -106,9 +106,25 @@ function scrollToActive() {
 }
 
 function highlightMatch(label: string): string {
-  if (!query.value) return label
-  const regex = new RegExp(`(${escapeRegex(query.value)})`, 'gi')
-  return label.replace(
+  // Escape HTML entities first to prevent XSS from label content
+  const escaped = label
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+  if (!query.value) return escaped
+
+  // Escape the query for safe regex usage, then also escape its HTML representation
+  // so we match against the already-escaped label text
+  const escapedQuery = escapeRegex(query.value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+  const regex = new RegExp(`(${escapedQuery})`, 'gi')
+  return escaped.replace(
     regex,
     '<mark class="bg-yellow-200 dark:bg-yellow-800 rounded px-0.5">$1</mark>',
   )

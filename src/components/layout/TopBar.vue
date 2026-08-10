@@ -14,7 +14,7 @@ import {
   Palette,
 } from '@lucide/vue'
 import { BaseAvatar } from '@purdia/ui'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@purdia/auth'
 import { useThemeStore, colorOptions } from '@/stores/theme'
 
 defineEmits<{

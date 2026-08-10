@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch, nextTick, onBeforeUnmount } from 'vue'
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
 
@@ -21,9 +21,86 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
+const dialogRef = ref<HTMLElement | null>(null)
+let previousActiveElement: HTMLElement | null = null
+
 function close() {
   emit('update:modelValue', false)
 }
+
+// ---------------------------------------------------------------------------
+// Focus Trap
+// ---------------------------------------------------------------------------
+
+const FOCUSABLE_SELECTORS = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'textarea:not([disabled])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(', ')
+
+function getFocusableElements(): HTMLElement[] {
+  if (!dialogRef.value) return []
+  return Array.from(dialogRef.value.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS))
+}
+
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape' && props.closable && !props.persistent) {
+    close()
+    return
+  }
+
+  if (e.key === 'Tab') {
+    const focusable = getFocusableElements()
+    if (focusable.length === 0) {
+      e.preventDefault()
+      return
+    }
+
+    const first = focusable[0]!
+    const last = focusable[focusable.length - 1]!
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+  }
+}
+
+// Watch open/close to manage focus
+watch(
+  () => props.modelValue,
+  async (isOpen) => {
+    if (isOpen) {
+      previousActiveElement = document.activeElement as HTMLElement | null
+      await nextTick()
+      // Focus the first focusable element, or the dialog itself
+      const focusable = getFocusableElements()
+      if (focusable.length > 0) {
+        focusable[0]!.focus()
+      } else {
+        dialogRef.value?.focus()
+      }
+    } else {
+      // Restore focus to previously focused element
+      previousActiveElement?.focus()
+      previousActiveElement = null
+    }
+  },
+)
+
+onBeforeUnmount(() => {
+  previousActiveElement?.focus()
+})
 
 const sizeClasses: Record<ModalSize, string> = {
   sm: 'max-w-sm',
@@ -47,12 +124,26 @@ const modalClasses = computed(() => [
         class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4"
         @click.self="persistent ? undefined : close()"
       >
-        <div :class="modalClasses">
+        <div
+          ref="dialogRef"
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="title ? 'modal-title' : undefined"
+          :class="modalClasses"
+          tabindex="-1"
+          @keydown="handleKeydown"
+        >
           <div
             v-if="title || closable"
             class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700"
           >
-            <h3 v-if="title" class="text-lg font-semibold dark:text-gray-100">{{ title }}</h3>
+            <h3
+              v-if="title"
+              id="modal-title"
+              class="text-lg font-semibold dark:text-gray-100"
+            >
+              {{ title }}
+            </h3>
             <button
               v-if="closable"
               class="text-2xl text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded p-1 leading-none cursor-pointer dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"

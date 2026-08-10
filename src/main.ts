@@ -29,7 +29,7 @@ app.use(pinia)
 app.use(router)
 
 // Initialize auth & theme on app start
-import { useAuthStore } from './stores/auth'
+import { useAuthStore } from '@purdia/auth'
 import { useThemeStore } from './stores/theme'
 
 const auth = useAuthStore()

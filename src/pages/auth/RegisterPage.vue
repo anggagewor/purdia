@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@purdia/auth'
 import { useThemeStore } from '@/stores/theme'
 import { BaseInput, BaseButton, BaseAlert } from '@purdia/ui'
 

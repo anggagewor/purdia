@@ -156,12 +156,7 @@ export function usePagination<T>(
   const totalPages = computed(() => meta.value.last_page)
   const totalItems = computed(() => meta.value.total)
 
-  // Watch page changes
-  watch(currentPage, () => {
-    fetchWithMeta()
-  })
-
-  // Watch perPage — reset to page 1
+  // Watch perPage — reset to page 1 and refetch
   watch(perPage, () => {
     currentPage.value = 1
     fetchWithMeta()

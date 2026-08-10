@@ -295,10 +295,7 @@ function sendEmail() {
               ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-medium'
               : ''
           "
-          @click="
-            currentFolder = folder.id
-            selectedEmail = null
-          "
+          @click="currentFolder = folder.id; selectedEmail = null"
         >
           <template #icon-left><component :is="folder.icon" class="w-4 h-4" /></template>
           <span class="flex-1 text-left">{{ folder.label }}</span>

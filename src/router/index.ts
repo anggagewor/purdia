@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { createAuthGuard } from '@purdia/auth'
 
 import authRoutes from './routes/auth'
 import dashboardRoutes from './routes/dashboard'
@@ -44,26 +44,9 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(async (to) => {
-  const auth = useAuthStore()
-
-  // Wait for auth to be ready (async decrypt from secure storage)
-  if (!auth.ready) {
-    await auth.init()
-  }
-
-  const isGuestRoute = to.meta.guest === true
-
-  // If not authenticated and trying to access a protected route, redirect to login
-  if (!auth.isAuthenticated && !isGuestRoute) {
-    return { name: 'login', query: { redirect: to.fullPath } }
-  }
-
-  // If authenticated and trying to access guest-only routes (login/register), redirect to dashboard
-  // But skip for public routes (accessible by everyone regardless of auth)
-  if (auth.isAuthenticated && isGuestRoute && !to.meta.public) {
-    return { name: 'dashboard' }
-  }
+createAuthGuard(router, {
+  loginRoute: 'login',
+  homeRoute: 'dashboard',
 })
 
 export default router

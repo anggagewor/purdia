@@ -109,10 +109,7 @@ const progressWidth = computed(() => ((currentStep.value + 1) / steps.length) * 
           </p>
           <BaseButton
             variant="primary"
-            @click="
-              submitted = false
-              currentStep = 0
-            "
+            @click="submitted = false; currentStep = 0"
           >
             Start Over
           </BaseButton>
