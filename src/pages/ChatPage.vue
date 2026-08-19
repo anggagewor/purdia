@@ -179,7 +179,7 @@ const messages = ref<Message[]>([
   },
 ])
 
-const selectedContact = ref<Contact>(contacts.value[0])
+const selectedContact = ref<Contact>(contacts.value[0]!)
 const newMessage = ref('')
 const searchQuery = ref('')
 const chatContainer = ref<HTMLElement | null>(null)

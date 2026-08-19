@@ -169,7 +169,7 @@ const activeTab = ref(0)
 const copiedIndex = ref<number | null>(null)
 
 async function copyCode(index: number) {
-  const code = samples[index].code
+  const code = samples[index]!.code
   await navigator.clipboard.writeText(code)
   copiedIndex.value = index
   setTimeout(() => {
@@ -298,12 +298,12 @@ function escapeHtml(str: string): string {
               <div class="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
             <span class="text-xs text-gray-400 ml-2 font-mono">
-              {{ samples[activeTab].filename }}
+              {{ samples[activeTab]!.filename }}
             </span>
           </div>
           <div class="flex items-center gap-2">
             <BaseBadge variant="secondary" size="sm">
-              {{ samples[activeTab].language }}
+              {{ samples[activeTab]!.language }}
             </BaseBadge>
             <button
               class="p-1.5 text-gray-400 hover:text-white rounded transition-colors"
@@ -321,7 +321,7 @@ function escapeHtml(str: string): string {
             <!-- Line numbers -->
             <div class="shrink-0 py-4 pl-4 pr-3 select-none border-r border-gray-800">
               <div
-                v-for="line in getLineNumbers(samples[activeTab].code)"
+                v-for="line in getLineNumbers(samples[activeTab]!.code)"
                 :key="line"
                 class="text-xs text-gray-600 text-right font-mono leading-6"
               >
@@ -332,7 +332,7 @@ function escapeHtml(str: string): string {
             <!-- Code -->
             <pre
               class="flex-1 py-4 px-4 text-sm text-gray-100 font-mono leading-6 overflow-x-auto"
-            ><code v-html="highlight(samples[activeTab].code, samples[activeTab].language)"></code></pre>
+            ><code v-html="highlight(samples[activeTab]!.code, samples[activeTab]!.language)"></code></pre>
           </div>
         </div>
       </div>

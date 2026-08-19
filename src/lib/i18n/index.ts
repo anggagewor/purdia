@@ -29,7 +29,7 @@ export function useI18n() {
     const [namespace, ...rest] = key.split('.')
     const messageKey = rest.join('.')
 
-    const messages = locales[currentLocale.value]?.[namespace]
+    const messages = namespace ? locales[currentLocale.value]?.[namespace] : undefined
     let text = messages?.[messageKey] || key
 
     // Interpolation: replace {param} with value

@@ -76,12 +76,12 @@ const imageColors = [
 ]
 
 function generatePost(id: number): Post {
-  const author = authors[id % authors.length]
-  const content = sampleContents[id % sampleContents.length]
+  const author = authors[id % authors.length]!
+  const content = sampleContents[id % sampleContents.length]!
   const numTags = 1 + (id % 3)
   const tags: string[] = []
   for (let i = 0; i < numTags; i++) {
-    tags.push(tagOptions[(id + i) % tagOptions.length])
+    tags.push(tagOptions[(id + i) % tagOptions.length]!)
   }
 
   const hasImage = id % 3 === 0
@@ -140,7 +140,7 @@ onMounted(() => {
   // Setup intersection observer
   observer = new IntersectionObserver(
     (entries) => {
-      if (entries[0].isIntersecting && !loading.value && hasMore.value) {
+      if (entries[0]!.isIntersecting && !loading.value && hasMore.value) {
         loadMore()
       }
     },
